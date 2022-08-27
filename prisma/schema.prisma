@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file: ./database.sqlite"
+}
+
+//Todo o esquema do banco de dados no PRISMA ORM é feito dentro do schema.prisma, diferente de alguns
+//outros ORMs que fazem a divisão por arquivos
+
+model User {
+
+  id String @id @default(uuid())
+
+  name String
+  email String @unique
+  password String
+
+  birthDate DateTime?
+  cellNumber Int? @unique
+  
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("user")
+
+} //podemos verificar que os parâmetros no prisma são passados como "@algumaCoisa"
