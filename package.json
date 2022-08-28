@@ -9,6 +9,7 @@
     "init:dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --exit-child --respawn ."
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/typescript": "^2.0.0",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.2.1",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dayjs": "^1.11.5",
     "dotenv": "^16.0.1",
