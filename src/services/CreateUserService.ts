@@ -1,6 +1,6 @@
 import { UserEntity } from "../database/entities/UserEntity";
 import { UsersRepository } from "../database/repositories/UsersRepository";
-import { hash } from "bcrypt"
+import { hash } from "bcrypt";
 
 type CreateUserDTO = {
     userData: UserEntity;
