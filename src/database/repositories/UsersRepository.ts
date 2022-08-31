@@ -2,7 +2,7 @@ import { prisma } from "../../../prisma/PrismaClient";
 import { UserEntity } from "../entities/UserEntity";
 
 type CreateUserDTO = {
-    userData: UserEntity;
+    uData: UserEntity;
 }
 
 type findByEmailDTO = {
@@ -11,10 +11,10 @@ type findByEmailDTO = {
 
 class UsersRepository {
 
-    async create({ userData }: CreateUserDTO) {
+    async create({ uData }: CreateUserDTO): Promise<UserEntity> {
         const newUser = await prisma.user.create({
             data: {
-                ... userData
+                ... uData //spread
             }
         })
 

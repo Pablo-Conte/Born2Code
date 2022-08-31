@@ -23,7 +23,7 @@ class CreateUserService{
 
         userData.password = newPass;
 
-        const newUser = await usersRepository.create({ userData });
+        const newUser = await usersRepository.create({ uData: userData });
         if (!newUser) {
             throw new Error ("User creation failed, contact support for more details")
         }

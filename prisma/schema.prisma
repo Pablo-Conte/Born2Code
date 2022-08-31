@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file: ./database.sqlite"
+  url      = "file:./database.sqlite"
 }
 
 //Todo o esquema do banco de dados no PRISMA ORM é feito dentro do schema.prisma, diferente de alguns
@@ -19,7 +19,7 @@ model User {
   password String
 
   birthDate DateTime?
-  cellNumber Int? @unique
+  cellNumber String? @unique
   
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
