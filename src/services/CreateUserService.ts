@@ -11,12 +11,13 @@ class CreateUserService{
 
     async execute({ userData }: CreateUserDTO): Promise<UserEntity>{
         
-        const { email, password, birthDate } = userData;
+        const { email, password, cellNumber } = userData;
         const usersRepository = new UsersRepository();
 
+        const cellNumberConflict = await usersRepository.findByCellNumber({ cellNumber })
         const userConflict = await usersRepository.findByEmail({ email });
 
-        if (userConflict) {
+        if (userConflict || cellNumberConflict) {
             
             throw new AppError("User Already exists!", 409);
         }

@@ -9,6 +9,10 @@ type findByEmailDTO = {
     email: string
 }
 
+type findByCellNumberDTO = {
+    cellNumber: string
+}
+
 class UsersRepository {
 
     async create({ uData }: CreateUserDTO): Promise<UserEntity> {
@@ -20,6 +24,16 @@ class UsersRepository {
 
         return newUser;
     };
+
+    async findByCellNumber({ cellNumber }: findByCellNumberDTO): Promise<UserEntity> {
+        const numberFound = await prisma.user.findFirst({
+            where: {
+                cellNumber
+            }
+        })
+
+        return numberFound;
+    }
 
     async findByEmail({ email }: findByEmailDTO): Promise<UserEntity>{
         const userFound = await prisma.user.findFirst({

@@ -27,7 +27,3 @@ model User {
   @@map("user")
 
 } //podemos verificar que os parâmetros no prisma são passados como "@algumaCoisa"
-
-model test {
-  id String @id @default(uuid())
-}
