@@ -21,7 +21,7 @@ class UserLoginService {
 
         const userAlreadyExists = await usersRepository.findByEmail({ email });
         if (!userAlreadyExists) {
-            throw new AppError("Incorrect email or password", 400);
+            throw new AppError("Incorrect email or password", 400); //bad request
         }
 
         const passwordMatch = await compare(password, userAlreadyExists.password)
@@ -35,7 +35,7 @@ class UserLoginService {
         })
 
         if (!newToken) {
-            throw new AppError("Login failed, contact support for more details", 401)
+            throw new AppError("Login failed, contact support for more details", 401) //Não autorizado
         }
 
         return { newToken };

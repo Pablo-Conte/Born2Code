@@ -18,6 +18,9 @@ app.use((err: Error, _request: Request, response: Response, _next: NextFunction)
             message: err.message
         })
     }
+
+    //Existem mais tipos de erro se quisermos...
+
     return response.status(500).json({
         status: "Error",
         message: `Internal Server Error, error: ${err}`

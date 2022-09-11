@@ -18,7 +18,7 @@ class UpdateUserService {
         if (!userAlreadyExists) {
             throw new AppError("User not found!", 404);
         }
-    
+
         const updatedUser = await usersRepository.update({ id, userData });
     
         if (!updatedUser) {

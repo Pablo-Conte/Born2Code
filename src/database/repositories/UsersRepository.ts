@@ -23,7 +23,7 @@ type UpdateUserDTO = {
 }
 
 type DeleteUserDTO = {
-    id: string
+    myId: string
 }
 
 class UsersRepository {
@@ -80,11 +80,11 @@ class UsersRepository {
         return updatedUser;
     }
 
-    async delete({ id }: DeleteUserDTO): Promise<void> {
-
+    async delete({ myId }: DeleteUserDTO): Promise<void> {
+        
         await prisma.user.delete({
             where: {
-                id
+                id: myId
             }
         })
     }

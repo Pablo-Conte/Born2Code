@@ -15,7 +15,7 @@ const deleteUserController = new DeleteUserController();
 const readUserController = new ReadUserController()
 
 router.post("/users/create", createUserController.control);
-router.put("/users/update", authSecurity, updateUserController.control)
+router.put("/users/update", authSecurity, updateUserController.control) //middle
 router.delete("/users/delete", authSecurity, deleteUserController.control)
 router.post("/users/login", userLoginController.control);
 router.get("/users/read", authSecurity, readUserController.control)
