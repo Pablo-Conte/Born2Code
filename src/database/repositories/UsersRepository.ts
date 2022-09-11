@@ -13,6 +13,15 @@ type findByCellNumberDTO = {
     cellNumber: string
 }
 
+type findByIdDTO = {
+    id: string
+}
+
+type UpdateUserDTO = {
+    id: string
+    userData: Partial<UserEntity>
+}
+
 class UsersRepository {
 
     async create({ uData }: CreateUserDTO): Promise<UserEntity> {
@@ -43,6 +52,28 @@ class UsersRepository {
         })
 
         return userFound;
+    }
+
+    async findById({ id }: findByIdDTO){
+        const userFound = await prisma.user.findFirst({
+            where: {
+                id
+            }
+        })
+
+        return userFound;
+    }
+
+    async update({ id, userData }: UpdateUserDTO): Promise<UserEntity> {
+        
+        const updatedUser = await prisma.user.update({
+                where: {
+                    id
+                },
+                data: userData
+        });
+        
+        return updatedUser;
     }
 }
 

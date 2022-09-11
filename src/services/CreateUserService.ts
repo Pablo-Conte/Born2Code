@@ -27,7 +27,7 @@ class CreateUserService{
         userData.password = newPass;
 
         if (userData?.birthDate){
-            userData.birthDate = new Date(userData.birthDate).toISOString() as unknown as Date;
+            userData.birthDate = new Date(userData.birthDate).toISOString as unknown as Date;
         }
 
 
