@@ -14,7 +14,7 @@ export async function authSecurity(request: Request, response: Response, next: N
 
     try {
         const { sub: id } = verify(token, auth.secret) as { sub: string };
-
+        
         request.user = {
             id
         };

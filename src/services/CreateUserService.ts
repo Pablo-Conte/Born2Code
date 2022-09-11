@@ -3,13 +3,13 @@ import { UsersRepository } from "../database/repositories/UsersRepository";
 import { hash } from "bcrypt";
 import { AppError } from "../shared/errors";
 
-type CreateUserDTO = {
+type TCreateUser = {
     userData: UserEntity;
 }
 
 class CreateUserService{
 
-    async execute({ userData }: CreateUserDTO): Promise<UserEntity>{
+    async execute({ userData }: TCreateUser): Promise<UserEntity>{
         
         const { email, password, cellNumber } = userData;
         const usersRepository = new UsersRepository();
@@ -27,7 +27,7 @@ class CreateUserService{
         userData.password = newPass;
 
         if (userData?.birthDate){
-            userData.birthDate = new Date(userData.birthDate).toISOString as unknown as Date;
+            userData.birthDate = new Date(userData.birthDate).toISOString() as unknown as Date;
         }
 
 

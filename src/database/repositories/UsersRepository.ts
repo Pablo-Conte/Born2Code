@@ -22,6 +22,10 @@ type UpdateUserDTO = {
     userData: Partial<UserEntity>
 }
 
+type DeleteUserDTO = {
+    id: string
+}
+
 class UsersRepository {
 
     async create({ uData }: CreateUserDTO): Promise<UserEntity> {
@@ -74,6 +78,15 @@ class UsersRepository {
         });
         
         return updatedUser;
+    }
+
+    async delete({ id }: DeleteUserDTO): Promise<void> {
+
+        await prisma.user.delete({
+            where: {
+                id
+            }
+        })
     }
 }
 
