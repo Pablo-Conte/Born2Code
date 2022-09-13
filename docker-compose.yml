@@ -1,0 +1,13 @@
+version: "3.9"
+
+services: 
+  database_born2code:
+    image: postgres:latest
+    constainer: database_born2code
+    restart: unless-stopped
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_DB
+
+  app_born2code:
