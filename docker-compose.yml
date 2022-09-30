@@ -3,11 +3,43 @@ version: "3.9"
 services: 
   database_born2code:
     image: postgres:latest
-    constainer: database_born2code
+    container_name: database_born2code
     restart: unless-stopped
     ports: 
       - 5432:5432
     environment:
-      - POSTGRES_DB
+      - POSTGRES_DB=born2code
+      - POSTGRES_USER=pablo
+      - POSTGRES_PASSWORD=17092022born2code
+    volumes:
+      - pgdata:/data/postgres
+    env_file:
+      - .env
+    logging:
+      options:
+        max-size: 10m
 
   app_born2code:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_born2code
+    restart: always
+    ports:
+      - 7000:7000
+    volumes:
+      - .:/usr/app
+    links:
+      - database_born2code
+    depends_on:
+      - database_born2code
+    env_file:
+      - .env
+    logging:
+      options:
+        max-size: 10m
+
+
+volumes:
+  pgdata: 
+    driver: local

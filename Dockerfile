@@ -10,4 +10,4 @@ COPY . /usr/app/
 
 EXPOSE 7000
 
-CMD ["npm", "run", "init-dev"]
+CMD ["yarn", "init:dev"]

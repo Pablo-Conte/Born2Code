@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CreateUserController } from "../controllers/CreateUserController";
 import { DeleteUserController } from "../controllers/DeleteUserController";
+import { LogoutUserController } from "../controllers/LogoutUserController";
 import { ReadUserController } from "../controllers/ReadUserController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
 import { UserLoginController } from "../controllers/UserLoginController";
@@ -13,13 +14,14 @@ const userLoginController = new UserLoginController();
 const updateUserController = new UpdateUserController();
 const deleteUserController = new DeleteUserController();
 const readUserController = new ReadUserController()
+const logoutUserController = new LogoutUserController();
 
 router.post("/users/create", createUserController.control);
 router.put("/users/update", authSecurity, updateUserController.control) //middle
 router.delete("/users/delete", authSecurity, deleteUserController.control)
 router.post("/users/login", userLoginController.control);
 router.get("/users/read", authSecurity, readUserController.control)
-
+router.put("/users/logout", authSecurity, logoutUserController.control)
 
 export { router };
 

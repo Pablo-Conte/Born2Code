@@ -3,27 +3,41 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./database.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 //Todo o esquema do banco de dados no PRISMA ORM é feito dentro do schema.prisma, diferente de alguns
 //outros ORMs que fazem a divisão por arquivos
+//yarn prisma migrate dev para criar uma nova migration
 
 model User {
-
   id String @id @default(uuid())
+  Tokens Tokens?
 
-  name String
-  email String @unique
+  name     String
+  email    String @unique
   password String
 
-  birthDate DateTime?
-  cellNumber String? @unique
-  
+  birthDate  DateTime?
+  cellNumber String?   @unique
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("user")
+}
+//podemos verificar que os parâmetros no prisma são passados como "@algumaCoisa"
 
-} //podemos verificar que os parâmetros no prisma são passados como "@algumaCoisa"
+model Tokens {
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String @unique
+  
+  token String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("tokens")
+}
