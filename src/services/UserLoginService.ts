@@ -19,7 +19,7 @@ class UserLoginService {
         const { secret, countdown } = auth;
 
         const usersRepository = new UsersRepository();
-
+    
         const userAlreadyExists = await usersRepository.findByEmail({ email });
         if (!userAlreadyExists) {
             throw new AppError("Incorrect email or password", 400); //bad request
