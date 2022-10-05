@@ -26,6 +26,10 @@ type DeleteUserDTO = {
     myId: string
 }
 
+type SetAdminDTO = {
+    userId: string
+}
+
 class UsersRepository {
 
     async create({ uData }: CreateUserDTO): Promise<UserEntity> {
@@ -85,6 +89,18 @@ class UsersRepository {
         await prisma.user.delete({
             where: {
                 id: myId
+            }
+        })
+    }
+
+    async setAdmin({ userId }: SetAdminDTO) {
+        
+        await prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                admin: true
             }
         })
     }

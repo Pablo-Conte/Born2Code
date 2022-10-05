@@ -7,7 +7,7 @@ class DeleteUserController{
         const { userId } = request.user;
 
         const userIdDelete = request.headers["x-user-id"] as string
-
+        
         const deleteUserService = new DeleteUserService();
 
         const deleteUser = await deleteUserService.execute( { myId: userId, id: userIdDelete } )

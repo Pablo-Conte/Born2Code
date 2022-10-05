@@ -8,10 +8,7 @@ class UpdateUserController {
         
         const { userId }  = request.user;   
 
-        const userData = request.body as Partial<UserEntity>; // ISSO AQUI NÃO ESTÁ RECEBENDO OS DADOS MAIS ;-;
-        console.log("this is userdata:")
-        console.log(userData)
-        
+        const userData = request.body as Partial<UserEntity>;
 
         if (userData.password){
             return response.status(401).json({message: "Password isn't alterable in this route"})
