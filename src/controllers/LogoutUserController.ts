@@ -12,9 +12,6 @@ class LogoutUserController{
         await userLogoutService.execute({ userId: userId })
         const header = request.headers.authorization
         
-        const [, token] = header.split(" ")
-        console.log(token)
-        
         return response.status(204).send()
 
     }

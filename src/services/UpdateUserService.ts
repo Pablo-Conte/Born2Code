@@ -20,7 +20,7 @@ class UpdateUserService {
         }
 
         const updatedUser = await usersRepository.update({ id, userData });
-    
+        
         if (!updatedUser) {
             throw new AppError ("User update failed, contact support for more details", 400);
         }
