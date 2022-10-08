@@ -93,7 +93,7 @@ class UsersRepository {
         })
     }
 
-    async setAdmin({ userId }: SetAdminDTO) {
+    async setAdmin({ userId }: SetAdminDTO): Promise<void> {
         
         await prisma.user.update({
             where: {
@@ -103,6 +103,13 @@ class UsersRepository {
                 admin: true
             }
         })
+    }
+
+    async readAll (): Promise<UserEntity[]>  {
+        
+        const findUsers = await prisma.user.findMany()
+
+        return findUsers;
     }
 }
 
