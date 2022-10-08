@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ReadAllService } from "../services/ReadAllService";
 
 class ReadAllController {
-    
+
     async control(request: Request, response: Response): Promise<Response> {
 
         const { userId } = request.user;

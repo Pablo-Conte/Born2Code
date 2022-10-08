@@ -1,9 +1,10 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { TokenRepository } from "../database/repositories/TokenRepository";
-import { UsersRepository } from "../database/repositories/UsersRepository";
-import auth from "../settings/auth";
-import { AppError } from "../shared/errors";
+import { TokenRepository } from "../../../database/repositories/TokenRepository";
+import { UsersRepository } from "../../../database/repositories/UsersRepository";
+import auth from "../../../settings/auth";
+import { AppError } from "../../../shared/errors";
+
 
 type TUserLogin = {
     email: string;

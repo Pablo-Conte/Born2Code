@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { AddAdminController } from "../controllers/AddAdminController";
-import { CreateUserController } from "../controllers/CreateUserController";
-import { DeleteUserController } from "../controllers/DeleteUserController";
-import { LogoutUserController } from "../controllers/LogoutUserController";
-import { ReadAllController } from "../controllers/ReadAllController";
-import { ReadUserController } from "../controllers/ReadUserController";
-import { UpdateUserController } from "../controllers/UpdateUserController";
-import { UserLoginController } from "../controllers/UserLoginController";
+import { AddAdminController } from "../modules/accounts/controllers/AddAdminController";
+import { CreateUserController } from "../modules/accounts/controllers/CreateUserController";
+import { DeleteUserController } from "../modules/accounts/controllers/DeleteUserController";
+import { LogoutUserController } from "../modules/accounts/controllers/LogoutUserController";
+import { ReadAllController } from "../modules/accounts/controllers/ReadAllController";
+import { ReadUserController } from "../modules/accounts/controllers/ReadUserController";
+import { UpdateUserController } from "../modules/accounts/controllers/UpdateUserController";
+import { UserLoginController } from "../modules/accounts/controllers/UserLoginController";
 import { authSecurity } from "./middlewares/authSecurity";
 
 const router = Router();

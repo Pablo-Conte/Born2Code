@@ -1,4 +1,5 @@
-import { TokenRepository } from "../database/repositories/TokenRepository";
+import { TokenRepository } from "../../../database/repositories/TokenRepository";
+
 
 type TUserLogout = {
     userId: string;

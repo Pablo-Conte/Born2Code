@@ -3,9 +3,11 @@
 //3 - se for, pega o user do header e muda o atributo admin para true 
 //4 - se não, retorna erro de autorização
 
-import { UserEntity } from "../database/entities/UserEntity";
-import { UsersRepository } from "../database/repositories/UsersRepository";
-import { AppError } from "../shared/errors";
+import { UserEntity } from "../../../database/entities/UserEntity"
+import { UsersRepository } from "../../../database/repositories/UsersRepository"
+import { AppError } from "../../../shared/errors"
+
+
 
 
 type TAddUser = {
@@ -30,6 +32,12 @@ class AddAdminService {
             throw new AppError("User is not a Admin to change permission for this user", 401)
         }
         
+        const userToChangeExists = await usersRepository.findById({ id: headerUserId });
+
+        if (!userToChangeExists) {
+            throw new AppError("This isn't a valid user ID, try again!", 404)
+        }
+
         const setUserAdmin = await usersRepository.setAdmin({ userId: headerUserId }) 
     }
 }

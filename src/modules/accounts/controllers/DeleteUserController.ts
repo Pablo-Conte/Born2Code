@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import { DeleteUserService } from "../services/DeleteUserService";
 
-class DeleteUserController{
+class DeleteUserController {
     async control(request: Request, response: Response): Promise<Response> {
 
         const { userId } = request.user;
 
         const userIdDelete = request.headers["x-user-id"] as string
-        
+
         const deleteUserService = new DeleteUserService();
 
-        const deleteUser = await deleteUserService.execute( { myId: userId, id: userIdDelete } )
+        const deleteUser = await deleteUserService.execute({ myId: userId, id: userIdDelete })
 
         return response.status(204).send();
     }
