@@ -30,7 +30,20 @@ type SetAdminDTO = {
     userId: string
 }
 
+type IsAdminDTO = {
+    userId: string
+}
+
 class UsersRepository {
+
+    async isAdmin({ userId }: IsAdminDTO): Promise<boolean> {
+        const userFound = await prisma.user.findFirst({
+            where: {
+                id: userId
+            }
+        })
+        return userFound.admin;
+    }
 
     async create({ uData }: CreateUserDTO): Promise<UserEntity> {
         const newUser = await prisma.user.create({

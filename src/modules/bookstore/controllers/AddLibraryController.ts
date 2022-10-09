@@ -7,17 +7,15 @@ class AddLibraryController {
     
     async control(request: Request, response: Response): Promise<Response> {
 
-        const { nameBook } = request.body;
+        const { userId } = request.user;
+        
+        const { nameLibrary } = request.body;
 
-        if (!nameBook) {
-            throw new AppError("Invalid name, try again!", 400)
-        }
+        const addLibraryService = new AddLibraryService();
 
-        const addBookService = new AddLibraryService();
+        const library = await addLibraryService.execute({ nameLibrary, userId});
 
-        const book = addBookService.execute({ nameBook });
-
-        return response.status(201).json(book);
+        return response.status(201).json(library);
 
     }
 }

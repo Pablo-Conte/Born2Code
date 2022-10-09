@@ -35,7 +35,8 @@ router.put("/users/addAdmin", authSecurity, addAdminController.control);
 //bookstore ---------------------------------------------------------------------------
 const addLibraryController = new AddLibraryController();
 
-router.post("/library/create", addLibraryController.control);
+router.post("/library/create", authSecurity, addLibraryController.control);
+
 
 
 

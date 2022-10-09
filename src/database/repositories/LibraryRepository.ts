@@ -2,20 +2,35 @@ import { prisma } from "../../../prisma/PrismaClient";
 import { LibraryEntity } from "../entities/LibraryEntity"
 
 type CreateBookDTO = {
-    nameBook: string
+    nameLibrary: string
+}
+
+type FindByNameDTO = {
+    name: string
 }
 
 class LibraryRepository {
-    
-    async create({ nameBook }: CreateBookDTO){
+
+    async create({ nameLibrary }: CreateBookDTO): Promise<LibraryEntity>{
         
-        const newBook = prisma.library.create({
+        const newLibrary = await prisma.library.create({
             data: {
-                name: nameBook
+                name: nameLibrary
             }
         })
 
-        return newBook;
+        return newLibrary;
+    }
+
+    async findByName({ name }: FindByNameDTO): Promise<LibraryEntity> {
+
+        const libraryFound = await prisma.library.findFirst({
+            where: {
+                name
+            }
+        })
+
+        return libraryFound; 
     }
 }
 
