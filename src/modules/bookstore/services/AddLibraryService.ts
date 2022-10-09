@@ -17,8 +17,6 @@ class AddLibraryService {
 
         const isUserAdmin = await usersRepository.isAdmin({ userId });
         
-        console.log(isUserAdmin)
-        
         if (!isUserAdmin){
             throw new AppError("You aren't a admin!", 401);
         }

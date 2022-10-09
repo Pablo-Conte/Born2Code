@@ -13,7 +13,7 @@ class AddLibraryController {
 
         const addLibraryService = new AddLibraryService();
 
-        const library = await addLibraryService.execute({ nameLibrary, userId});
+        const library = await addLibraryService.execute({ nameLibrary, userId });
 
         return response.status(201).json(library);
 
