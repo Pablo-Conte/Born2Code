@@ -12,12 +12,10 @@ class CreateBookController {
         
         if (!request.user.isAdmin) throw new AppError("You aren't an Admin!", 401);
         if (!libraryId) throw new AppError("Library is not informed", 401);
-
-        console.log(libraryId)
         
         const createBookService = new CreateBookService();
 
-        const newBook = createBookService.execute({ dataToCreateBook,  libraryId })
+        const newBook = await createBookService.execute({ dataToCreateBook,  libraryId })
 
         return response.status(201).json(newBook);
     }

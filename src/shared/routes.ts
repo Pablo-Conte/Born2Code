@@ -8,6 +8,7 @@ import { ReadUserController } from "../modules/accounts/services/ReadUser/ReadUs
 import { UpdateUserController } from "../modules/accounts/services/UpdateUser/UpdateUserController";
 import { UserLoginController } from "../modules/accounts/services/UserLogin/UserLoginController";
 import { CreateBookController } from "../modules/books/services/CreateBook/CreateBookController";
+import { DeleteBookController } from "../modules/books/services/DeleteBook/DeleteBookController";
 import { CreateLibraryController } from "../modules/bookstore/services/CreateLibrary/CreateLibraryController";
 import { DeleteLibraryController } from "../modules/bookstore/services/DeleteLibrary/DeleteLibraryController";
 import { ReadLibraryController } from "../modules/bookstore/services/ReadLibrary/ReadLibraryController";
@@ -61,6 +62,9 @@ router.delete("/library/delete", authSecurity, deleteLibraryController.control);
 //Books -------------------------------------------------------------------------------
 const createBookController = new CreateBookController();
 router.post("/books/create", authSecurity, createBookController.control)
+
+const deleteBookController = new DeleteBookController();
+router.delete("/books/delete", authSecurity, deleteBookController.control);
 
 
 export { router };

@@ -3,11 +3,19 @@ import { BookEntity } from "../entities/BookEntity";
 
 type CreateBookDTO = {
     dataToCreateBook: BookEntity;
-    libraryId: string
+    libraryId: string;
 }
 
 type FindByNameDTO = {
-    name: string
+    name: string;
+}
+
+type FindByIdDTO = {
+    id: string;
+}
+
+type DeleteBookDTO = {
+    id: string
 }
 
 class BooksRepository {
@@ -24,6 +32,15 @@ class BooksRepository {
         return newBook;
     }
 
+    async DeleteBook({ id }: DeleteBookDTO){
+
+        await prisma.book.delete({
+            where: {
+                id
+            }
+        })
+    }
+
     async findByName({ name }: FindByNameDTO): Promise<BookEntity>{
 
         const BookFound = prisma.book.findFirst({
@@ -33,6 +50,17 @@ class BooksRepository {
         })
 
         return BookFound;
+    }
+
+    async findById({ id }: FindByIdDTO){
+        
+        const bookFound = prisma.book.findFirst({
+            where: {
+                id
+            }
+        })
+
+        return bookFound;
     }
 
 }
