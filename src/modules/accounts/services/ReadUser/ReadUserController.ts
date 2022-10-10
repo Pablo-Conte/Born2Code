@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
-import { ReadUserService } from "../services/ReadUserService";
-
-type TReadUser = {
-    userId: string
-}
+import { ReadUserService } from "./ReadUserService";
 
 class ReadUserController {
 

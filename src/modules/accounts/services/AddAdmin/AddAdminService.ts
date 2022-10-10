@@ -3,12 +3,9 @@
 //3 - se for, pega o user do header e muda o atributo admin para true 
 //4 - se não, retorna erro de autorização
 
-import { UserEntity } from "../../../database/entities/UserEntity"
-import { UsersRepository } from "../../../database/repositories/UsersRepository"
-import { AppError } from "../../../shared/errors"
-
-
-
+import { UserEntity } from "../../../../database/entities/UserEntity"
+import { UsersRepository } from "../../../../database/repositories/UsersRepository"
+import { AppError } from "../../../../shared/errors"
 
 type TAddUser = {
     userId: string, 

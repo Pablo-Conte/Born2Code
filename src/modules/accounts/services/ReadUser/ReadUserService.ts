@@ -1,6 +1,5 @@
-import { UserEntity } from "../../../database/entities/UserEntity";
-import { UsersRepository } from "../../../database/repositories/UsersRepository";
-
+import { UserEntity } from "../../../../database/entities/UserEntity";
+import { UsersRepository } from "../../../../database/repositories/UsersRepository";
 
 type TReadUser = {
     myId: string

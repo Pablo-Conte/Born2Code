@@ -12,8 +12,7 @@ datasource db {
 //yarn prisma migrate dev para criar uma nova migration
 
 model User {
-
-  id String @id @default(uuid())
+  id     String  @id @default(uuid())
   Tokens Tokens?
 
   name     String
@@ -22,21 +21,21 @@ model User {
 
   birthDate  DateTime?
   cellNumber String?   @unique
-  admin Boolean @default(false)
+  admin      Boolean   @default(false)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("user")
 }
+
 //podemos verificar que os parâmetros no prisma são passados como "@algumaCoisa"
 
 model Tokens {
-
-  id String @id @default(uuid())
-  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId String @unique
-  
+
   token String
 
   created_at DateTime @default(now())
@@ -46,9 +45,21 @@ model Tokens {
 }
 
 model Library {
-
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
   name String @unique
 
+  books Book[]
+
   @@map("library")
+}
+
+model Book {
+  id        String   @id @default(uuid())
+
+  Library   Library? @relation(fields: [libraryId], references: [id])
+  libraryId String
+
+  name      String   @unique
+
+  
 }

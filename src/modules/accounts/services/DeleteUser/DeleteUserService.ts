@@ -1,6 +1,5 @@
-import { UsersRepository } from "../../../database/repositories/UsersRepository";
-import { AppError } from "../../../shared/errors";
-
+import { UsersRepository } from "../../../../database/repositories/UsersRepository";
+import { AppError } from "../../../../shared/errors";
 
 type TDeleteUser = {
     myId: string
@@ -27,7 +26,6 @@ class DeleteUserService {
             
         }
         
-        console.log(userToDelete)
         await usersRepository.delete({ myId: userToDelete });
     
         return;

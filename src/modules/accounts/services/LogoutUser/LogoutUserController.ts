@@ -1,6 +1,5 @@
 import { Request, Response, } from "express";
-import { UserLogoutService } from "../services/UserLogoutService";
-
+import { UserLogoutService } from "./UserLogoutService";
 
 class LogoutUserController {
 

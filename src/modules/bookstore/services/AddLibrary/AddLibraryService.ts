@@ -1,7 +1,7 @@
-import { LibraryEntity } from "../../../database/entities/LibraryEntity";
-import { LibraryRepository } from "../../../database/repositories/LibraryRepository"
-import { UsersRepository } from "../../../database/repositories/UsersRepository";
-import { AppError } from "../../../shared/errors";
+import { LibraryEntity } from "../../../../database/entities/LibraryEntity";
+import { LibraryRepository } from "../../../../database/repositories/LibraryRepository";
+import { UsersRepository } from "../../../../database/repositories/UsersRepository";
+import { AppError } from "../../../../shared/errors";
 
 type TCreateBook = {
     nameLibrary: string

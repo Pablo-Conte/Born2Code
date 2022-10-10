@@ -1,6 +1,6 @@
-import { UserEntity } from "../../../database/entities/UserEntity";
-import { UsersRepository } from "../../../database/repositories/UsersRepository";
-import { AppError } from "../../../shared/errors";
+import { UserEntity } from "../../../../database/entities/UserEntity";
+import { UsersRepository } from "../../../../database/repositories/UsersRepository";
+import { AppError } from "../../../../shared/errors";
 
 type TUpdateUser = {
     id: string

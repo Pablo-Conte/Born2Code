@@ -1,8 +1,7 @@
 import { hash } from "bcrypt";
-import { UserEntity } from "../../../database/entities/UserEntity";
-import { UsersRepository } from "../../../database/repositories/UsersRepository";
-import { AppError } from "../../../shared/errors";
-
+import { UserEntity } from "../../../../database/entities/UserEntity";
+import { UsersRepository } from "../../../../database/repositories/UsersRepository";
+import { AppError } from "../../../../shared/errors";
 
 type TCreateUser = {
     userData: UserEntity;

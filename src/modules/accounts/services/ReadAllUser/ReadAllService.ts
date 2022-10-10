@@ -1,6 +1,5 @@
-import { UsersRepository } from "../../../database/repositories/UsersRepository";
-import { AppError } from "../../../shared/errors";
-
+import { UsersRepository } from "../../../../database/repositories/UsersRepository";
+import { AppError } from "../../../../shared/errors";
 
 type TReadUser = {
     userId: string

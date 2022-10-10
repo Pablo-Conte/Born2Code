@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ReadAllService } from "../services/ReadAllService";
+import { ReadAllService } from "./ReadAllService";
 
 class ReadAllController {
 

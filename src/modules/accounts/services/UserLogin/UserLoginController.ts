@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserLoginService } from "../services/UserLoginService";
+import { UserLoginService } from "./UserLoginService";
 
 class UserLoginController {
     async control(request: Request, response: Response): Promise<Response> {

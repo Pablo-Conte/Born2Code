@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { AddAdminService } from "../services/AddAdminService";
-
+import { AddAdminService } from "./AddAdminService";
 
 class AddAdminController {
 
@@ -12,7 +11,7 @@ class AddAdminController {
 
         const addAdminService = new AddAdminService();
 
-        const addAdmin = await addAdminService.execute({ userId, headerUserId });
+        await addAdminService.execute({ userId, headerUserId });
 
         return response.status(204).send();
     }

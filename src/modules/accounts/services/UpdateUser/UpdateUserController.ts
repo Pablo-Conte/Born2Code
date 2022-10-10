@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { UserEntity } from "../../../database/entities/UserEntity";
-import { UpdateUserService } from "../services/UpdateUserService";
+import { UserEntity } from "../../../../database/entities/UserEntity";
+import { UpdateUserService } from "./UpdateUserService";
 
 class UpdateUserController {
 
