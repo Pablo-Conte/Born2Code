@@ -15,12 +15,17 @@ type FindByIdDTO = {
 }
 
 type DeleteBookDTO = {
-    id: string
+    id: string;
+}
+
+type UpdateBookDTO = {
+    dataBook: Partial<BookEntity>;
+    bookId: string;
 }
 
 class BooksRepository {
     
-    async CreateBook({ dataToCreateBook, libraryId }: CreateBookDTO): Promise<BookEntity>{
+    async createBook({ dataToCreateBook, libraryId }: CreateBookDTO): Promise<BookEntity>{
         
         const newBook = await prisma.book.create({
             data: {
@@ -32,7 +37,19 @@ class BooksRepository {
         return newBook;
     }
 
-    async DeleteBook({ id }: DeleteBookDTO){
+    async updateBook({ dataBook, bookId }: UpdateBookDTO){
+
+        const updatedBook = await prisma.book.update({
+            where: {
+                id: bookId
+            },
+            data: dataBook
+        })
+
+        return updatedBook;
+    }
+
+    async deleteBook({ id }: DeleteBookDTO){
 
         await prisma.book.delete({
             where: {

@@ -15,7 +15,7 @@ class DeleteBookService {
 
         if (!userExists) throw new AppError("Book doesn't exists, try again!", 404) 
 
-        await bookRepository.DeleteBook({ id });
+        await bookRepository.deleteBook({ id });
     }
 }
 

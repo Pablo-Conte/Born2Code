@@ -17,7 +17,7 @@ class CreateBookService {
         
         if (nameConflict) throw new AppError("This book already exists", 409);
 
-        const newBook = await booksRepository.CreateBook({ dataToCreateBook, libraryId})
+        const newBook = await booksRepository.createBook({ dataToCreateBook, libraryId})
 
         return newBook;
     }
