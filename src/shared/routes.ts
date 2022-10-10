@@ -9,6 +9,7 @@ import { UpdateUserController } from "../modules/accounts/services/UpdateUser/Up
 import { UserLoginController } from "../modules/accounts/services/UserLogin/UserLoginController";
 import { CreateBookController } from "../modules/books/services/CreateBook/CreateBookController";
 import { DeleteBookController } from "../modules/books/services/DeleteBook/DeleteBookController";
+import { ReadBookController } from "../modules/books/services/ReadBook/ReadBookController";
 import { UpdateBookController } from "../modules/books/services/UpdateBook/UpdateBookController";
 import { CreateLibraryController } from "../modules/bookstore/services/CreateLibrary/CreateLibraryController";
 import { DeleteLibraryController } from "../modules/bookstore/services/DeleteLibrary/DeleteLibraryController";
@@ -62,10 +63,13 @@ router.delete("/library/delete", authSecurity, deleteLibraryController.control);
 
 //Books -------------------------------------------------------------------------------
 const createBookController = new CreateBookController();
-router.post("/books/create", authSecurity, createBookController.control)
+router.post("/books/create", authSecurity, createBookController.control);
+
+const readBookController = new ReadBookController();
+router.get("/books/read", authSecurity, readBookController.control);
 
 const updateBookController = new UpdateBookController();
-router.put("/books/update", authSecurity, updateBookController.control)
+router.put("/books/update", authSecurity, updateBookController.control);
 
 const deleteBookController = new DeleteBookController();
 router.delete("/books/delete", authSecurity, deleteBookController.control);
