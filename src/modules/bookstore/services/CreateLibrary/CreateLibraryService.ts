@@ -8,7 +8,7 @@ type TCreateBook = {
     userId: string
 }
 
-class AddLibraryService {
+class CreateLibraryService {
 
     async execute({ nameLibrary, userId }: TCreateBook): Promise<LibraryEntity> {
 
@@ -34,4 +34,4 @@ class AddLibraryService {
     }
 }
 
-export { AddLibraryService }
+export { CreateLibraryService }

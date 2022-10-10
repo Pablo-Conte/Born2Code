@@ -56,10 +56,11 @@ model Library {
 model Book {
   id        String   @id @default(uuid())
 
-  Library   Library? @relation(fields: [libraryId], references: [id])
+  Library   Library? @relation(fields: [libraryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   libraryId String
 
   name      String   @unique
+  hourValue Float
 
-  
+  @@map("book")
 }

@@ -2,11 +2,24 @@ import { prisma } from "../../../prisma/PrismaClient";
 import { LibraryEntity } from "../entities/LibraryEntity"
 
 type CreateBookDTO = {
-    nameLibrary: string
+    nameLibrary: string;
 }
 
 type FindByNameDTO = {
-    name: string
+    name: string;
+}
+
+type DataToUpdateDTO = {
+    data: Partial<LibraryEntity>;
+    libraryId: string;
+}
+
+type FindByIdDTO = {
+    libraryId: string;
+}
+
+type DeleteLibraryDTO = {
+    libraryId: string;
 }
 
 class LibraryRepository {
@@ -20,6 +33,40 @@ class LibraryRepository {
         })
 
         return newLibrary;
+    }
+
+    async update({ data, libraryId }: DataToUpdateDTO): Promise<LibraryEntity>{
+
+        const updatedLibrary = await prisma.library.update({
+            where: {
+                id: libraryId
+            },
+            data: {
+                ... data
+            }
+        })
+
+        return updatedLibrary
+    }
+
+    async findById({ libraryId }: FindByIdDTO): Promise<LibraryEntity> {
+        
+        const libraryFound = await prisma.library.findUnique({
+            where: {
+                id: libraryId
+            }
+        })
+
+        return libraryFound;
+    }
+
+    async delete({ libraryId }: DeleteLibraryDTO): Promise<void> {
+
+        await prisma.library.delete({
+            where: {
+                id: libraryId
+            }
+        })
     }
 
     async findByName({ name }: FindByNameDTO): Promise<LibraryEntity> {

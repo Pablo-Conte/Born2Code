@@ -8,6 +8,7 @@ class UserEntity implements User {
     password: string;
     birthDate: Date;
     cellNumber: string;
+    admin: boolean;
     readonly created_at: Date;
     readonly updated_at: Date;
 }

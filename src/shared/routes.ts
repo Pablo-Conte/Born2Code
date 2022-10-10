@@ -7,7 +7,12 @@ import { ReadAllController } from "../modules/accounts/services/ReadAllUser/Read
 import { ReadUserController } from "../modules/accounts/services/ReadUser/ReadUserController";
 import { UpdateUserController } from "../modules/accounts/services/UpdateUser/UpdateUserController";
 import { UserLoginController } from "../modules/accounts/services/UserLogin/UserLoginController";
-import { AddLibraryController } from "../modules/bookstore/services/AddLibrary/AddLibraryController";
+import { CreateBookController } from "../modules/books/services/CreateBook/CreateBookController";
+import { CreateLibraryController } from "../modules/bookstore/services/CreateLibrary/CreateLibraryController";
+import { DeleteLibraryController } from "../modules/bookstore/services/DeleteLibrary/DeleteLibraryController";
+import { ReadLibraryController } from "../modules/bookstore/services/ReadLibrary/ReadLibraryController";
+import { UpdateLibraryController } from "../modules/bookstore/services/UpdateLibrary/UpdateLibraryController";
+
 
 import { authSecurity } from "./middlewares/authSecurity";
 
@@ -17,8 +22,8 @@ const router = Router();
 const createUserController = new CreateUserController();
 router.post("/users/create", createUserController.control);
 
-const userLoginController = new UserLoginController();
-router.post("/users/login", userLoginController.control);
+const readUserController = new ReadUserController();
+router.get("/users/read", authSecurity, readUserController.control);
 
 const updateUserController = new UpdateUserController();
 router.put("/users/update", authSecurity, updateUserController.control);
@@ -26,8 +31,8 @@ router.put("/users/update", authSecurity, updateUserController.control);
 const deleteUserController = new DeleteUserController();
 router.delete("/users/delete", authSecurity, deleteUserController.control);
 
-const readUserController = new ReadUserController();
-router.get("/users/read", authSecurity, readUserController.control);
+const userLoginController = new UserLoginController();
+router.post("/users/login", userLoginController.control);
 
 const logoutUserController = new LogoutUserController();
 router.put("/users/logout", authSecurity, logoutUserController.control);
@@ -39,10 +44,23 @@ const readAllController = new ReadAllController();
 router.get("/users/readAll", authSecurity, readAllController.control);
 //-------------------------------------------------------------------------------------
 
-//bookstore ---------------------------------------------------------------------------
-const addLibraryController = new AddLibraryController();
-router.post("/library/create", authSecurity, addLibraryController.control);
+//Bookstore ---------------------------------------------------------------------------
+const createLibraryController = new CreateLibraryController();
+router.post("/library/create", authSecurity, createLibraryController.control);
 
+const readLibraryController = new ReadLibraryController();
+router.get("/library/read", authSecurity, readLibraryController.control)
+
+const updateLibraryController = new UpdateLibraryController();
+router.put("/library/update", authSecurity, updateLibraryController.control);
+
+const deleteLibraryController = new DeleteLibraryController();
+router.delete("/library/delete", authSecurity, deleteLibraryController.control);
+//-------------------------------------------------------------------------------------
+
+//Books -------------------------------------------------------------------------------
+const createBookController = new CreateBookController();
+router.post("/books/create", authSecurity, createBookController.control)
 
 
 export { router };
