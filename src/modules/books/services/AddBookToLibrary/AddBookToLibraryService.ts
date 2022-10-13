@@ -12,7 +12,7 @@ class AddBookToLibraryService {
 
         const library_bookRepository = new Library_bookRepository();
 
-        const alreadyRelationConflict = library_bookRepository.alreadyRelationConflict({ bookId, libraryId })
+        const alreadyRelationConflict = await library_bookRepository.alreadyRelationConflict({ bookId, libraryId })
 
         if (alreadyRelationConflict) throw new AppError("This relation already exists!", 400)
         

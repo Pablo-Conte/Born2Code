@@ -26,13 +26,13 @@ class Library_bookRepository {
 
     async alreadyRelationConflict({ bookId, libraryId}: AlreadyRelationConflictDTO): Promise<library_bookEntity>{
 
-        const verifyConflict = prisma.library_book.findFirst({
+        const verifyConflict = await prisma.library_book.findFirst({
             where: {
                 bookId,
                 libraryId
             }
         })
-
+        
         return verifyConflict;
     }
 }

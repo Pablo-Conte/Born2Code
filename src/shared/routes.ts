@@ -10,6 +10,7 @@ import { UserLoginController } from "../modules/accounts/services/UserLogin/User
 import { AddBookToLibraryController } from "../modules/books/services/AddBookToLibrary/AddBookToLibraryController";
 import { CreateBookController } from "../modules/books/services/CreateBook/CreateBookController";
 import { DeleteBookController } from "../modules/books/services/DeleteBook/DeleteBookController";
+import { ReadAllBooksController } from "../modules/books/services/ReadAllBooks/ReadAllBooksController";
 import { ReadBookController } from "../modules/books/services/ReadBook/ReadBookController";
 import { UpdateBookController } from "../modules/books/services/UpdateBook/UpdateBookController";
 import { CreateLibraryController } from "../modules/bookstore/services/CreateLibrary/CreateLibraryController";
@@ -76,8 +77,10 @@ const deleteBookController = new DeleteBookController();
 router.delete("/books/delete", authSecurity, deleteBookController.control);
 
 const addBookToLibrary = new AddBookToLibraryController();
-router.put("/books/addBookToLibrary", authSecurity, addBookToLibrary.control);
+router.post("/books/addBookToLibrary", authSecurity, addBookToLibrary.control);
 
+const readAllBooksController = new ReadAllBooksController();
+router.get("/books/ReadAll", authSecurity, readAllBooksController.control);
 
 
 export { router };

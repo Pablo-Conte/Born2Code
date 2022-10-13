@@ -66,9 +66,9 @@ model Book {
 
 model library_book {
 
-  Library   Library? @relation(fields: [libraryId], references: [id])
+  Library   Library? @relation(fields: [libraryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   libraryId String
-  Book      Book?    @relation(fields: [bookId], references: [id])
+  Book      Book?    @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   bookId    String
 
   @@id([libraryId, bookId])

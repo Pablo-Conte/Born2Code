@@ -78,6 +78,13 @@ class BooksRepository {
         return bookFound;
     }
 
+    async readAllBooks(): Promise<BookEntity[]>{
+
+        const booksFound = prisma.book.findMany()
+
+        return booksFound;
+    }
+
 }
 
 export { BooksRepository }

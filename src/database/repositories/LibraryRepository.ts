@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/PrismaClient";
+import { BookEntity } from "../entities/BookEntity";
 import { LibraryEntity } from "../entities/LibraryEntity"
 
 type CreateBookDTO = {
@@ -20,6 +21,10 @@ type FindByIdDTO = {
 
 type DeleteLibraryDTO = {
     libraryId: string;
+}
+
+type ReadAllBooksDTO = {
+    query: string;
 }
 
 class LibraryRepository {
@@ -78,6 +83,26 @@ class LibraryRepository {
         })
 
         return libraryFound; 
+    }
+
+    async readAllBooks({ query }: ReadAllBooksDTO): Promise<any> {
+        
+        const booksFound = await prisma.library.findMany({
+            where: {
+                name: query
+            },
+            include: {
+                books: { include: { Book: true }}
+            }
+            
+        })
+
+        const result = booksFound.map((books) => {
+            return {...books.books.map((book) => { return { ...book.Book }})}
+        })
+
+        return result;
+        
     }
 }
 
