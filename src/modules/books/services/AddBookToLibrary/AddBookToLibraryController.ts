@@ -12,12 +12,12 @@ class AddBookToLibraryController {
         const libraryId = request.headers['x-library-id'] as string;
 
         if (!bookId || !libraryId) throw new AppError("You forgot the data man!", 404)
-        
+
         const addBookToLibrary = new AddBookToLibraryService()
 
-        const newRelation = await addBookToLibrary.execute({ bookId, libraryId })
+        await addBookToLibrary.execute({ bookId, libraryId })
 
-        return response.status(201).json(newRelation);
+        return response.status(201).send();
 
     }
 }

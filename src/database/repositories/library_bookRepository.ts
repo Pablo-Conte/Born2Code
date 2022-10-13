@@ -7,18 +7,33 @@ type CreateRelationDTO = {
     libraryId: string
 }
 
+type AlreadyRelationConflictDTO = {
+    bookId: string,
+    libraryId: string
+}
+
 class Library_bookRepository {
 
-    createRelation({ bookId, libraryId }:CreateRelationDTO): Promise<library_bookEntity> {
+    async createRelation({ bookId, libraryId }:CreateRelationDTO): Promise<void> {
 
-        const newRelation = prisma.library_book.create({
+        await prisma.library_book.create({
             data: {
                 bookId,
                 libraryId
             }
         })
+    }
 
-        return newRelation;
+    async alreadyRelationConflict({ bookId, libraryId}: AlreadyRelationConflictDTO): Promise<library_bookEntity>{
+
+        const verifyConflict = prisma.library_book.findFirst({
+            where: {
+                bookId,
+                libraryId
+            }
+        })
+
+        return verifyConflict;
     }
 }
 
