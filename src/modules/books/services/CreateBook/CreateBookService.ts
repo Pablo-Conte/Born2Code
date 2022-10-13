@@ -4,12 +4,11 @@ import { AppError } from "../../../../shared/errors";
 
 type TUserData = {
     dataToCreateBook: BookEntity;
-    libraryId: string;
 }
 
 class CreateBookService {
     
-    async execute( { dataToCreateBook, libraryId }: TUserData): Promise<BookEntity> {
+    async execute( { dataToCreateBook }: TUserData): Promise<BookEntity> {
 
         const booksRepository = new BooksRepository();
 
@@ -17,7 +16,7 @@ class CreateBookService {
         
         if (nameConflict) throw new AppError("This book already exists", 409);
 
-        const newBook = await booksRepository.createBook({ dataToCreateBook, libraryId})
+        const newBook = await booksRepository.createBook({ dataToCreateBook })
 
         return newBook;
     }

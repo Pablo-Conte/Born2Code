@@ -7,6 +7,7 @@ import { ReadAllController } from "../modules/accounts/services/ReadAllUser/Read
 import { ReadUserController } from "../modules/accounts/services/ReadUser/ReadUserController";
 import { UpdateUserController } from "../modules/accounts/services/UpdateUser/UpdateUserController";
 import { UserLoginController } from "../modules/accounts/services/UserLogin/UserLoginController";
+import { AddBookToLibraryController } from "../modules/books/services/AddBookToLibrary/AddBookToLibraryController";
 import { CreateBookController } from "../modules/books/services/CreateBook/CreateBookController";
 import { DeleteBookController } from "../modules/books/services/DeleteBook/DeleteBookController";
 import { ReadBookController } from "../modules/books/services/ReadBook/ReadBookController";
@@ -73,6 +74,9 @@ router.put("/books/update", authSecurity, updateBookController.control);
 
 const deleteBookController = new DeleteBookController();
 router.delete("/books/delete", authSecurity, deleteBookController.control);
+
+const addBookToLibrary = new AddBookToLibraryController();
+router.put("/books/addBookToLibrary", authSecurity, addBookToLibrary.control);
 
 
 
