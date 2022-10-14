@@ -22,6 +22,10 @@ type UpdateBookDTO = {
     bookId: string;
 }
 
+type ReadAllLibrariesOnBookDTO = {
+    queryBook: string;
+}
+
 class BooksRepository {
     
     async createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity>{
@@ -85,6 +89,27 @@ class BooksRepository {
         return booksFound;
     }
 
+    async readAllLibrariesOnBook({ queryBook }: ReadAllLibrariesOnBookDTO) {
+        
+        const librariesFound = await prisma.book.findMany({
+            where: {
+                id: queryBook
+            },
+            include: {
+                library: { include: { Library: true } }
+            }
+        })
+
+        const result = librariesFound.map((libraries) => {
+            
+            const book = libraries.library
+
+            return book.map((books) => { return books.Library })
+        })
+
+        return result[0];
+        
+    }
 }
 
 export { BooksRepository }

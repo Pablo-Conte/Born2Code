@@ -3,26 +3,28 @@ import { BooksRepository } from "../../../../database/repositories/BookRepositor
 import { LibraryRepository } from "../../../../database/repositories/LibraryRepository";
 
 type TUserData = {
-    query: string;
+    queryLibrary: string;
+    queryBook: string;
 }
 
 class ReadAllBooksService {
 
-    async execute({ query }: TUserData): Promise<BookEntity[]>{
+    async execute({ queryLibrary, queryBook }: TUserData){
 
         const bookRepository = new BooksRepository();
         const libraryRepository = new LibraryRepository()
 
-        const booksOnLibraryFound = await libraryRepository.readAllBooks({ query });        
-
         const booksFound = await bookRepository.readAllBooks()
 
-        if (query){
+        if (queryLibrary){
+            const booksOnLibraryFound = await libraryRepository.readAllBooks({ queryLibrary });  
             return booksOnLibraryFound;
-        } else {
-            return booksFound;
+        } else if (queryBook) {
+            const libraryOnBooksFound = await bookRepository.readAllLibrariesOnBook({ queryBook }) 
+            return libraryOnBooksFound;
         }
         
+        return booksFound;
     }
 }
 

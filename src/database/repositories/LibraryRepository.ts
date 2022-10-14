@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/PrismaClient";
+import { AddAdminController } from "../../modules/accounts/services/AddAdmin/AddAdminController";
 import { BookEntity } from "../entities/BookEntity";
 import { LibraryEntity } from "../entities/LibraryEntity"
 
@@ -24,13 +25,13 @@ type DeleteLibraryDTO = {
 }
 
 type ReadAllBooksDTO = {
-    query: string;
+    queryLibrary: string;
 }
 
 class LibraryRepository {
 
-    async create({ nameLibrary }: CreateBookDTO): Promise<LibraryEntity>{
-        
+    async create({ nameLibrary }: CreateBookDTO): Promise<LibraryEntity> {
+
         const newLibrary = await prisma.library.create({
             data: {
                 name: nameLibrary
@@ -40,14 +41,14 @@ class LibraryRepository {
         return newLibrary;
     }
 
-    async update({ data, libraryId }: DataToUpdateDTO): Promise<LibraryEntity>{
+    async update({ data, libraryId }: DataToUpdateDTO): Promise<LibraryEntity> {
 
         const updatedLibrary = await prisma.library.update({
             where: {
                 id: libraryId
             },
             data: {
-                ... data
+                ...data
             }
         })
 
@@ -55,7 +56,7 @@ class LibraryRepository {
     }
 
     async findById({ libraryId }: FindByIdDTO): Promise<LibraryEntity> {
-        
+
         const libraryFound = await prisma.library.findUnique({
             where: {
                 id: libraryId
@@ -82,27 +83,29 @@ class LibraryRepository {
             }
         })
 
-        return libraryFound; 
+        return libraryFound;
     }
 
-    async readAllBooks({ query }: ReadAllBooksDTO): Promise<any> {
-        
+    async readAllBooks({ queryLibrary }: ReadAllBooksDTO): Promise<any> {
+
         const booksFound = await prisma.library.findMany({
             where: {
-                name: query
+                name: queryLibrary
             },
             include: {
-                books: { include: { Book: true }}
+                books: { include: { Book: true } }
             }
-            
+
         })
 
         const result = booksFound.map((books) => {
-            return {...books.books.map((book) => { return { ...book.Book }})}
+            const library = books.books
+            
+            return library.map((book) => { return book.Book })
         })
 
-        return result;
-        
+        return result[0];
+
     }
 }
 

@@ -5,7 +5,7 @@ class LibraryEntity implements Library {
 
     readonly id: string;
     name: string;
-    book?: library_bookEntity[];
+    books?: library_bookEntity[];
 }
 
 export { LibraryEntity }; 

@@ -11,7 +11,7 @@ class ReadAllController {
 
         const users = await readAllService.execute({ userId })
 
-        return response.status(201).json(users)
+        return response.status(200).json(users)
     }
 }
 

@@ -5,13 +5,14 @@ class ReadAllBooksController {
 
     async control(request: Request, response: Response): Promise<Response> {
 
-        const query = request.query['library'] as string;
+        const queryBook = request.query['bookId'] as string;
+        const queryLibrary = request.query['library'] as string;
 
         const readAllBooksService = new ReadAllBooksService();
 
-        const booksFound = await readAllBooksService.execute({ query });
+        const booksFound = await readAllBooksService.execute({ queryLibrary, queryBook });
 
-        return response.status(201).json(booksFound);
+        return response.status(200).json(booksFound);
     }
 }
 
