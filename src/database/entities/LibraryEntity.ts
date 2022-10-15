@@ -1,5 +1,5 @@
 import { Library } from "@prisma/client";
-import { library_bookEntity } from "./library_book";
+import { library_bookEntity } from "./library_bookEntity";
 
 class LibraryEntity implements Library {
 

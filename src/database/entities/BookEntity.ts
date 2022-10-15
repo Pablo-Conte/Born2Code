@@ -1,5 +1,5 @@
 import { Book } from "@prisma/client";
-import { library_bookEntity } from "./library_book";
+import { library_bookEntity } from "./library_bookEntity";
 
 class BookEntity implements Book {
 
@@ -7,6 +7,7 @@ class BookEntity implements Book {
     library?: library_bookEntity[];
     name: string;
     hourValue: number;
+    rented: boolean
 
 }
 

@@ -12,6 +12,8 @@ import { CreateBookController } from "../modules/books/services/CreateBook/Creat
 import { DeleteBookController } from "../modules/books/services/DeleteBook/DeleteBookController";
 import { ReadAllBooksController } from "../modules/books/services/ReadAllBooks/ReadAllBooksController";
 import { ReadBookController } from "../modules/books/services/ReadBook/ReadBookController";
+import { RentABookController } from "../modules/books/services/RentABook/RentABookController";
+import { ReturnBookController } from "../modules/books/services/ReturnBook/ReturnBookController";
 import { UpdateBookController } from "../modules/books/services/UpdateBook/UpdateBookController";
 import { CreateLibraryController } from "../modules/bookstore/services/CreateLibrary/CreateLibraryController";
 import { DeleteLibraryController } from "../modules/bookstore/services/DeleteLibrary/DeleteLibraryController";
@@ -81,6 +83,12 @@ router.post("/books/addBookToLibrary", authSecurity, addBookToLibrary.control);
 
 const readAllBooksController = new ReadAllBooksController();
 router.get("/books/ReadAll", authSecurity, readAllBooksController.control);
+
+const rentABookController = new RentABookController();
+router.put("/books/rent", authSecurity, rentABookController.control);
+
+const returnBookController = new ReturnBookController();
+router.post("/books/return", authSecurity, returnBookController.control);
 
 
 export { router };

@@ -1,6 +1,6 @@
 
 import { prisma } from "../../../prisma/PrismaClient"
-import { library_bookEntity } from "../entities/library_book"
+import { library_bookEntity } from "../entities/library_bookEntity"
 
 type CreateRelationDTO = {
     bookId: string,
@@ -14,7 +14,7 @@ type AlreadyRelationConflictDTO = {
 
 class Library_bookRepository {
 
-    async createRelation({ bookId, libraryId }:CreateRelationDTO): Promise<void> {
+    async createRelation({ bookId, libraryId }: CreateRelationDTO): Promise<void> {
 
         await prisma.library_book.create({
             data: {
@@ -24,7 +24,7 @@ class Library_bookRepository {
         })
     }
 
-    async alreadyRelationConflict({ bookId, libraryId}: AlreadyRelationConflictDTO): Promise<library_bookEntity>{
+    async alreadyRelationConflict({ bookId, libraryId }: AlreadyRelationConflictDTO): Promise<library_bookEntity> {
 
         const verifyConflict = await prisma.library_book.findFirst({
             where: {
@@ -32,7 +32,7 @@ class Library_bookRepository {
                 libraryId
             }
         })
-        
+
         return verifyConflict;
     }
 }

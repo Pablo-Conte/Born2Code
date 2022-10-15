@@ -1,5 +1,6 @@
 import { prisma } from "../../../prisma/PrismaClient"
 import { BookEntity } from "../entities/BookEntity";
+import { Rentuser_bookRepository } from "./Rentuser_book";
 
 type CreateBookDTO = {
     dataToCreateBook: BookEntity;
@@ -24,6 +25,15 @@ type UpdateBookDTO = {
 
 type ReadAllLibrariesOnBookDTO = {
     queryBook: string;
+}
+
+type RentABookDTO = {
+    bookId: string;
+    userId: string;
+}
+
+type VerifyIfIsNotRentedDTO = {
+    bookId: string;
 }
 
 class BooksRepository {
@@ -109,6 +119,30 @@ class BooksRepository {
 
         return result[0];
         
+    }
+
+    async rentABook({ bookId, userId }: RentABookDTO): Promise<void> {
+        await prisma.book.update({
+            where: {
+                id: bookId
+            },
+            data: {
+                rented: true
+            }
+        })
+
+        const rentuser_book = new Rentuser_bookRepository();
+        await rentuser_book.rent({ bookId, userId })
+    }
+
+    async verifyIfIsNotRented({ bookId }: VerifyIfIsNotRentedDTO):Promise<BookEntity>{
+        const rentedBook = prisma.book.findUnique({
+            where: {
+                id: bookId
+            }
+        });
+
+        return rentedBook;
     }
 }
 
