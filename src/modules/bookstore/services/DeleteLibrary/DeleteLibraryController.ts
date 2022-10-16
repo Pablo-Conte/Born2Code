@@ -4,6 +4,13 @@ import { DeleteLibraryService } from "./DeleteLibraryService";
 
 class DeleteLibraryController {
 
+
+    /**
+     * Verify if is admin
+     * get request headers
+     * execute deleteLibraryService
+     */
+
     async control(request: Request, response: Response): Promise<Response>{
         
         if (!request.user.isAdmin) throw new AppError("User is not an Admin to do this!", 401);
