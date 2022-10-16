@@ -12,7 +12,30 @@ type AlreadyRelationConflictDTO = {
     libraryId: string
 }
 
+type FindByIdDTO = {
+    library_bookId: string;
+}
+
+type UpdateToRentedDTO = {
+    library_bookId: string;
+}
+
+type UpdateToNotRentedDTO = {
+    library_bookId: string;
+}
+
 class Library_bookRepository {
+
+    async findById({ library_bookId }: FindByIdDTO): Promise<library_bookEntity>{
+        
+        const library_bookFound = await prisma.library_book.findFirst({
+            where: {
+                id: library_bookId
+            }
+        })
+        
+        return library_bookFound;
+    }
 
     async createRelation({ bookId, libraryId }: CreateRelationDTO): Promise<void> {
 
@@ -34,6 +57,30 @@ class Library_bookRepository {
         })
 
         return verifyConflict;
+    }
+
+    async updateToRented({ library_bookId }: UpdateToRentedDTO): Promise<void> {
+        
+        await prisma.library_book.update({
+            where: {
+                id: library_bookId
+            },
+            data: {
+                rented: true
+            }
+        })
+    }
+
+    async updateToNotRented({ library_bookId }: UpdateToNotRentedDTO): Promise<void> {
+        
+        await prisma.library_book.update({
+            where: {
+                id: library_bookId
+            },
+            data: {
+                rented: false
+            }
+        })
     }
 }
 

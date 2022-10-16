@@ -11,9 +11,10 @@ model User {
   id     String  @id @default(uuid())
   Tokens Tokens?
 
-  name     String
-  email    String @unique
-  password String
+  name       String
+  email      String          @unique
+  password   String
+  bookRented Rentuser_book[]
 
   birthDate  DateTime?
   cellNumber String?   @unique
@@ -21,8 +22,6 @@ model User {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
-  bookRented Rentuser_book[]
 
   @@map("user")
 }
@@ -40,11 +39,24 @@ model Tokens {
   @@map("tokens")
 }
 
+model library_book {
+  id String @id @default(uuid())
+
+  Library   Library? @relation(fields: [libraryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  libraryId String
+  Book      Book?    @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  bookId    String
+
+  rented Boolean @default(false)
+}
+
 model Library {
   id   String @id @default(uuid())
   name String @unique
 
   books library_book[]
+
+  rented Rentuser_book[]
 
   @@map("library")
 }
@@ -54,32 +66,24 @@ model Book {
 
   library library_book[]
 
-  name      String  @unique
+  name      String @unique
   hourValue Float
-  rented    Boolean @default(false)
 
   userWhoRented Rentuser_book[]
 
   @@map("book")
 }
 
-model library_book {
-  Library   Library? @relation(fields: [libraryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  libraryId String
-  Book      Book?    @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  bookId    String
-
-  @@id([libraryId, bookId])
-}
-
 model Rentuser_book {
-  
-  User   User?   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId String
-  Book   Book?   @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  bookId String
+  id String @id @default(uuid())
+
+  User           User?    @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId         String
+  Book           Book?    @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  bookId         String
+  Library        Library? @relation(fields: [libraryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  libraryId      String
+  library_bookId String
 
   rented_at DateTime @default(now())
-
-  @@id([userId, bookId])
 }

@@ -4,28 +4,44 @@ import { Rentuser_bookEntity } from "../entities/Rentuser_bookentity";
 type RentDTO = {
     bookId: string;
     userId: string;
+    libraryId: string;
+    library_bookId: string;
 }
 
 type VerifyIfRentExistsDTO = {
-    bookId: string;
-    userId: string;
+    returnId: string;
+}
+
+type DeleteDTO = {
+    returnId: string;
 }
 
 class Rentuser_bookRepository {
-    async rent({ bookId, userId }: RentDTO): Promise<void> {
+
+    async delete({ returnId}: DeleteDTO): Promise<void>{
+        await prisma.rentuser_book.delete({
+            where: {
+                id: returnId
+            }
+        })
+    }
+    
+    async rent({ bookId, userId, libraryId, library_bookId }: RentDTO): Promise<void> {
+        
         await prisma.rentuser_book.create({
             data: {
                 bookId,
-                userId
+                userId,
+                libraryId,
+                library_bookId
             }
         })
     }
 
-    async verifyIfRentExists({ bookId, userId}: VerifyIfRentExistsDTO): Promise<Rentuser_bookEntity> {
+    async verifyIfRentExists({ returnId }: VerifyIfRentExistsDTO): Promise<Rentuser_bookEntity> {
         const rentFound = await prisma.rentuser_book.findFirst({
             where: {
-                bookId,
-                userId
+                id: returnId
             }
         })
         

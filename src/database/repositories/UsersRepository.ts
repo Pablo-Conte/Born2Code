@@ -34,7 +34,33 @@ type IsAdminDTO = {
     userId: string
 }
 
+type ReadAllbooksDTO = {
+    userId: string
+}
+
 class UsersRepository {
+
+    async readAllBooks({ userId }: ReadAllbooksDTO) {
+        
+        const booksFound = await prisma.user.findMany({
+            where: {
+                id: userId
+            },
+            include: {
+                bookRented: { include: { Book: true }}
+            } 
+        })
+
+        const result = booksFound.map((books) => {
+
+            const book = books.bookRented
+
+            return book.map((books) => { return books.Book })
+
+        })
+
+        return result;
+    }
 
     async isAdmin({ userId }: IsAdminDTO): Promise<boolean> {
         const userFound = await prisma.user.findFirst({

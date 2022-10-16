@@ -6,11 +6,11 @@ class RentABookController {
     async control(request: Request, response: Response): Promise<Response> {
 
         const { userId }  = request.user
-        const bookId = request.headers['x-book-id'] as string;
+        const library_bookId = request.headers['x-librarybook-id'] as string;
 
         const rentABookService = new RentABookService();
 
-        await rentABookService.execute({ bookId, userId })
+        await rentABookService.execute({ library_bookId, userId })
 
         return response.status(200).send();
     }

@@ -7,7 +7,6 @@ class BookEntity implements Book {
     library?: library_bookEntity[];
     name: string;
     hourValue: number;
-    rented: boolean
 
 }
 
