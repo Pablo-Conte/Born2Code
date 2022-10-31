@@ -54,6 +54,7 @@ type DeleteTokenDTO = {
 type RentDTO = {
   userId: string;
   library_bookId: string;
+  historyRentId: string;
 };
 
 type VerifyIfRentExistsDTO = {

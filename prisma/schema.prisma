@@ -48,7 +48,7 @@ model LibraryBook {
   Book      Book?    @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   bookId    String
 
-  rented Boolean        @default(false)
+  rented Boolean               @default(false)
   Rented RentUserLibraryBook[]
 
   @@map("library_book")
@@ -84,6 +84,20 @@ model RentUserLibraryBook {
   userId         String
   LibraryBook    LibraryBook? @relation(fields: [library_bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   library_bookId String
+  historyId      String
 
   @@map("rent_user_library_book")
+}
+
+model HistoryRent {
+  id String @id @default(uuid())
+
+  libraryid  String
+  bookId     String
+  clienteId  String
+  startDate  DateTime
+  endDate    DateTime?
+  totalValue String?
+
+  @@map("history_rent")
 }

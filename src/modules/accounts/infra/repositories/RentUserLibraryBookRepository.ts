@@ -16,15 +16,20 @@ class RentUserLibraryBookRepository {
   async rent({
     userId,
     library_bookId,
-  }: RentDTO): Promise<void> {
+    historyRentId
+  }: RentDTO): Promise<RentUserLibraryBookEntity> {
     
-    await prisma.rentUserLibraryBook.create({
+    const createdRent = await prisma.rentUserLibraryBook.create({
       data: {
         userId,
         library_bookId,
+        historyId: historyRentId
       },
     });
+    
+    return createdRent;
   }
+
 
   async verifyIfRentExists({
     returnId,

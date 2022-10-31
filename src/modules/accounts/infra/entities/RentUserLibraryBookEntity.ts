@@ -5,6 +5,7 @@ class RentUserLibraryBookEntity implements RentUserLibraryBook {
   rented_at: Date;
   userId: string;
   library_bookId: string;
+  historyId: string;
 }
 
 export { RentUserLibraryBookEntity };
