@@ -6,7 +6,8 @@
   "author": "Pablo Conte Correa <pablo.correa.nr@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "init:dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --exit-child --respawn ."
+    "init:dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --exit-child --respawn .",
+    "push": "npm version patch && git push"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
