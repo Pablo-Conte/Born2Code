@@ -1,0 +1,147 @@
+{
+  "editor.mouseWheelZoom": true,
+  "workbench.tree.indent": 16,
+  "workbench.colorCustomizations": {
+    "tree.indentGuidesStroke": "#4c4f4cbb"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.fontSize": 16,
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.folders.color": "#ef5350",
+  "material-icon-theme.files.associations": {
+    "ormconfig.json": "database",
+    "tsconfig.json": "tune",
+    "package.json": "Nodejs",
+    "swagger.json": "lib",
+    "*.swagger.json": "lib",
+    "*.rules.ts": "Settings",
+    "*.perms.ts": "Settings",
+    "*.bak": "Changelog",
+    // **.json -> sobescreve qualquer especificação
+    // *.json -> sobescreve todos os arquivos .json sem especificação
+  },
+  "material-icon-theme.folders.associations": {
+    "infra": "app",
+    "entities": "class",
+    "schemas": "class",
+    "typeorm": "database",
+    "repositories": "mappings",
+    "http": "container",
+    "migrations": "tools",
+    "modules": "components",
+    "implementations": "core",
+    "dtos": "typescript",
+    "fakes": "mock",
+    "java": "core",
+    "cms": "core",
+    "default": "core",
+    "presentation": "core",
+    "main": "core",
+    "*": "core",
+    "domain": "class",
+    "useCases": "controller",
+    "websocket": "pipe",
+    "in-memory": "mock",
+    "insomnia": "shared",
+    "swagger": "meta",
+    "accessControlList": "serverless",
+    "accounts": "serverless",
+    "invitations": "serverless",
+    "notifications": "serverless",
+    "organization": "serverless",
+    "projects": "serverless",
+    "sectors": "serverless",
+    "timeTracker": "serverless",
+    "permissionsSwagger": "meta",
+    "rolesSwagger": "meta",
+    "auditSwagger": "meta",
+    "passwordSwagger": "meta",
+    "sessionsSwagger": "meta",
+    "usersSwagger": "meta",
+    "inviteSwagger": "meta",
+    "notificationsSwagger": "meta",
+    "organizationSwagger": "meta",
+    "projectSwagger": "meta",
+    "sectorSwagger": "meta",
+    "reportErrorSwagger": "meta",
+    "timeEntrySwagger": "meta",
+    "timeReportSwagger": "meta",
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on",
+  "workbench.editor.tabSizing": "shrink",
+  "explorer.compactFolders": false,
+  "editor.tabSize": 4,
+  "editor.formatOnSave": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "explorer.confirmDragAndDrop": false,
+  // Configura tamanho e família da fonte
+  "editor.fontSize": 14,
+  "editor.lineHeight": 24,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  // Aplica linhas verticais para lembrar de quebrar linha em códigos muito grandes
+  "editor.rulers": [
+    80,
+    120
+  ],
+  // Aplica um sinal visual na esquerda da linha selecionada
+  "editor.renderLineHighlight": "gutter",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  // faz prettier funcionar com typescript
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.external.linuxExec": "lxterminal",
+  "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+  "terminal.external.windowsExec": "C:\\WINDOWS\\System32\\wsl.exe",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Dracula Soft",
+  "explorer.confirmDelete": false,
+  "window.menuBarVisibility": "toggle",
+  "git.autofetch": true,
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "Ubuntu (WSL)": {
+      "path": "C:\\WINDOWS\\System32\\wsl.exe",
+      "args": [
+        "-d",
+        "Ubuntu"
+      ]
+    }
+  },
+  "workbench.activityBar.visible": false,
+  "window.zoomLevel": 1,
+}
