@@ -97,7 +97,7 @@ model HistoryRent {
   clienteId  String
   startDate  DateTime
   endDate    DateTime?
-  totalValue String?
+  totalValue Float?
 
   @@map("history_rent")
 }

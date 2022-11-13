@@ -1,13 +1,13 @@
-import { HistoryRentEntity } from "../infra/entities/HistoryRentEntity"
+import { HistoryRentEntity } from "../infra/entities/HistoryRentEntity";
 
 type CreateHistoryRentDTO = {
-    dataToCreateHistory: Partial<HistoryRentEntity>
+  dataToCreateHistory: HistoryRentEntity;
 };
 
 type UpdateDTO = {
-    id: string;
-    endDate: Date;
-    totalValue: string;
-}
+  id: string;
+  endDate: Date;
+  totalValue: string;
+};
 
 export { CreateHistoryRentDTO, UpdateDTO };

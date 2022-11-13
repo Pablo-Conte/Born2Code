@@ -5,6 +5,7 @@ import { HistoryRentEntity } from "../entities/HistoryRentEntity";
 class HistoryRentRepository {
 
     async CreateHistoryRent({ dataToCreateHistory }: CreateHistoryRentDTO): Promise<HistoryRentEntity> {
+        
         const CreatedHistory = await prisma.historyRent.create({
             data: {
                 ...dataToCreateHistory

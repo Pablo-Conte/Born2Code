@@ -10,8 +10,9 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
@@ -45,7 +46,7 @@
           "PascalCase"
         ],
         "custom": {
-          "regex": "^T[A-Z]|^*DTO[A-Z]",
+          "regex": "^T[A-Z]|^DTO[A-Z]",
           "match": true
         }
       }
