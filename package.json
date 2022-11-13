@@ -1,5 +1,5 @@
 {
-  "name": "LetsDev-BackEnd",
+  "name": "born2code_v2",
   "version": "1.0.5",
   "main": "./src/shared/server.ts",
   "repository": "https://github.com/Pablo-Conte/LetsDev-BackEnd",
