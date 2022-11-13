@@ -143,5 +143,5 @@
     }
   },
   "workbench.activityBar.visible": false,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
 }
