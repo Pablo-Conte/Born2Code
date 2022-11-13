@@ -52,6 +52,9 @@
     "projects": "serverless",
     "sectors": "serverless",
     "timeTracker": "serverless",
+    "audit": "serverless",
+    "books": "serverless",
+    "bookstore": "serverless",
     "permissionsSwagger": "meta",
     "rolesSwagger": "meta",
     "auditSwagger": "meta",
@@ -89,7 +92,6 @@
   // Configura tamanho e família da fonte
   "editor.fontSize": 14,
   "editor.lineHeight": 24,
-  "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
   // Aplica linhas verticais para lembrar de quebrar linha em códigos muito grandes
   "editor.rulers": [
