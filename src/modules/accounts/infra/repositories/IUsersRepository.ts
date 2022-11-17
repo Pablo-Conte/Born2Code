@@ -15,7 +15,7 @@ interface IUsersRepository {
   create({ userData }: CreateUserDTO): Promise<UserEntity>;
   findByCellNumber({ cellNumber }: findByCellNumberDTO): Promise<UserEntity>;
   findByEmail({ email }: findByEmailDTO): Promise<UserEntity>;
-  findById({ id }: findByIdDTO): void;
+  findById({ id }: findByIdDTO): Promise<UserEntity>;
   readAllBooks({ userId }: ReadAllBooksDTO): Promise<number>;
   readAll(): Promise<UserEntity[]>;
   update({ id, userData }: UpdateUserDTO): Promise<UserEntity>;

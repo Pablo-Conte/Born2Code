@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-
-import { DeleteUserService } from "./DeleteUserService";
+import { container } from "tsyringe";
+import { DeleteUserUseCase } from "./DeleteUserUsecase";
 
 class DeleteUserController {
   async control(request: Request, response: Response): Promise<Response> {
@@ -8,9 +8,9 @@ class DeleteUserController {
 
     const userIdDelete = request.headers["x-user-id"] as string;
 
-    const deleteUserService = new DeleteUserService();
+    const deleteUserUseCase = container.resolve(DeleteUserUseCase);
 
-    await deleteUserService.execute({
+    await deleteUserUseCase.execute({
       myId: userId,
       id: userIdDelete,
     });
@@ -20,9 +20,3 @@ class DeleteUserController {
 }
 
 export { DeleteUserController };
-
-// passar os dois requests criados para dentro do serviço
-// verificar se os IDs são diferentes ou não para saber se sou eu ou não
-// se for igual deleta-me
-// se não, verifica se existe
-// se existir, deleta, senão, joga mensagem de erro
