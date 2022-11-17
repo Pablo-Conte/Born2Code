@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import { UserEntity } from "../../infra/entities/UserEntity";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TReadUser = {
   myId: string;

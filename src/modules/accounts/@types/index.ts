@@ -1,10 +1,6 @@
 import { TokenEntity } from "../infra/entities/TokenEntity";
 import { UserEntity } from "../infra/entities/UserEntity";
 
-type CreateUserDTO = {
-  uData: UserEntity;
-};
-
 type findByEmailDTO = {
   email: string;
 };
@@ -66,7 +62,6 @@ type DeleteDTO = {
 };
 
 export {
-  CreateUserDTO,
   DeleteUserDTO,
   IsAdminDTO,
   ReadAllBooksDTO,

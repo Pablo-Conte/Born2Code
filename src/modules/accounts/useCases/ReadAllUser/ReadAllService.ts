@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TReadUser = {
   userId: string;

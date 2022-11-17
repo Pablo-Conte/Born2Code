@@ -1,6 +1,6 @@
 import { AppError } from "../../../../shared/errors/appError";
 import { UserEntity } from "../../infra/entities/UserEntity";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TUpdateUser = {
   id: string;

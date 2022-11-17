@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 import { TokenRepository } from "../../modules/accounts/infra/repositories/TokenRepository";
-import { UsersRepository } from "../../modules/accounts/infra/repositories/UsersRepository";
+import { UsersRepository } from "../../modules/accounts/infra/repositories/implementations/UsersRepository";
 import auth from "../../settings/auth";
 import { AppError } from "../errors/appError";
 
@@ -26,7 +26,7 @@ export async function authSecurity(
   }
 
   const [, token] = authHeader.split(" ");
-  
+
   try {
     const { sub: userId } = verify(token, auth.secret) as tokenAuth;
     const { token: tokenDB } = await tokensRepository.findByUserId({

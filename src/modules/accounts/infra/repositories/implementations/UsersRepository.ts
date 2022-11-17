@@ -1,30 +1,41 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   ReadAllBooksDTO,
   IsAdminDTO,
-  CreateUserDTO,
   findByCellNumberDTO,
   findByEmailDTO,
   findByIdDTO,
   UpdateUserDTO,
   DeleteUserDTO,
   SetAdminDTO,
-} from "../../@types";
-import { UserEntity } from "../entities/UserEntity";
+} from "../../../@types";
+import { CreateUserDTO } from "../../../@types/CreateUserDTO";
+import { UserEntity } from "../../entities/UserEntity";
+import { IUsersRepository } from "../IUsersRepository";
 
-class UsersRepository {
+class UsersRepository implements IUsersRepository {
+  async create({ userData }: CreateUserDTO): Promise<UserEntity> {
+    const newUser = await prisma.user.create({
+      data: {
+        ...userData, // spread
+      },
+    });
+
+    return newUser;
+  }
 
   async readAllBooks({ userId }: ReadAllBooksDTO): Promise<number> {
-
     const booksFound = await prisma.user.findMany({
       where: {
         id: userId,
       },
-      include: { BookRented: true }
-    })
-    const result = booksFound.map((booksRented) => { return booksRented.BookRented })
-    
-    return result[0].length
+      include: { BookRented: true },
+    });
+    const result = booksFound.map((booksRented) => {
+      return booksRented.BookRented;
+    });
+
+    return result[0].length;
   }
 
   async isAdmin({ userId }: IsAdminDTO): Promise<boolean> {
@@ -34,16 +45,6 @@ class UsersRepository {
       },
     });
     return userFound.admin;
-  }
-
-  async create({ uData }: CreateUserDTO): Promise<UserEntity> {
-    const newUser = await prisma.user.create({
-      data: {
-        ...uData, // spread
-      },
-    });
-
-    return newUser;
   }
 
   async findByCellNumber({

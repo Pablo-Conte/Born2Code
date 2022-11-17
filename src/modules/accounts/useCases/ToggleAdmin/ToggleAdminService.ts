@@ -4,7 +4,7 @@
 // 4 - se não, retorna erro de autorização
 
 import { AppError } from "../../../../shared/errors/appError";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TAddUser = {
   isAdmin: boolean;

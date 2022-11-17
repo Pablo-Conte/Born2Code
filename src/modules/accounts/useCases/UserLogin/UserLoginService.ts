@@ -4,7 +4,7 @@ import { sign } from "jsonwebtoken";
 import auth from "../../../../settings/auth";
 import { AppError } from "../../../../shared/errors/appError";
 import { TokenRepository } from "../../infra/repositories/TokenRepository";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TUserLogin = {
   email: string;

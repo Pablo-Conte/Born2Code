@@ -1,6 +1,6 @@
 import { AppError } from "../../../../shared/errors/appError";
 import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
-import { UsersRepository } from "../../../accounts/infra/repositories/UsersRepository";
+import { UsersRepository } from "../../../accounts/infra/repositories/implementations/UsersRepository";
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
 import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
 import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";

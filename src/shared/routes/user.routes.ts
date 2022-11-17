@@ -1,6 +1,8 @@
 import { Router } from "express";
+import { UsersRepository } from "../../modules/accounts/infra/repositories/implementations/UsersRepository";
 
 import { CreateUserController } from "../../modules/accounts/useCases/CreateUser/CreateUserController";
+import { CreateUserUseCase } from "../../modules/accounts/useCases/CreateUser/CreateUserUseCase";
 import { DeleteUserController } from "../../modules/accounts/useCases/DeleteUser/DeleteUserController";
 import { LogoutUserController } from "../../modules/accounts/useCases/LogoutUser/LogoutUserController";
 import { ReadAllController } from "../../modules/accounts/useCases/ReadAllUser/ReadAllController";
@@ -34,11 +36,7 @@ userRoutes.post("/login", userLoginController.control);
 
 userRoutes.put("/logout", authSecurity, logoutUserController.control);
 
-userRoutes.put(
-  "/toggleAdmin",
-  authSecurity,
-  toggleAdminController.control
-);
+userRoutes.put("/toggleAdmin", authSecurity, toggleAdminController.control);
 
 userRoutes.get("/readAll", authSecurity, readAllController.control);
 //-------------------------------------------------------------------------------------
