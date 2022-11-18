@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { UserLoginService } from "./UserLoginService";
+import { UserLoginUseCase } from "./UserLoginUseCase";
 
 class UserLoginController {
   async control(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
-    const userLoginService = new UserLoginService();
+    const userLoginUseCase = container.resolve(UserLoginUseCase);
 
-    const newToken = await userLoginService.execute({ email, password });
+    const newToken = await userLoginUseCase.execute({ email, password });
 
     return response.status(200).json(newToken);
   }
