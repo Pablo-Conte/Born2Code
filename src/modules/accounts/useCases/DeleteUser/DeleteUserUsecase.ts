@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
-import { DeleteUserDTO } from "../../@types/TDeleteUser";
+import { DeleteUserDTO } from "../../@types/DeleteUserDTO";
 import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 import { IUsersRepository } from "../../infra/repositories/IUsersRepository";
 

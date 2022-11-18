@@ -1,17 +1,15 @@
 import { Request, Response } from "express";
-
-import { ReadUserService } from "./ReadUserService";
+import { container } from "tsyringe";
+import { ReadUserUseCase } from "./ReadUserUseCase";
 
 class ReadUserController {
   async control(request: Request, response: Response): Promise<Response> {
     const { userId } = request.user;
-
     const userIdRead = request.headers["x-user-id"] as string;
 
-    const readUserService = new ReadUserService();
-
-    const User = await readUserService.execute({
-      myId: userId,
+    const readUserUseCase = container.resolve(ReadUserUseCase);
+    const User = await readUserUseCase.execute({
+      userId,
       id: userIdRead,
     });
 

@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { ToggleAdminService } from "./ToggleAdminService";
+import { ToggleAdminUseCase } from "./ToggleAdminUseCase";
 
 class ToggleAdminController {
   async control(request: Request, response: Response): Promise<Response> {
     const { isAdmin } = request.user as unknown as {
       isAdmin: boolean;
-      
     };
     const headerUserId = request.headers["x-user-id"] as string;
 
-    const toggleAdminService = new ToggleAdminService();
-
+    const toggleAdminService = container.resolve(ToggleAdminUseCase);
     const result = await toggleAdminService.execute({ isAdmin, headerUserId });
 
     let returnString: string;
