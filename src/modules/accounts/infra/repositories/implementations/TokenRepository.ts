@@ -1,16 +1,14 @@
 import { prisma } from "../../../../../../prisma/PrismaClient";
-import {
-  CreateUserTokenDTO,
-  DeleteTokenDTO,
-  FindUserIdDTO,
-} from "../../../@types";
+import { CreateTokenDTO } from "../../../@types/CreateTokenDTO";
+import { FindUserDTO } from "../../../@types/FindUserDTO";
+
 import { TokenEntity } from "../../entities/TokenEntity";
 import { ITokenRepository } from "../ITokenRepository";
 
 class TokenRepository implements ITokenRepository {
   async create({
     tokenData: { userId, token },
-  }: CreateUserTokenDTO): Promise<void> {
+  }: CreateTokenDTO): Promise<void> {
     await prisma.tokens.create({
       data: {
         userId,
@@ -19,7 +17,7 @@ class TokenRepository implements ITokenRepository {
     });
   }
 
-  async findByUserId({ userId }: FindUserIdDTO): Promise<TokenEntity> {
+  async findByUserId({ userId }: FindUserDTO): Promise<TokenEntity> {
     const foundedToken = await prisma.tokens.findFirst({
       where: {
         userId,
@@ -28,7 +26,7 @@ class TokenRepository implements ITokenRepository {
     return foundedToken;
   }
 
-  async delete({ userId }: DeleteTokenDTO): Promise<void> {
+  async delete({ userId }: FindUserDTO): Promise<void> {
     await prisma.tokens.delete({
       where: {
         userId,

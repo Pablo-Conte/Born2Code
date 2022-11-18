@@ -1,17 +1,14 @@
 import { prisma } from "../../../../../../prisma/PrismaClient";
-import {
-  ReadAllBooksDTO,
-  IsAdminDTO,
-  findByCellNumberDTO,
-  findByEmailDTO,
-  findByIdDTO,
-  UpdateUserDTO,
-  DeleteUserDTO,
-  SetAdminDTO,
-} from "../../../@types";
-import { CreateUserDTO } from "../../../@types/CreateUserDTO";
 import { UserEntity } from "../../entities/UserEntity";
 import { IUsersRepository } from "../IUsersRepository";
+import { CellNumberDTO } from "../../../@types/CellNumberDTO";
+import { EmailDTO } from "../../../@types/EmailDTO";
+import { CreateUserDTO } from "../../../@types/CreateUserDTO";
+import { ReadUserDTO } from "../../../@types/ReadUserDTO";
+import { FindUserDTO } from "../../../@types/FindUserDTO";
+import { SetAdminDTO } from "../../../@types/SetAdminDTO";
+import { UpdateUserDTO } from "../../../@types/UpdateUserDTO";
+import { DeleteUserDTO } from "../../../@types/DeleteUserDTO";
 
 class UsersRepository implements IUsersRepository {
   async create({ userData }: CreateUserDTO): Promise<UserEntity> {
@@ -24,7 +21,7 @@ class UsersRepository implements IUsersRepository {
     return newUser;
   }
 
-  async readAllBooks({ userId }: ReadAllBooksDTO): Promise<number> {
+  async readAllBooks({ userId }: ReadUserDTO): Promise<number> {
     const booksFound = await prisma.user.findMany({
       where: {
         id: userId,
@@ -38,28 +35,17 @@ class UsersRepository implements IUsersRepository {
     return result[0].length;
   }
 
-  async isAdmin({ userId }: IsAdminDTO): Promise<boolean> {
+  async findById({ id }: FindUserDTO) {
     const userFound = await prisma.user.findFirst({
       where: {
-        id: userId,
-      },
-    });
-    return userFound.admin;
-  }
-
-  async findByCellNumber({
-    cellNumber,
-  }: findByCellNumberDTO): Promise<UserEntity> {
-    const numberFound = await prisma.user.findFirst({
-      where: {
-        cellNumber,
+        id,
       },
     });
 
-    return numberFound;
+    return userFound;
   }
 
-  async findByEmail({ email }: findByEmailDTO): Promise<UserEntity> {
+  async findByEmail({ email }: EmailDTO): Promise<UserEntity> {
     const userFound = await prisma.user.findFirst({
       where: {
         email,
@@ -69,14 +55,14 @@ class UsersRepository implements IUsersRepository {
     return userFound;
   }
 
-  async findById({ id }: findByIdDTO) {
-    const userFound = await prisma.user.findFirst({
+  async findByCellNumber({ cellNumber }: CellNumberDTO): Promise<UserEntity> {
+    const numberFound = await prisma.user.findFirst({
       where: {
-        id,
+        cellNumber,
       },
     });
 
-    return userFound;
+    return numberFound;
   }
 
   async update({ id, userData }: UpdateUserDTO): Promise<UserEntity> {
@@ -94,6 +80,15 @@ class UsersRepository implements IUsersRepository {
     });
 
     return updatedUser;
+  }
+
+  async isAdmin({ userId }: SetAdminDTO): Promise<boolean> {
+    const userFound = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+    return userFound.admin;
   }
 
   async delete({ myId }: DeleteUserDTO): Promise<void> {

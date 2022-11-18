@@ -1,5 +1,6 @@
 import { prisma } from "../../../../../../prisma/PrismaClient";
-import { DeleteDTO, RentDTO, VerifyIfRentExistsDTO } from "../../../@types";
+import { DeleteTokenDTO } from "../../../@types/DeleteTokenDTO";
+import { RentDTO } from "../../../@types/RentDTO";
 import { RentEntity } from "../../entities/RentEntity";
 import { IRentRepository } from "../IRentRepository";
 
@@ -20,9 +21,7 @@ class RentRepository implements IRentRepository {
     return createdRent;
   }
 
-  async verifyIfRentExists({
-    returnId,
-  }: VerifyIfRentExistsDTO): Promise<RentEntity> {
+  async verifyIfRentExists({ returnId }: DeleteTokenDTO): Promise<RentEntity> {
     const rentFound = await prisma.rentUserLibraryBook.findFirst({
       where: {
         id: returnId,
@@ -32,7 +31,7 @@ class RentRepository implements IRentRepository {
     return rentFound;
   }
 
-  async delete({ returnId }: DeleteDTO): Promise<void> {
+  async delete({ returnId }: DeleteTokenDTO): Promise<void> {
     await prisma.rentUserLibraryBook.delete({
       where: {
         id: returnId,
