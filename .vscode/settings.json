@@ -16,7 +16,7 @@
     "*.swagger.json": "lib",
     "*.rules.ts": "Settings",
     "*.perms.ts": "Settings",
-    "*.bak": "Changelog",
+    "*.bak": "Changelog"
     // **.json -> sobescreve qualquer especificação
     // *.json -> sobescreve todos os arquivos .json sem especificação
   },
@@ -55,6 +55,7 @@
     "audit": "serverless",
     "books": "serverless",
     "bookstore": "serverless",
+    "sessions": "serverless",
     "permissionsSwagger": "meta",
     "rolesSwagger": "meta",
     "auditSwagger": "meta",
@@ -68,7 +69,7 @@
     "sectorSwagger": "meta",
     "reportErrorSwagger": "meta",
     "timeEntrySwagger": "meta",
-    "timeReportSwagger": "meta",
+    "timeReportSwagger": "meta"
   },
   "editor.bracketPairColorization.enabled": true,
   "editor.minimap.enabled": false,
@@ -94,10 +95,7 @@
   "editor.lineHeight": 24,
   "editor.fontLigatures": true,
   // Aplica linhas verticais para lembrar de quebrar linha em códigos muito grandes
-  "editor.rulers": [
-    80,
-    120
-  ],
+  "editor.rulers": [80, 120],
   // Aplica um sinal visual na esquerda da linha selecionada
   "editor.renderLineHighlight": "gutter",
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -116,7 +114,7 @@
     "source.fixAll.eslint": true
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Dracula Soft",
+  "workbench.colorTheme": "Darcula Storm",
   "explorer.confirmDelete": false,
   "window.menuBarVisibility": "toggle",
   "git.autofetch": true,
@@ -138,12 +136,9 @@
     },
     "Ubuntu (WSL)": {
       "path": "C:\\WINDOWS\\System32\\wsl.exe",
-      "args": [
-        "-d",
-        "Ubuntu"
-      ]
+      "args": ["-d", "Ubuntu"]
     }
   },
   "workbench.activityBar.visible": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 0
 }
