@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { LogoutUserController } from "../../modules/accounts/useCases/LogoutUser/LogoutUserController";
-import { UserLoginController } from "../../modules/accounts/useCases/UserLogin/UserLoginController";
+import { LogoutUserController } from "../../modules/sessions/useCases/LogoutUser/LogoutUserController";
+import { UserLoginController } from "../../modules/sessions/useCases/UserLogin/UserLoginController";
 import { authSecurity } from "../middlewares/authSecurity";
 
 const sessionRoutes = Router();

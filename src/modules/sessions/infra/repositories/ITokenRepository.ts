@@ -1,5 +1,5 @@
 import { CreateTokenDTO } from "../../@types/CreateTokenDTO";
-import { FindUserDTO } from "../../@types/FindUserDTO";
+import { FindUserDTO } from "../../../accounts/@types/FindUserDTO";
 import { TokenEntity } from "../entities/TokenEntity";
 
 interface ITokenRepository {

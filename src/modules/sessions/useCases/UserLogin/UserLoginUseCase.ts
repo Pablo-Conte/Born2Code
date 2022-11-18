@@ -4,10 +4,10 @@ import { inject, injectable } from "tsyringe";
 
 import auth from "../../../../settings/auth";
 import { AppError } from "../../../../shared/errors/appError";
-import { LoginReturnDTO } from "../../@types/LoginReturnDTO";
+import { LoginReturnDTO } from "../../../accounts/@types/LoginReturnDTO";
 import { UserLoginDTO } from "../../@types/UserLoginDTO";
 import { TokenRepository } from "../../infra/repositories/implementations/TokenRepository";
-import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
+import { UsersRepository } from "../../../accounts/infra/repositories/implementations/UsersRepository";
 
 @injectable()
 class UserLoginUseCase {

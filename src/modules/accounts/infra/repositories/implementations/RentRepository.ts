@@ -1,5 +1,5 @@
 import { prisma } from "../../../../../../prisma/PrismaClient";
-import { DeleteTokenDTO } from "../../../@types/DeleteTokenDTO";
+import { DeleteTokenDTO } from "../../../../sessions/@types/DeleteTokenDTO";
 import { RentDTO } from "../../../@types/RentDTO";
 import { RentEntity } from "../../entities/RentEntity";
 import { IRentRepository } from "../IRentRepository";

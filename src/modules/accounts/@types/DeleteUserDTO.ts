@@ -1,6 +1,6 @@
 type DeleteUserDTO = {
   myId: string;
-  id: string;
+  id?: string;
 };
 
 export { DeleteUserDTO };

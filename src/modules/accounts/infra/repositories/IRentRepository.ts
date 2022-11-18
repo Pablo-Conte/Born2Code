@@ -1,6 +1,6 @@
 import { RentEntity } from "../entities/RentEntity";
 import { RentDTO } from "../../@types/RentDTO";
-import { DeleteTokenDTO } from "../../@types/DeleteTokenDTO";
+import { DeleteTokenDTO } from "../../../sessions/@types/DeleteTokenDTO";
 
 interface IRentRepository {
   rent({ userId, library_bookId, historyRentId }: RentDTO): Promise<RentEntity>;
