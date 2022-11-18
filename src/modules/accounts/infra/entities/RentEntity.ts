@@ -1,6 +1,6 @@
 import { RentUserLibraryBook } from "@prisma/client";
 
-class RentUserLibraryBookEntity implements RentUserLibraryBook {
+class RentEntity implements RentUserLibraryBook {
   readonly id: string;
   rented_at: Date;
   userId: string;
@@ -8,4 +8,4 @@ class RentUserLibraryBookEntity implements RentUserLibraryBook {
   historyId: string;
 }
 
-export { RentUserLibraryBookEntity };
+export { RentEntity };

@@ -1,5 +1,5 @@
 import { AppError } from "../../../../shared/errors/appError";
-import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
+import { RentRepository } from "../../../accounts/infra/repositories/implementations/RentRepository";
 import { UsersRepository } from "../../../accounts/infra/repositories/implementations/UsersRepository";
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
 import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
@@ -12,7 +12,7 @@ type TBookId = {
 
 class RentABookService {
   async execute({ library_bookId, userId }: TBookId): Promise<void> {
-    const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
+    const rentRepository = new RentRepository();
     const library_bookRepository = new Library_BookRepository();
     const userRepository = new UsersRepository();
     const historyRentService = new HistoryRentService();
@@ -45,7 +45,7 @@ class RentABookService {
       dataToCreateHistory
     );
 
-    await rentUserLibraryBookRepository.rent({
+    await rentRepository.rent({
       userId,
       library_bookId,
       historyRentId: CreatedHistory.id,

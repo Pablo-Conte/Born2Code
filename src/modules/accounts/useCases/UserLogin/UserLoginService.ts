@@ -3,7 +3,7 @@ import { sign } from "jsonwebtoken";
 
 import auth from "../../../../settings/auth";
 import { AppError } from "../../../../shared/errors/appError";
-import { TokenRepository } from "../../infra/repositories/TokenRepository";
+import { TokenRepository } from "../../infra/repositories/implementations/TokenRepository";
 import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TUserLogin = {
