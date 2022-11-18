@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
-import { ToggleAdminDTO } from "../../@types/ToggleAdminDTO";
+import { SetAdminDTO } from "../../@types/SetAdminDTO";
 import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 @injectable()
@@ -10,7 +10,7 @@ class ToggleAdminUseCase {
     private usersRepository: UsersRepository
   ) {}
 
-  async execute({ isAdmin, headerUserId }: ToggleAdminDTO): Promise<boolean> {
+  async execute({ isAdmin, headerUserId }: SetAdminDTO): Promise<boolean> {
     if (!isAdmin)
       throw new AppError(
         "User is not a Admin to change permission for this user",

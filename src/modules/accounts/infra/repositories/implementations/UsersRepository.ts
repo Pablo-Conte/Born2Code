@@ -82,7 +82,7 @@ class UsersRepository implements IUsersRepository {
     return updatedUser;
   }
 
-  async isAdmin({ userId }: SetAdminDTO): Promise<boolean> {
+  async isAdmin({ userId }: FindUserDTO): Promise<boolean> {
     const userFound = await prisma.user.findFirst({
       where: {
         id: userId,

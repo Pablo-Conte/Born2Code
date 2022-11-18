@@ -1,5 +1,5 @@
 type FindUserDTO = {
-  userId: string;
+  userId?: string;
   id?: string;
 };
 
