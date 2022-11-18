@@ -1,22 +1,21 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { UserEntity } from "../../infra/entities/UserEntity";
-import { UpdateUserService } from "./UpdateUserService";
+import { UpdateUserUseCase } from "./UpdateUserUseCase";
 
 class UpdateUserController {
   async control(request: Request, response: Response): Promise<Response> {
     const { userId } = request.user;
 
     const userData = request.body as Partial<UserEntity>;
-
     if (userData.password) {
       return response
         .status(401)
         .json({ message: "Password isn't alterable in this route" });
     }
 
-    const updateUserService = new UpdateUserService();
-
+    const updateUserService = container.resolve(UpdateUserUseCase);
     const updatedUser = await updateUserService.execute({
       id: userId,
       userData,

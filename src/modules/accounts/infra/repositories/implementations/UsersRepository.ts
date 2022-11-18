@@ -84,7 +84,13 @@ class UsersRepository implements IUsersRepository {
       where: {
         id,
       },
-      data: userData,
+      data: {
+        name: userData.name,
+        email: userData.email,
+        birthDate: userData.birthDate,
+        password: userData.password,
+        cellNumber: userData.cellNumber,
+      },
     });
 
     return updatedUser;
