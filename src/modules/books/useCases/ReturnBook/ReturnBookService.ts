@@ -46,8 +46,8 @@ class ReturnBookService {
     const minutes = Math.ceil(time / (1000 * 60));
     const coefficientHours = minutes / 60;
 
-    const total = (coefficientHours * hourValue).toFixed(2);
-    
+    const total = (coefficientHours * hourValue);
+
     const rentUserLibraryBook = await rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
 
     await historyRentReturnService.execute({ id: rentUserLibraryBook.historyId, endDate: now, totalValue: total })

@@ -7,7 +7,7 @@ type CreateHistoryRentDTO = {
 type UpdateDTO = {
   id: string;
   endDate: Date;
-  totalValue: string;
+  totalValue: number;
 };
 
 export { CreateHistoryRentDTO, UpdateDTO };
