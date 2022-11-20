@@ -1,6 +1,7 @@
 /* eslint-disable radix */
 /* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
+import dayjs, { Dayjs } from "dayjs";
 import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
 import { HistoryRentRepository } from "../../../audit/infra/repositories/HistoryRentRepository";
 import { HistoryRentReturnService } from "../../../audit/infra/useCases/HistoryRentReturnService";
@@ -28,13 +29,16 @@ class ReturnBookService {
     
     if (!rentedBook) throw new AppError("This Rent not exists!", 404);
     
-    const now = new Date(Date.now()) as Date;
-    const rented_at = new Date(rentedBook.rented_at) as Date;
+    
 
     const { bookId } = await libraryBookRepository.findById({ library_bookId: rentedBook.library_bookId })
 
     const bookRepository = new BooksRepository();
     const book = await bookRepository.findById({ id: bookId });
+
+
+    const now = new Date(Date.now()) as Date;
+    const rented_at = new Date(rentedBook.rented_at) as Date;
 
     const { hourValue } = book;
 
@@ -47,7 +51,17 @@ class ReturnBookService {
     const coefficientHours = minutes / 60;
 
     const total = (coefficientHours * hourValue).toFixed(2);
+
+
+    const n = new Dayjs()
+    const rent_at_book = new Date(rentedBook.rented_at) as Date
+    const rent_at = dayjs(rent_at_book)
+
     
+    
+
+
+
     const rentUserLibraryBook = await rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
 
     await historyRentReturnService.execute({ id: rentUserLibraryBook.historyId, endDate: now, totalValue: total })
