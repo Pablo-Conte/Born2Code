@@ -17,7 +17,7 @@ class AddBookToLibraryController {
 
     await addBookToLibrary.execute({ bookId, libraryId });
 
-    return response.status(201).send();
+    return response.status(204).send();
   }
 }
 
