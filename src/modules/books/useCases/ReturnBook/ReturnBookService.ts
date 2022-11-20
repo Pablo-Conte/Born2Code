@@ -44,9 +44,9 @@ class ReturnBookService {
     const time = Math.abs(parsedNow - parsedRentedAt);
 
     const minutes = Math.ceil(time / (1000 * 60));
-    const coefficientHours = minutes / 60;
-
-    const total = (coefficientHours * hourValue);
+    const coefficientHours = Number(Math.round((minutes / 60)*100) / 100);
+    
+    const total = Number(Math.round((coefficientHours * hourValue) * 100) / 100);
 
     const rentUserLibraryBook = await rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
 
