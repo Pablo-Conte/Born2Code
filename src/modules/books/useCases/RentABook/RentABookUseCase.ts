@@ -18,12 +18,12 @@ type TBookId = {
 class RentABookUseCase {
   constructor(
     @inject(UsersRepository)
-    @inject(RentRepository)
-    @inject(Library_BookRepository)
-    @inject(HistoryRentUseCase)
     private usersRepository: IUsersRepository,
-    private rentRepository: IRentRepository,
+    @inject(Library_BookRepository)
     private library_bookRepository: ILibrary_BookRepository,
+    @inject(RentRepository)
+    private rentRepository: IRentRepository,
+    @inject(HistoryRentUseCase)
     private historyRentUseCase: HistoryRentUseCase
   ) {}
 

@@ -10,7 +10,7 @@ type TUpdateBook = {
 };
 
 @injectable()
-class UpdateBookService {
+class UpdateBookUseCase {
   constructor(
     @inject(BooksRepository)
     private booksRepository: IBooksRepository
@@ -31,4 +31,4 @@ class UpdateBookService {
   }
 }
 
-export { UpdateBookService };
+export { UpdateBookUseCase };

@@ -18,12 +18,12 @@ type TData = {
 class ReturnBookUseCase {
   constructor(
     @inject(RentRepository)
-    @inject(BooksRepository)
-    @inject(Library_BookRepository)
-    @inject(HistoryRentReturnUseCase)
     private rentRepository: IRentRepository,
+    @inject(BooksRepository)
     private bookRepository: IBooksRepository,
+    @inject(Library_BookRepository)
     private library_bookRepository: ILibrary_BookRepository,
+    @inject(HistoryRentReturnUseCase)
     private historyRentReturnUseCase: HistoryRentReturnUseCase
   ) {}
 
@@ -55,7 +55,7 @@ class ReturnBookUseCase {
     const minutes = Math.ceil(time / (1000 * 60));
     const coefficientHours = minutes / 60;
 
-    const total = (coefficientHours * hourValue).toFixed(2);
+    const total = coefficientHours * hourValue;
 
     const rentUserLibraryBook = await this.rentRepository.verifyIfRentExists({
       returnId,

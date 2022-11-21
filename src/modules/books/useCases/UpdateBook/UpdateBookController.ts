@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/appError";
 import { BookEntity } from "../../infra/entities/BookEntity";
-import { UpdateBookService } from "./UpdateBookService";
+import { UpdateBookUseCase } from "./UpdateBookUseCase";
 
 class UpdateBookController {
   async control(request: Request, response: Response): Promise<Response> {
@@ -10,9 +11,9 @@ class UpdateBookController {
 
     const bookId = request.headers["x-book-id"] as string;
     const dataBook = request.body as Partial<BookEntity>;
-    const updateBookService = new UpdateBookService();
+    const updateBookUseCase = container.resolve(UpdateBookUseCase);
 
-    const updatedBook = await updateBookService.execute({ dataBook, bookId });
+    const updatedBook = await updateBookUseCase.execute({ dataBook, bookId });
 
     return response.status(201).json(updatedBook);
   }
