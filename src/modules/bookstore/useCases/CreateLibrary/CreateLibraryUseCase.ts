@@ -1,9 +1,9 @@
+import { CreateBookDTO } from "@modules/bookstore/@types/CreateBookDTO";
+import { LibraryEntity } from "@modules/bookstore/infra/entities/LibraryEntity";
+import { ILibraryRepository } from "@modules/bookstore/infra/repositories/ILibraryRepository";
+import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { CreateBookDTO } from "../../@types/CreateBookDTO";
-import { LibraryEntity } from "../../infra/entities/LibraryEntity";
-import { ILibraryRepository } from "../../infra/repositories/ILibraryRepository";
-import { LibraryRepository } from "../../infra/repositories/implementations/LibraryRepository";
 
 @injectable()
 class CreateLibraryUseCase {

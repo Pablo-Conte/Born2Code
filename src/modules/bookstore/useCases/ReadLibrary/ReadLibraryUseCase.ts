@@ -1,7 +1,7 @@
+import { LibraryIdDTO } from "@modules/bookstore/@types";
+import { LibraryEntity } from "@modules/bookstore/infra/entities/LibraryEntity";
+import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
 import { inject, injectable } from "tsyringe";
-import { LibraryIdDTO } from "../../@types";
-import { LibraryEntity } from "../../infra/entities/LibraryEntity";
-import { LibraryRepository } from "../../infra/repositories/implementations/LibraryRepository";
 
 @injectable()
 class ReadLibraryUseCase {

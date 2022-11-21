@@ -1,12 +1,11 @@
+import { CreateUserController } from "@modules/accounts/useCases/CreateUser/CreateUserController";
+import { DeleteUserController } from "@modules/accounts/useCases/DeleteUser/DeleteUserController";
+import { ReadAllController } from "@modules/accounts/useCases/ReadAllUser/ReadAllController";
+import { ReadUserController } from "@modules/accounts/useCases/ReadUser/ReadUserController";
+import { ToggleAdminController } from "@modules/accounts/useCases/ToggleAdmin/ToggleAdminController";
+import { UpdateUserController } from "@modules/accounts/useCases/UpdateUser/UpdateUserController";
+import { authSecurity } from "@shared/middlewares/authSecurity";
 import { Router } from "express";
-
-import { CreateUserController } from "../../modules/accounts/useCases/CreateUser/CreateUserController";
-import { DeleteUserController } from "../../modules/accounts/useCases/DeleteUser/DeleteUserController";
-import { ReadAllController } from "../../modules/accounts/useCases/ReadAllUser/ReadAllController";
-import { ReadUserController } from "../../modules/accounts/useCases/ReadUser/ReadUserController";
-import { ToggleAdminController } from "../../modules/accounts/useCases/ToggleAdmin/ToggleAdminController";
-import { UpdateUserController } from "../../modules/accounts/useCases/UpdateUser/UpdateUserController";
-import { authSecurity } from "../middlewares/authSecurity";
 
 const userRoutes = Router();
 

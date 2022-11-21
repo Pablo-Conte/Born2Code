@@ -1,13 +1,12 @@
+import { RentRepository } from "@modules/accounts/infra/repositories/implementations/RentRepository";
+import { IRentRepository } from "@modules/accounts/infra/repositories/IRentRepository";
+import { HistoryRentReturnUseCase } from "@modules/audit/infra/useCases/HistoryRentReturnUseCase";
+import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
+import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
+import { ILibrary_BookRepository } from "@modules/bookstore/infra/repositories/ILibrary_BookRepository";
+import { Library_BookRepository } from "@modules/bookstore/infra/repositories/implementations/Library_BookRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { RentRepository } from "../../../accounts/infra/repositories/implementations/RentRepository";
-import { IRentRepository } from "../../../accounts/infra/repositories/IRentRepository";
-import { IUsersRepository } from "../../../accounts/infra/repositories/IUsersRepository";
-import { HistoryRentReturnUseCase } from "../../../audit/infra/useCases/HistoryRentReturnUseCase";
-import { ILibrary_BookRepository } from "../../../bookstore/infra/repositories/ILibrary_BookRepository";
-import { Library_BookRepository } from "../../../bookstore/infra/repositories/implementations/Library_BookRepository";
-import { IBooksRepository } from "../../infra/repositories/IBooksRepository";
-import { BooksRepository } from "../../infra/repositories/implementations/BooksRepository";
 
 type TData = {
   returnId: string;

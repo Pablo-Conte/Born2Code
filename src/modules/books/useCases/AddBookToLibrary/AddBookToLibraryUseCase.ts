@@ -1,8 +1,8 @@
+import { UserDataDTO } from "@modules/bookstore/@types";
+import { ILibrary_BookRepository } from "@modules/bookstore/infra/repositories/ILibrary_BookRepository";
+import { Library_BookRepository } from "@modules/bookstore/infra/repositories/implementations/Library_BookRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { UserDataDTO } from "../../../bookstore/@types";
-import { ILibrary_BookRepository } from "../../../bookstore/infra/repositories/ILibrary_BookRepository";
-import { Library_BookRepository } from "../../../bookstore/infra/repositories/implementations/Library_BookRepository";
 
 @injectable()
 class AddBookToLibraryUseCase {

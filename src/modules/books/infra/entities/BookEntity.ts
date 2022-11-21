@@ -1,6 +1,5 @@
+import { Library_BookEntity } from "@modules/bookstore/infra/entities/Library_BookEntity";
 import { Book } from "@prisma/client";
-
-import { Library_BookEntity } from "../../../bookstore/infra/entities/Library_BookEntity";
 
 class BookEntity implements Book {
   readonly id: string;

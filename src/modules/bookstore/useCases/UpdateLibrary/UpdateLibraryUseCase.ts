@@ -1,8 +1,8 @@
+import { DataDTO } from "@modules/bookstore/@types";
+import { LibraryEntity } from "@modules/bookstore/infra/entities/LibraryEntity";
+import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { DataDTO } from "../../@types";
-import { LibraryEntity } from "../../infra/entities/LibraryEntity";
-import { LibraryRepository } from "../../infra/repositories/implementations/LibraryRepository";
 
 @injectable()
 class UpdateLibraryUseCase {

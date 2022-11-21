@@ -1,11 +1,11 @@
-import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
-  AlreadyRelationConflictDTO,
-  CreateRelationDTO,
   FindLibraryBookByIdDTO,
-  UpdateToNotRentedDTO,
+  CreateRelationDTO,
+  AlreadyRelationConflictDTO,
   UpdateToRentedDTO,
-} from "../../../@types";
+  UpdateToNotRentedDTO,
+} from "@modules/bookstore/@types";
+import { prisma } from "@prisma/PrismaClient";
 import { Library_BookEntity } from "../../entities/Library_BookEntity";
 import { ILibrary_BookRepository } from "../ILibrary_BookRepository";
 

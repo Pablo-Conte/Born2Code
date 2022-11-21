@@ -1,7 +1,7 @@
+import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
+import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { IBooksRepository } from "../../infra/repositories/IBooksRepository";
-import { BooksRepository } from "../../infra/repositories/implementations/BooksRepository";
 
 type TDeleteBook = {
   id: string;

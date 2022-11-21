@@ -1,8 +1,8 @@
+import { DeleteLibraryDTO } from "@modules/bookstore/@types";
+import { ILibraryRepository } from "@modules/bookstore/infra/repositories/ILibraryRepository";
+import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { DeleteLibraryDTO } from "../../@types/DeleteLibraryDTO";
-import { ILibraryRepository } from "../../infra/repositories/ILibraryRepository";
-import { LibraryRepository } from "../../infra/repositories/implementations/LibraryRepository";
 
 @injectable()
 class DeleteLibraryUseCase {

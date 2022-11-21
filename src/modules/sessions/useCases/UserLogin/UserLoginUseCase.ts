@@ -1,13 +1,12 @@
+import { LoginReturnDTO } from "@modules/accounts/@types/LoginReturnDTO";
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { UserLoginDTO } from "@modules/sessions/@types/UserLoginDTO";
+import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
+import auth from "@settings/auth";
+import { AppError } from "@shared/errors/appError";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-
-import auth from "../../../../settings/auth";
-import { AppError } from "../../../../shared/errors/appError";
-import { LoginReturnDTO } from "../../../accounts/@types/LoginReturnDTO";
-import { UserLoginDTO } from "../../@types/UserLoginDTO";
-import { TokenRepository } from "../../infra/repositories/implementations/TokenRepository";
-import { UsersRepository } from "../../../accounts/infra/repositories/implementations/UsersRepository";
 
 @injectable()
 class UserLoginUseCase {

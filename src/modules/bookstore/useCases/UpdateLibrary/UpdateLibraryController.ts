@@ -1,8 +1,7 @@
+import { LibraryEntity } from "@modules/bookstore/infra/entities/LibraryEntity";
+import { AppError } from "@shared/errors/appError";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
-import { AppError } from "../../../../shared/errors/appError";
-import { LibraryEntity } from "../../infra/entities/LibraryEntity";
 import { UpdateLibraryUseCase } from "./UpdateLibraryUseCase";
 
 class UpdateLibraryController {

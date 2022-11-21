@@ -1,12 +1,12 @@
-import { BookEntity } from "../../../books/infra/entities/BookEntity";
+import { FindByNameDTO } from "@modules/books/@types";
+import { BookEntity } from "@modules/books/infra/entities/BookEntity";
 import {
-  CreateBookDTO,
   DataToUpdateDTO,
-  FindByIdDTO,
   DeleteLibraryDTO,
-  FindByNameDTO,
+  FindByIdDTO,
   ReadAllBooksDTO,
-} from "../../@types";
+} from "@modules/bookstore/@types";
+import { CreateBookDTO } from "@modules/bookstore/@types/CreateBookDTO";
 import { LibraryEntity } from "../entities/LibraryEntity";
 
 interface ILibraryRepository {

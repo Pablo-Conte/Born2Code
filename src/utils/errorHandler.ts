@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AppError } from "@shared/errors/appError";
 import { NextFunction, Request, Response } from "express";
-
-import { AppError } from "../shared/errors/appError";
 
 export function errorHandler(
   err: Error,
@@ -14,8 +12,6 @@ export function errorHandler(
       message: err.message,
     });
   }
-
-  // Existem mais tipos de erro se quisermos...
 
   return response.status(500).json({
     status: "Error",

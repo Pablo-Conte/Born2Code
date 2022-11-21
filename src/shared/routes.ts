@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import { booksRoutes } from "./routes/books.routes";
 import { booksStoreRoutes } from "./routes/bookstore.routes";
 import { sessionRoutes } from "./routes/session.routes";

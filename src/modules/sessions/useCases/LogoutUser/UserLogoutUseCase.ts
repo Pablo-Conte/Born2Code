@@ -1,7 +1,7 @@
+import { UserLogoutDTO } from "@modules/sessions/@types/UserLogoutDTO";
+import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
+import { ITokenRepository } from "@modules/sessions/infra/repositories/ITokenRepository";
 import { inject, injectable } from "tsyringe";
-import { TokenRepository } from "../../infra/repositories/implementations/TokenRepository";
-import { ITokenRepository } from "../../infra/repositories/ITokenRepository";
-import { UserLogoutDTO } from "../../@types/UserLogoutDTO";
 
 @injectable()
 class UserLogoutUseCase {

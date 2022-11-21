@@ -1,11 +1,9 @@
-/* eslint-disable eqeqeq */
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
+import auth from "@settings/auth";
+import { AppError } from "@shared/errors/appError";
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-
-import { TokenRepository } from "../../modules/sessions/infra/repositories/implementations/TokenRepository";
-import { UsersRepository } from "../../modules/accounts/infra/repositories/implementations/UsersRepository";
-import auth from "../../settings/auth";
-import { AppError } from "../errors/appError";
 
 type tokenAuth = {
   sub: string;

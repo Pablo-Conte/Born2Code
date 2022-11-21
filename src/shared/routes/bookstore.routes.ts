@@ -1,10 +1,9 @@
+import { CreateLibraryController } from "@modules/bookstore/useCases/CreateLibrary/CreateLibraryController";
+import { DeleteLibraryController } from "@modules/bookstore/useCases/DeleteLibrary/DeleteLibraryController";
+import { ReadLibraryController } from "@modules/bookstore/useCases/ReadLibrary/ReadLibraryController";
+import { UpdateLibraryController } from "@modules/bookstore/useCases/UpdateLibrary/UpdateLibraryController";
+import { authSecurity } from "@shared/middlewares/authSecurity";
 import { Router } from "express";
-
-import { CreateLibraryController } from "../../modules/bookstore/useCases/CreateLibrary/CreateLibraryController";
-import { DeleteLibraryController } from "../../modules/bookstore/useCases/DeleteLibrary/DeleteLibraryController";
-import { ReadLibraryController } from "../../modules/bookstore/useCases/ReadLibrary/ReadLibraryController";
-import { UpdateLibraryController } from "../../modules/bookstore/useCases/UpdateLibrary/UpdateLibraryController";
-import { authSecurity } from "../middlewares/authSecurity";
 
 const booksStoreRoutes = Router();
 

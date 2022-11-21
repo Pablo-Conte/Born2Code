@@ -5,8 +5,8 @@ import "express-async-errors";
 import cors from "cors"; // Permite a comunicação entre o back e o front
 import express from "express";
 
-import { errorHandler } from "../utils/errorHandler";
 import { routesIndex } from "./routes";
+import { errorHandler } from "@utils/errorHandler";
 
 const app = express();
 

@@ -4,7 +4,7 @@ import {
   AlreadyRelationConflictDTO,
   UpdateToRentedDTO,
   UpdateToNotRentedDTO,
-} from "../../@types";
+} from "@modules/bookstore/@types";
 import { Library_BookEntity } from "../entities/Library_BookEntity";
 
 interface ILibrary_BookRepository {
