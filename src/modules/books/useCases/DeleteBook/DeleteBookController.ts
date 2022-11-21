@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/appError";
-import { DeleteBookService } from "./DeleteBookService";
+import { DeleteBookUseCase } from "./DeleteBookUseCase";
 
 class DeleteBookController {
   async control(request: Request, response: Response): Promise<Response> {
@@ -10,9 +11,9 @@ class DeleteBookController {
 
     const idToDelete = request.headers["x-book-id"] as string;
 
-    const deleteBookService = new DeleteBookService();
+    const deleteBookUseCase = container.resolve(DeleteBookUseCase);
 
-    await deleteBookService.execute({ id: idToDelete });
+    await deleteBookUseCase.execute({ id: idToDelete });
 
     return response.status(204).send();
   }

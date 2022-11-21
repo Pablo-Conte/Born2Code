@@ -1,7 +1,6 @@
-/* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
 import { BookEntity } from "../../infra/entities/BookEntity";
-import { BooksRepository } from "../../infra/repositories/BookRepository";
+import { IBooksRepository } from "../../infra/repositories/IBooksRepository";
 
 type TUserData = {
   queryLibrary: string;
@@ -9,22 +8,22 @@ type TUserData = {
   all: string;
 };
 
-class ReadBooksService {
-  async execute({ queryLibrary, queryBook, all }: TUserData) {
-    const bookRepository = new BooksRepository();
+class ReadAllBooksUseCase {
+  constructor(private booksRepository: IBooksRepository) {}
 
+  async execute({ queryLibrary, queryBook, all }: TUserData) {
     const getAll = all == "true";
 
     let booksFound: BookEntity[];
     switch (getAll) {
       case true:
-        booksFound = await bookRepository.readBooks({
+        booksFound = await this.booksRepository.readBooks({
           queryLibrary,
         });
         break;
       case false:
         if (!queryBook) throw new AppError("Book id missing", 400);
-        booksFound = await bookRepository.readBooks({
+        booksFound = await this.booksRepository.readBooks({
           queryBook,
         });
         break;
@@ -37,4 +36,4 @@ class ReadBooksService {
   }
 }
 
-export { ReadBooksService };
+export { ReadAllBooksUseCase };

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { ReadBooksService } from "./ReadAllBooksService";
+import { ReadAllBooksUseCase } from "./ReadAllBooksUseCase";
 
 class ReadBooksController {
   async control(request: Request, response: Response): Promise<Response> {
@@ -14,9 +15,9 @@ class ReadBooksController {
       all: string;
     };
 
-    const readAllBooksService = new ReadBooksService();
+    const readAllBooksUseCase = container.resolve(ReadAllBooksUseCase);
 
-    const booksFound = await readAllBooksService.execute({
+    const booksFound = await readAllBooksUseCase.execute({
       queryLibrary,
       queryBook,
       all,

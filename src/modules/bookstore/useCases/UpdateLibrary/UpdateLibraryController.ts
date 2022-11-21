@@ -1,20 +1,21 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/appError";
 import { LibraryEntity } from "../../infra/entities/LibraryEntity";
-import { UpdateLibraryService } from "./UpdateLibraryService";
+import { UpdateLibraryUseCase } from "./UpdateLibraryUseCase";
 
 class UpdateLibraryController {
   async control(request: Request, response: Response): Promise<Response> {
     if (!request.user.isAdmin)
       throw new AppError("User is not an Admin to do this!", 401);
 
-    const updateLibraryService = new UpdateLibraryService();
+    const updateLibraryUseCase = container.resolve(UpdateLibraryUseCase);
 
     const dataToChangeOnLibrary = request.body as Partial<LibraryEntity>;
     const libraryId = request.headers["x-library-id"] as string;
 
-    const updatedLibrary = await updateLibraryService.execute({
+    const updatedLibrary = await updateLibraryUseCase.execute({
       data: dataToChangeOnLibrary,
       libraryId,
     });

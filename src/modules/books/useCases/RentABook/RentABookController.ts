@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { RentABookService } from "./RentABookService";
+import { RentABookUseCase } from "./RentABookUseCase";
 
 class RentABookController {
   async control(request: Request, response: Response): Promise<Response> {
     const { userId } = request.user;
     const library_bookId = request.headers["x-librarybook-id"] as string;
 
-    const rentABookService = new RentABookService();
+    const rentABookUseCase = container.resolve(RentABookUseCase);
 
-    await rentABookService.execute({ library_bookId, userId });
+    await rentABookUseCase.execute({ library_bookId, userId });
 
     return response.status(200).send();
   }

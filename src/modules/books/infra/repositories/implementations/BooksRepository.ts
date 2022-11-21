@@ -1,19 +1,19 @@
 import { Prisma } from "@prisma/client";
-
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   CreateBookDTO,
   UpdateBookDTO,
   DeleteBookDTO,
   FindByNameDTO,
   FindByIdDTO,
-  ReadAllLibrariesOnBookDTO,
   ReadBooksDTO,
+  ReadAllLibrariesOnBookDTO,
   ReadByUserIdDTO,
-} from "../../@types";
-import { BookEntity } from "../entities/BookEntity";
+} from "../../../@types";
+import { BookEntity } from "../../entities/BookEntity";
+import { IBookRepository } from "../IBooksRepository";
 
-class BooksRepository {
+class BooksRepository implements IBookRepository {
   async createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity> {
     const newBook = await prisma.book.create({
       data: {
@@ -109,9 +109,7 @@ class BooksRepository {
 
   async readBooksByUserId({ userId }: ReadByUserIdDTO): Promise<BookEntity[]> {
     const booksFound = await prisma.book.findMany({
-      where: {
-        
-      },
+      where: {},
     });
 
     return booksFound;

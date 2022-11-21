@@ -1,5 +1,5 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
-import { BookEntity } from "../../../books/infra/entities/BookEntity";
+import { prisma } from "../../../../../../prisma/PrismaClient";
+import { BookEntity } from "../../../../books/infra/entities/BookEntity";
 import {
   CreateBookDTO,
   DataToUpdateDTO,
@@ -7,10 +7,12 @@ import {
   DeleteLibraryDTO,
   FindByNameDTO,
   ReadAllBooksDTO,
-} from "../../@types";
-import { LibraryEntity } from "../entities/LibraryEntity";
+} from "../../../@types";
 
-class LibraryRepository {
+import { LibraryEntity } from "../../entities/LibraryEntity";
+import { ILibraryRepository } from "../ILibraryRepository";
+
+class LibraryRepository implements ILibraryRepository {
   async create({ nameLibrary }: CreateBookDTO): Promise<LibraryEntity> {
     const newLibrary = await prisma.library.create({
       data: {

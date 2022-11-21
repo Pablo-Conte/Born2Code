@@ -47,6 +47,20 @@ type UpdateToNotRentedDTO = {
   library_bookId: string;
 };
 
+type LibraryIdDTO = {
+  libraryId: string;
+};
+
+type DataDTO = {
+  data: Partial<LibraryEntity>;
+  libraryId: string;
+};
+
+type UserDataDTO = {
+  bookId: string;
+  libraryId: string;
+};
+
 export {
   CreateBookDTO,
   DataToUpdateDTO,
@@ -59,4 +73,7 @@ export {
   UpdateToNotRentedDTO,
   CreateRelationDTO,
   FindLibraryBookByIdDTO,
+  LibraryIdDTO,
+  DataDTO,
+  UserDataDTO,
 };
