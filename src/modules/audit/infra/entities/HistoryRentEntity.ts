@@ -1,6 +1,6 @@
 import { HistoryRent } from "@prisma/client";
 
-class HistoryRentEntity {
+class HistoryRentEntity implements HistoryRent {
   id: string;
   libraryid: string;
   bookId: string;
