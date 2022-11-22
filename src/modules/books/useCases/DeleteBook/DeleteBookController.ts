@@ -1,7 +1,6 @@
-import { AppError } from "@shared/errors/appError";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
+import { AppError } from "@shared/errors/appError";
 import { DeleteBookUseCase } from "./DeleteBookUseCase";
 
 class DeleteBookController {

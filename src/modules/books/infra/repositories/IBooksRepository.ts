@@ -6,7 +6,7 @@ import {
   FindByIdDTO,
   ReadBooksDTO,
   ReadAllLibrariesOnBookDTO,
-} from "../../@types";
+} from "@modules/books/@types";
 import { BookEntity } from "../entities/BookEntity";
 
 interface IBooksRepository {

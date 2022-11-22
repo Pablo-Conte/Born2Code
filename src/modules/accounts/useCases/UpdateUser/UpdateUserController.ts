@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
 import { UserEntity } from "../../infra/entities/UserEntity";
 import { UpdateUserUseCase } from "./UpdateUserUseCase";
 

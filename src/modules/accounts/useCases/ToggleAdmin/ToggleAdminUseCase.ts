@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { SetAdminDTO } from "../../@types/SetAdminDTO";
-import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
+import { AppError } from "@shared/errors/appError";
+import { SetAdminDTO } from "@modules/accounts/@types/SetAdminDTO";
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
 
 @injectable()
 class ToggleAdminUseCase {

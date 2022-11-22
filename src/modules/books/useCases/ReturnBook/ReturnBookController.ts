@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
 import { ReturnBookUseCase } from "./ReturnBookUseCase";
 
 class ReturnBookController {

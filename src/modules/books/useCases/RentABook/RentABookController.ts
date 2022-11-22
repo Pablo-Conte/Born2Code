@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
 import { RentABookUseCase } from "./RentABookUseCase";
 
 class RentABookController {

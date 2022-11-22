@@ -1,7 +1,7 @@
+import { ReadUserDTO } from "@modules/accounts/@types/ReadUserDTO";
+import { UserEntity } from "@modules/accounts/infra/entities/UserEntity";
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
 import { inject, injectable } from "tsyringe";
-import { ReadUserDTO } from "../../@types/ReadUserDTO";
-import { UserEntity } from "../../infra/entities/UserEntity";
-import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 @injectable()
 class ReadUserUseCase {

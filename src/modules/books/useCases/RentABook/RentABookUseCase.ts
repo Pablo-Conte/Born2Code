@@ -1,3 +1,5 @@
+import { inject, injectable } from "tsyringe";
+import { AppError } from "@shared/errors/appError";
 import { RentRepository } from "@modules/accounts/infra/repositories/implementations/RentRepository";
 import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
 import { IRentRepository } from "@modules/accounts/infra/repositories/IRentRepository";
@@ -6,8 +8,6 @@ import { HistoryRentEntity } from "@modules/audit/infra/entities/HistoryRentEnti
 import { HistoryRentUseCase } from "@modules/audit/infra/useCases/HistoryRentUseCase";
 import { ILibrary_BookRepository } from "@modules/bookstore/infra/repositories/ILibrary_BookRepository";
 import { Library_BookRepository } from "@modules/bookstore/infra/repositories/implementations/Library_BookRepository";
-import { AppError } from "@shared/errors/appError";
-import { inject, injectable } from "tsyringe";
 
 type TBookId = {
   library_bookId: string;

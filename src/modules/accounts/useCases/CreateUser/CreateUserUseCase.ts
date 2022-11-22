@@ -1,10 +1,9 @@
 import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
-
-import { AppError } from "../../../../shared/errors/appError";
-import { CreateUserDTO } from "../../@types/CreateUserDTO";
-import { UserEntity } from "../../infra/entities/UserEntity";
-import { IUsersRepository } from "../../infra/repositories/IUsersRepository";
+import { AppError } from "@shared/errors/appError";
+import { CreateUserDTO } from "@modules/accounts/@types/CreateUserDTO";
+import { UserEntity } from "@modules/accounts/infra/entities/UserEntity";
+import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 
 @injectable()
 class CreateUserUseCase {

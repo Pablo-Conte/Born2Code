@@ -1,14 +1,14 @@
-import { prisma } from "../../../../../../prisma/PrismaClient";
+import { CellNumberDTO } from "@modules/accounts/@types/CellNumberDTO";
+import { CreateUserDTO } from "@modules/accounts/@types/CreateUserDTO";
+import { DeleteUserDTO } from "@modules/accounts/@types/DeleteUserDTO";
+import { EmailDTO } from "@modules/accounts/@types/EmailDTO";
+import { FindUserDTO } from "@modules/accounts/@types/FindUserDTO";
+import { ReadUserDTO } from "@modules/accounts/@types/ReadUserDTO";
+import { SetAdminDTO } from "@modules/accounts/@types/SetAdminDTO";
+import { UpdateUserDTO } from "@modules/accounts/@types/UpdateUserDTO";
+import { prisma } from "@prisma/PrismaClient";
 import { UserEntity } from "../../entities/UserEntity";
 import { IUsersRepository } from "../IUsersRepository";
-import { CellNumberDTO } from "../../../@types/CellNumberDTO";
-import { EmailDTO } from "../../../@types/EmailDTO";
-import { CreateUserDTO } from "../../../@types/CreateUserDTO";
-import { ReadUserDTO } from "../../../@types/ReadUserDTO";
-import { FindUserDTO } from "../../../@types/FindUserDTO";
-import { SetAdminDTO } from "../../../@types/SetAdminDTO";
-import { UpdateUserDTO } from "../../../@types/UpdateUserDTO";
-import { DeleteUserDTO } from "../../../@types/DeleteUserDTO";
 
 class UsersRepository implements IUsersRepository {
   async create({ userData }: CreateUserDTO): Promise<UserEntity> {

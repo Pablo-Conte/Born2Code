@@ -1,9 +1,8 @@
-/* eslint-disable eqeqeq */
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { ReadUserDTO } from "../../@types/ReadUserDTO";
-import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
-import { IUsersRepository } from "../../infra/repositories/IUsersRepository";
+import { AppError } from "@shared/errors/appError";
+import { ReadUserDTO } from "@modules/accounts/@types/ReadUserDTO";
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 
 @injectable()
 class ReadAllUseCase {

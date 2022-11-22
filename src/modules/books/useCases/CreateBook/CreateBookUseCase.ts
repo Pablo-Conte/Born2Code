@@ -1,8 +1,8 @@
+import { inject, injectable } from "tsyringe";
+import { AppError } from "@shared/errors/appError";
 import { BookEntity } from "@modules/books/infra/entities/BookEntity";
 import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
 import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
-import { AppError } from "@shared/errors/appError";
-import { inject, injectable } from "tsyringe";
 
 type TUserData = {
   dataToCreateBook: BookEntity;

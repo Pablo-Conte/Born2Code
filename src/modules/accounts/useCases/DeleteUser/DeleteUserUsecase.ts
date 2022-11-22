@@ -1,8 +1,8 @@
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { DeleteUserDTO } from "../../@types/DeleteUserDTO";
-import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
-import { IUsersRepository } from "../../infra/repositories/IUsersRepository";
+import { DeleteUserDTO } from "@modules/accounts/@types/DeleteUserDTO";
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 
 @injectable()
 class DeleteUserUseCase {

@@ -1,8 +1,8 @@
+import { UpdateUserDTO } from "@modules/accounts/@types/UpdateUserDTO";
+import { UserEntity } from "@modules/accounts/infra/entities/UserEntity";
+import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { AppError } from "@shared/errors/appError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../shared/errors/appError";
-import { UpdateUserDTO } from "../../@types/UpdateUserDTO";
-import { UserEntity } from "../../infra/entities/UserEntity";
-import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 @injectable()
 class UpdateUserUseCase {

@@ -1,5 +1,5 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
-import { CreateHistoryRentDTO, UpdateDTO } from "../../@types";
+import { prisma } from "@prisma/PrismaClient";
+import { CreateHistoryRentDTO, UpdateDTO } from "@modules/audit/@types";
 import { HistoryRentEntity } from "../entities/HistoryRentEntity";
 import { IHistoryRentRepository } from "./implementations/IHistoryRentRepository";
 
