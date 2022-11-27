@@ -2,7 +2,7 @@ import { AppError } from "../../../../shared/errors/appError";
 import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
 import { UsersRepository } from "../../../accounts/infra/repositories/UsersRepository";
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
-import { HistoryRentRepository } from "../../../audit/infra/repositories/HistoryRentRepository";
+import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
 import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
 
 
@@ -16,9 +16,9 @@ class RentABookService {
     const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
     const library_bookRepository = new Library_BookRepository();
     const userRepository = new UsersRepository();
-    const historyRent = new HistoryRentRepository();
+    const historyRentService = new HistoryRentService();
 
-    const rentedBooks = await userRepository.readAllBooks({ userId })
+    const rentedBooks = await userRepository.readAllBooks({ userId });
 
     if (rentedBooks >= 3)
       throw new AppError(
@@ -26,21 +26,30 @@ class RentABookService {
         400
       );
 
-    const libraryBook = await library_bookRepository.findById(
-      {
-        library_bookId,
-      }
-    );
+    const libraryBook = await library_bookRepository.findById({
+      library_bookId,
+    });
 
     if (libraryBook.rented) throw new AppError("Book already rented", 409);
 
-    const dataToCreateHistory = { libraryid: libraryBook.libraryId, bookId: libraryBook.bookId, clienteId: userId, startDate: new Date} as Partial<HistoryRentEntity>
-    const CreatedHistory = await historyRent.CreateHistoryRent({ dataToCreateHistory })
+    const dataToCreateHistory: HistoryRentEntity = {
+      libraryid: libraryBook.libraryId,
+      bookId: libraryBook.bookId,
+      clienteId: userId,
+      startDate: new Date(),
+      endDate: undefined,
+      id: undefined,
+      totalValue: undefined,
+    };
 
-    const rentedUserLibraryBook = await rentUserLibraryBookRepository.rent({
+    const CreatedHistory = await historyRentService.execute(
+      dataToCreateHistory
+    );
+
+    await rentUserLibraryBookRepository.rent({
       userId,
       library_bookId,
-      historyRentId: CreatedHistory.id
+      historyRentId: CreatedHistory.id,
     });
 
     await library_bookRepository.updateToRented({ library_bookId });

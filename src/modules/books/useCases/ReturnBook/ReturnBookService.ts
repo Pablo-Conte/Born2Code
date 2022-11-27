@@ -2,7 +2,7 @@
 /* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
 import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
-import { HistoryRentRepository } from "../../../audit/infra/repositories/HistoryRentRepository";
+import { HistoryRentReturnService } from "../../../audit/infra/useCases/HistoryRentReturnService";
 import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
 import { BooksRepository } from "../../infra/repositories/BookRepository";
 
@@ -15,7 +15,7 @@ class ReturnBookService {
   async execute({ returnId, userId }: TData): Promise<object> {
     const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
     const libraryBookRepository = new Library_BookRepository();
-    const historyRentRepository = new HistoryRentRepository()
+    const historyRentReturnService = new HistoryRentReturnService();
     
     const rentedBook = await rentUserLibraryBookRepository.verifyIfRentExists({
       returnId,
@@ -47,7 +47,8 @@ class ReturnBookService {
     const total = (coefficientHours * hourValue).toFixed(2);
     
     const rentUserLibraryBook = await rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
-    await historyRentRepository.Update({ id: rentUserLibraryBook.historyId, endDate: now, totalValue: total })
+
+    await historyRentReturnService.execute({ id: rentUserLibraryBook.historyId, endDate: now, totalValue: total })
 
     await libraryBookRepository.updateToNotRented({
       library_bookId: rentedBook.library_bookId,
