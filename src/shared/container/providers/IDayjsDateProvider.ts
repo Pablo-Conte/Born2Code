@@ -1,6 +1,10 @@
+type userDataDTO = {
+  birthDate: Date;
+};
+
 interface IDayjsDateProvider {
-  dateNow(userData): Date;
+  dateNow({ birthDate }: userDataDTO): Date;
   convertToUTC(date: Date): string;
 }
 
-export { IDayjsDateProvider };
+export { IDayjsDateProvider, userDataDTO };

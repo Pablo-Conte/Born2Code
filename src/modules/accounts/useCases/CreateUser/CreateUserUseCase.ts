@@ -31,7 +31,7 @@ class CreateUserUseCase {
     userData.password = newPass;
 
     if (userData?.birthDate) {
-      userData.birthDate = this.dayjsDateProvider.dateNow(userData.birthDate);
+      userData.birthDate = this.dayjsDateProvider.dateNow(userData);
     }
 
     const newUser = await this.usersRepository.create({ userData });
