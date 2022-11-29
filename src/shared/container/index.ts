@@ -4,12 +4,14 @@ import { IRentRepository } from "@modules/accounts/infra/repositories/IRentRepos
 import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 import { HistoryRentRepository } from "@modules/audit/infra/repositories/HistoryRentRepository";
 import { IHistoryRentRepository } from "@modules/audit/infra/repositories/implementations/IHistoryRentRepository";
-import { HistoryRentUseCase } from "@modules/audit/infra/useCases/HistoryRentUseCase";
+import { HistoryRentUseCase } from "@modules/audit/useCases/HistoryRentUseCase";
 import { ILibraryRepository } from "@modules/bookstore/infra/repositories/ILibraryRepository";
 import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
 import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
 import { ITokenRepository } from "@modules/sessions/infra/repositories/ITokenRepository";
 import { container } from "tsyringe";
+import { IDayjsDateProvider } from "./providers/IDayjsDateProvider";
+import { DayjsDateProvider } from "./providers/implementations/DayjsDateProvider";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -36,4 +38,9 @@ container.registerSingleton<IHistoryRentRepository>(
 container.registerSingleton<HistoryRentUseCase>(
   "HistoryRentUseCase",
   HistoryRentUseCase
+);
+
+container.registerSingleton<IDayjsDateProvider>(
+  "DayjsDateProvider",
+  DayjsDateProvider
 );

@@ -2,11 +2,11 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@shared/errors/appError";
 import { RentRepository } from "@modules/accounts/infra/repositories/implementations/RentRepository";
 import { IRentRepository } from "@modules/accounts/infra/repositories/IRentRepository";
-import { HistoryRentReturnUseCase } from "@modules/audit/infra/useCases/HistoryRentReturnUseCase";
 import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
 import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
 import { ILibrary_BookRepository } from "@modules/bookstore/infra/repositories/ILibrary_BookRepository";
 import { Library_BookRepository } from "@modules/bookstore/infra/repositories/implementations/Library_BookRepository";
+import { HistoryRentReturnUseCase } from "@modules/audit/useCases/HistoryRentReturnUseCase";
 
 type TData = {
   returnId: string;

@@ -4,12 +4,15 @@ import { AppError } from "@shared/errors/appError";
 import { CreateUserDTO } from "@modules/accounts/@types/CreateUserDTO";
 import { UserEntity } from "@modules/accounts/infra/entities/UserEntity";
 import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
+import { IDayjsDateProvider } from "@shared/container/providers/IDayjsDateProvider";
 
 @injectable()
 class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject("DayjsDateProvider")
+    private dayjsDateProvider: IDayjsDateProvider
   ) {}
 
   async execute({ userData }: CreateUserDTO): Promise<UserEntity> {
@@ -28,9 +31,7 @@ class CreateUserUseCase {
     userData.password = newPass;
 
     if (userData?.birthDate) {
-      userData.birthDate = new Date(
-        userData.birthDate
-      ).toISOString() as unknown as Date;
+      userData.birthDate = this.dayjsDateProvider.dateNow(userData.birthDate);
     }
 
     const newUser = await this.usersRepository.create({ userData });

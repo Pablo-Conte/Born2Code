@@ -5,9 +5,9 @@ import { UsersRepository } from "@modules/accounts/infra/repositories/implementa
 import { IRentRepository } from "@modules/accounts/infra/repositories/IRentRepository";
 import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 import { HistoryRentEntity } from "@modules/audit/infra/entities/HistoryRentEntity";
-import { HistoryRentUseCase } from "@modules/audit/infra/useCases/HistoryRentUseCase";
 import { ILibrary_BookRepository } from "@modules/bookstore/infra/repositories/ILibrary_BookRepository";
 import { Library_BookRepository } from "@modules/bookstore/infra/repositories/implementations/Library_BookRepository";
+import { HistoryRentUseCase } from "@modules/audit/useCases/HistoryRentUseCase";
 
 type TBookId = {
   library_bookId: string;
