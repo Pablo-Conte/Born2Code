@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
-import { AppError } from "@shared/errors/appError";
 import { container } from "tsyringe";
 import { CreateBookUseCase } from "./CreateBookUseCase";
 
 class CreateBookController {
   async control(request: Request, response: Response): Promise<Response> {
-    const dataToCreateBook = request.body;
+    const { userId } = request.user;
 
-    if (!request.user.isAdmin) throw new AppError("You aren't an Admin!", 401);
+    const dataToCreateBook = request.body;
 
     const createBookUseCase = container.resolve(CreateBookUseCase);
 
-    const newBook = await createBookUseCase.execute({ dataToCreateBook });
+    const newBook = await createBookUseCase.execute({
+      dataToCreateBook,
+      userId,
+    });
 
     return response.status(201).json(newBook);
   }

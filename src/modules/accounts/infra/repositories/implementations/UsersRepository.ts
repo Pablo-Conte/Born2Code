@@ -35,10 +35,10 @@ class UsersRepository implements IUsersRepository {
     return result[0].length;
   }
 
-  async findById({ id }: FindUserDTO) {
+  async findById({ userId }: FindUserDTO) {
     const userFound = await prisma.user.findFirst({
       where: {
-        id,
+        id: userId,
       },
     });
 
