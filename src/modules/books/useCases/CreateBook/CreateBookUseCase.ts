@@ -4,6 +4,7 @@ import { BookEntity } from "@modules/books/infra/entities/BookEntity";
 import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
 import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
 import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 
 type TUserData = {
   dataToCreateBook?: BookEntity;
@@ -16,7 +17,7 @@ class CreateBookUseCase {
     @inject(BooksRepository)
     private booksRepository: IBooksRepository,
     @inject(UsersRepository)
-    private usersRepository: UsersRepository
+    private usersRepository: IUsersRepository
   ) {}
 
   async execute({ dataToCreateBook, userId }: TUserData): Promise<BookEntity> {

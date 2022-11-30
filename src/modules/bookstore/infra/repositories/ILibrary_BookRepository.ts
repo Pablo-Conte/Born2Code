@@ -11,7 +11,11 @@ interface ILibrary_BookRepository {
   findById({
     library_bookId,
   }: FindLibraryBookByIdDTO): Promise<Library_BookEntity>;
-  createRelation({ bookId, libraryId }: CreateRelationDTO): Promise<void>;
+  createRelation({
+    bookId,
+    libraryId,
+    userId,
+  }: CreateRelationDTO): Promise<void>;
   alreadyRelationConflict({
     bookId,
     libraryId,

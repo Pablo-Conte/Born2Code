@@ -28,6 +28,7 @@ type ReadAllBooksDTO = {
 type CreateRelationDTO = {
   bookId: string;
   libraryId: string;
+  userId?: string;
 };
 
 type AlreadyRelationConflictDTO = {
@@ -59,6 +60,7 @@ type DataDTO = {
 type UserDataDTO = {
   bookId: string;
   libraryId: string;
+  userId?: string;
 };
 
 export {
