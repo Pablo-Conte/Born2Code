@@ -9,11 +9,15 @@
     "init:dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --exit-child --respawn .",
     "push": "npm version patch && git push"
   },
+  "prisma": {
+    "seed": "ts-node-dev ./prisma/seed.ts"
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.10",
     "@types/typescript": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.42.1",
@@ -27,9 +31,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^2.6.2",
+    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "*"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
