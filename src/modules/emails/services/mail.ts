@@ -1,4 +1,4 @@
-import * as nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 import config from "../configs/configs";
 
 class Mail {
@@ -10,13 +10,13 @@ class Mail {
 
   sendMail() {
     let mailOptions = {
-      from: "danielvasconcelos.reis@gmail.com",
+      from: "Administrador <4bd1ab9be0-1a8e11@inbox.mailtrap.io>",
       to: this.to,
       subject: this.subject,
       html: this.message,
     };
 
-    const transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
       host: config.host,
       port: config.port,
       secure: false,
@@ -24,19 +24,19 @@ class Mail {
         user: config.user,
         pass: config.password,
       },
-      tls: { rejectUnauthorized: false },
+      // tls: { rejectUnauthorized: false },
     });
 
     console.log("mailOptions", mailOptions);
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        return error;
-      } else {
-        return "E-mail enviado com sucesso!";
-      }
+    transporter.sendMail({
+      from: "Administrador <4bd1ab9be0-1a8e11@inbox.mailtrap.io>",
+      to: this.to,
+      subject: this.subject,
+      html: this.message,
     });
   }
 }
 
 export default new Mail();
+export { Mail };

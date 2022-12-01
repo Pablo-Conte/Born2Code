@@ -1,8 +1,8 @@
 class Configs {
   public host = "smtp.mailtrap.io";
   public port = 2525;
-  public user = "225f107f5cd749";
-  public password = "12f7731f67423c";
+  public user = "28e75fb9a57c29";
+  public password = "ffdd727ee28593";
 }
 
 export default new Configs();

@@ -1,10 +1,10 @@
-import { controller } from "@modules/emails/controller";
+import { Controller } from "@modules/emails/Controller";
 import { Router } from "express";
 
 const emailsRoutes = Router();
 
-const controler = new controller();
+const controller = new Controller();
 
-emailsRoutes.post("/send", controler.control);
+emailsRoutes.post("/send", controller.control);
 
 export { emailsRoutes };

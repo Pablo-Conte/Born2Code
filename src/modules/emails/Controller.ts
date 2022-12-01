@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
-import mail from "./services/mail";
+import { Mail } from "./services/mail";
 
-class controller {
+class Controller {
   async control(request: Request, response: Response): Promise<Response> {
-    const message = Object.assign({}, request.body);
+    const mail = new Mail();
+    const message = Object.assign({ Mail }, request.body);
+    mail.sendMail();
 
     mail.to = message.to;
     mail.subject = message.subject;
@@ -14,4 +16,4 @@ class controller {
   }
 }
 
-export { controller };
+export { Controller };
