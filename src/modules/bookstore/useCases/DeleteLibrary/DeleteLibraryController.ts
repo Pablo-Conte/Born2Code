@@ -5,13 +5,11 @@ import { DeleteLibraryUseCase } from "./DeleteLibraryUseCase";
 
 class DeleteLibraryController {
   async control(request: Request, response: Response): Promise<Response> {
-    if (!request.user.isAdmin)
-      throw new AppError("User is not an Admin to do this!", 401);
-
+    const { userId } = request.user;
     const libraryId = request.headers["x-library-id"] as string;
-    const deleteLibraryUseCase = container.resolve(DeleteLibraryUseCase);
 
-    await deleteLibraryUseCase.execute({ libraryId });
+    const deleteLibraryUseCase = container.resolve(DeleteLibraryUseCase);
+    await deleteLibraryUseCase.execute({ libraryId, userId });
 
     return response.status(204).send();
   }

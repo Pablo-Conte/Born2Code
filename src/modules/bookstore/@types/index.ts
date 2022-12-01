@@ -11,6 +11,7 @@ type FindByNameDTO = {
 type DataToUpdateDTO = {
   data: Partial<LibraryEntity>;
   libraryId: string;
+  userId: string;
 };
 
 type FindByIdDTO = {
@@ -19,6 +20,7 @@ type FindByIdDTO = {
 
 type DeleteLibraryDTO = {
   libraryId: string;
+  userId: string;
 };
 
 type ReadAllBooksDTO = {
@@ -55,6 +57,7 @@ type LibraryIdDTO = {
 type DataDTO = {
   data: Partial<LibraryEntity>;
   libraryId: string;
+  userId: string;
 };
 
 type UserDataDTO = {

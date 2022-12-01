@@ -22,7 +22,11 @@ class LibraryRepository implements ILibraryRepository {
     return newLibrary;
   }
 
-  async update({ data, libraryId }: DataToUpdateDTO): Promise<LibraryEntity> {
+  async update({
+    data,
+    libraryId,
+    userId,
+  }: DataToUpdateDTO): Promise<LibraryEntity> {
     const updatedLibrary = await prisma.library.update({
       where: {
         id: libraryId,

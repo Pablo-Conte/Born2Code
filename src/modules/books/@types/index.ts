@@ -15,11 +15,13 @@ type FindByIdDTO = {
 
 type DeleteBookDTO = {
   id: string;
+  userId: string;
 };
 
 type UpdateBookDTO = {
   dataBook: Partial<BookEntity>;
   bookId: string;
+  userId: string;
 };
 
 type ReadAllLibrariesOnBookDTO = {

@@ -6,17 +6,15 @@ import { UpdateLibraryUseCase } from "./UpdateLibraryUseCase";
 
 class UpdateLibraryController {
   async control(request: Request, response: Response): Promise<Response> {
-    if (!request.user.isAdmin)
-      throw new AppError("User is not an Admin to do this!", 401);
+    const { userId } = request.user;
+    const libraryId = request.headers["x-library-id"] as string;
+    const dataToChangeOnLibrary = request.body as Partial<LibraryEntity>;
 
     const updateLibraryUseCase = container.resolve(UpdateLibraryUseCase);
-
-    const dataToChangeOnLibrary = request.body as Partial<LibraryEntity>;
-    const libraryId = request.headers["x-library-id"] as string;
-
     const updatedLibrary = await updateLibraryUseCase.execute({
       data: dataToChangeOnLibrary,
       libraryId,
+      userId,
     });
 
     return response.status(201).json(updatedLibrary);
