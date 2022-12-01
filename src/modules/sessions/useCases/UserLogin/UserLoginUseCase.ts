@@ -1,20 +1,22 @@
+import auth from "@settings/auth";
+import { inject, injectable } from "tsyringe";
+import { sign } from "jsonwebtoken";
+import { compare } from "bcrypt";
+import { AppError } from "@shared/errors/appError";
 import { LoginReturnDTO } from "@modules/accounts/@types/LoginReturnDTO";
 import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 import { UserLoginDTO } from "@modules/sessions/@types/UserLoginDTO";
 import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
-import auth from "@settings/auth";
-import { AppError } from "@shared/errors/appError";
-import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
-import { inject, injectable } from "tsyringe";
+import { ITokenRepository } from "@modules/sessions/infra/repositories/ITokenRepository";
 
 @injectable()
 class UserLoginUseCase {
   constructor(
     @inject(UsersRepository)
+    private usersRepository: IUsersRepository,
     @inject(TokenRepository)
-    private usersRepository: UsersRepository,
-    private tokensRepository: TokenRepository
+    private tokensRepository: ITokenRepository
   ) {}
 
   async execute({ email, password }: UserLoginDTO): Promise<LoginReturnDTO> {
