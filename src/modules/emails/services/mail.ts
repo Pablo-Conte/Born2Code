@@ -10,7 +10,7 @@ class Mail {
 
   sendMail() {
     let mailOptions = {
-      from: "portalband@band.com.br",
+      from: "danielvasconcelos.reis@gmail.com",
       to: this.to,
       subject: this.subject,
       html: this.message,
@@ -27,7 +27,7 @@ class Mail {
       tls: { rejectUnauthorized: false },
     });
 
-    console.log(mailOptions);
+    console.log("mailOptions", mailOptions);
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
