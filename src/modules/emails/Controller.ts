@@ -4,8 +4,7 @@ import { Mail } from "./services/mail";
 class Controller {
   async control(request: Request, response: Response): Promise<Response> {
     const mail = new Mail();
-    const message = Object.assign({ Mail }, request.body);
-    mail.sendMail();
+    const message = Object.assign({}, request.body);
 
     mail.to = message.to;
     mail.subject = message.subject;

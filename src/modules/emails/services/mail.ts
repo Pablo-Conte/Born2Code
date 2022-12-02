@@ -10,7 +10,7 @@ class Mail {
 
   sendMail() {
     let mailOptions = {
-      from: "Administrador <4bd1ab9be0-1a8e11@inbox.mailtrap.io>",
+      from: "Administrador <administrador@born2code.com>",
       to: this.to,
       subject: this.subject,
       html: this.message,
@@ -24,13 +24,11 @@ class Mail {
         user: config.user,
         pass: config.password,
       },
-      // tls: { rejectUnauthorized: false },
+      tls: { rejectUnauthorized: false },
     });
 
-    console.log("mailOptions", mailOptions);
-
     transporter.sendMail({
-      from: "Administrador <4bd1ab9be0-1a8e11@inbox.mailtrap.io>",
+      from: "Administrador <administrador@born2code.com>",
       to: this.to,
       subject: this.subject,
       html: this.message,
