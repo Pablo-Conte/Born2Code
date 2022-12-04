@@ -2,6 +2,7 @@ import { LibraryEntity } from "../infra/entities/LibraryEntity";
 
 type CreateBookDTO = {
   nameLibrary: string;
+  email: string;
 };
 
 type FindByNameDTO = {

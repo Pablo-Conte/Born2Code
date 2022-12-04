@@ -58,8 +58,10 @@ model Library {
   id String @id @default(uuid())
 
   name String @unique
+  email String
 
   Books LibraryBook[]
+
 
   @@map("library")
 }

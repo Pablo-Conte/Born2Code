@@ -11,10 +11,11 @@ import {
 import { LibraryEntity } from "../entities/LibraryEntity";
 
 class LibraryRepository {
-  async create({ nameLibrary }: CreateBookDTO): Promise<LibraryEntity> {
+  async create({ nameLibrary, email }: CreateBookDTO): Promise<LibraryEntity> {
     const newLibrary = await prisma.library.create({
       data: {
         name: nameLibrary,
+        email
       },
     });
 
