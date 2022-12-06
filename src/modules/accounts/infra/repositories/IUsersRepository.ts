@@ -15,6 +15,7 @@ interface IUsersRepository {
   readAllBooks({ userId }: FindUserDTO): Promise<number>;
   readAll(): Promise<UserEntity[]>;
   update({ id, userData }: UpdateUserDTO): Promise<UserEntity>;
+  addAvatar({ avatar }: UpdateUserDTO): Promise<UserEntity>;
   isAdmin({ userId }: FindUserDTO): Promise<boolean>;
   toggleAdmin({ userId, admin }: SetAdminDTO): Promise<void>;
   delete({ myId }: DeleteUserDTO): Promise<void>;

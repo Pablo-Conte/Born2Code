@@ -17,6 +17,7 @@ model User {
   birthDate  DateTime?
   cellNumber String?   @unique
   admin      Boolean   @default(false)
+  avatar     String?
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

@@ -65,6 +65,19 @@ class UsersRepository implements IUsersRepository {
     return numberFound;
   }
 
+  async addAvatar({ id, avatar }: UpdateUserDTO): Promise<UserEntity> {
+    const updatedUser = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        avatar,
+      },
+    });
+
+    return updatedUser;
+  }
+
   async update({ id, userData }: UpdateUserDTO): Promise<UserEntity> {
     const updatedUser = await prisma.user.update({
       where: {
@@ -76,6 +89,7 @@ class UsersRepository implements IUsersRepository {
         birthDate: userData.birthDate,
         password: userData.password,
         cellNumber: userData.cellNumber,
+        avatar: userData.avatar,
       },
     });
 
