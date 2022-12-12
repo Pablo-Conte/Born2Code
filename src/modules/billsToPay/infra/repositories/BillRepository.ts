@@ -1,5 +1,5 @@
 import { prisma } from "../../../../../prisma/PrismaClient";
-import { UserIdDTO } from "../@types";
+import { BillIdDTO, UserIdDTO, UserIdVerifyDTO } from "../@types";
 import { BillEntity } from "../entities/BillEntity";
 
 class BillRepository {
@@ -12,6 +12,27 @@ class BillRepository {
     });
     return newBill;
   }
+
+  async verifyOpenBill({ userId }: UserIdVerifyDTO): Promise<BillEntity> {
+    const openBill = await prisma.bill.findFirst({
+      where: {
+        userId,
+        payied: false,
+      },
+    });
+    return openBill;
+  }
+
+  async setPaiyedTrue({ billId }: BillIdDTO): Promise<void> {
+    await prisma.bill.update({
+      where: {
+        id: billId,
+      },
+      data: {
+        payied: true,
+      },
+    });
+  }
 }
 
-export { BillRepository }
+export { BillRepository };

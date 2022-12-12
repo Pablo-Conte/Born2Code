@@ -3,4 +3,12 @@ type UserIdDTO = {
   valor: number;
 };
 
-export { UserIdDTO };
+type UserIdVerifyDTO = {
+  userId: string;
+}
+
+type BillIdDTO = {
+  billId: string;
+}
+
+export { UserIdDTO, UserIdVerifyDTO, BillIdDTO };

@@ -30,9 +30,9 @@ model User {
 }
 
 model Bill {
-  id String @default(uuid())
+  id String @id @default(uuid())
   valor Float
-  payied Boolean?
+  payied Boolean? @default(false)
 
   user User @relation(fields: [userId], references: [id])
   userId String @unique
@@ -108,7 +108,7 @@ model HistoryRent {
   clienteId  String
   startDate  DateTime
   endDate    DateTime?
-  totalValue String?
+  totalValue Float?
 
   @@map("history_rent")
 }

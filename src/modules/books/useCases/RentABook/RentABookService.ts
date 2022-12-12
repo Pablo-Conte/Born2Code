@@ -3,8 +3,8 @@ import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositor
 import { UsersRepository } from "../../../accounts/infra/repositories/UsersRepository";
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
 import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
+import { VerifyOpenBillsService } from "../../../billsToPay/useCases/VerifyOpenBillsService";
 import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
-
 
 type TBookId = {
   library_bookId: string;
@@ -25,6 +25,14 @@ class RentABookService {
         "Maximum books rented, return one and come back here!",
         400
       );
+
+    const verifyOpenBill = new VerifyOpenBillsService();
+
+    const openBill = await verifyOpenBill.execute({ userId });
+
+    if (openBill) {
+      throw new AppError("An open Bill is open for you, pay it first!", 400);
+    }
 
     const libraryBook = await library_bookRepository.findById({
       library_bookId,
@@ -53,7 +61,6 @@ class RentABookService {
     });
 
     await library_bookRepository.updateToRented({ library_bookId });
-
   }
 }
 
