@@ -4,10 +4,8 @@ import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import { AppError } from "@shared/errors/appError";
 import { LoginReturnDTO } from "@modules/accounts/@types/LoginReturnDTO";
-import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
 import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 import { UserLoginDTO } from "@modules/sessions/@types/UserLoginDTO";
-import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
 import { ITokenRepository } from "@modules/sessions/infra/repositories/ITokenRepository";
 
 @injectable()
