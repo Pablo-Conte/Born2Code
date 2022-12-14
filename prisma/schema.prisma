@@ -72,6 +72,8 @@ model Book {
 
   Library LibraryBook[]
 
+  emphasisBook EmphasisBook?
+
   @@map("book")
 }
 
@@ -100,4 +102,13 @@ model HistoryRent {
   totalValue String?
 
   @@map("history_rent")
+}
+
+model EmphasisBook {
+  id String @id @default(uuid())
+
+  Book Book? @relation(fields: [bookId], references: [id])
+  bookId String @unique
+
+  totalRents Int
 }
