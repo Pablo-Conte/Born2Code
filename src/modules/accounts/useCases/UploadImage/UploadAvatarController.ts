@@ -8,6 +8,7 @@ class UploadAvatarController {
     const avatar = request.file.filename;
 
     const uploadAvatarUseCase = container.resolve(UploadAvatarUseCase);
+
     const updateUser = await uploadAvatarUseCase.execute({
       avatar,
       userId,

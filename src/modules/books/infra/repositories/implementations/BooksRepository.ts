@@ -8,6 +8,7 @@ import {
   ReadAllLibrariesOnBookDTO,
   ReadByUserIdDTO,
 } from "@modules/books/@types";
+import { BookImageDTO } from "@modules/books/useCases/UploadImageBook/UploadImageBookUseCase";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@prisma/PrismaClient";
 import { BookEntity } from "../../entities/BookEntity";
@@ -33,6 +34,19 @@ class BooksRepository implements IBooksRepository {
     });
 
     return updatedBook;
+  }
+
+  async uploadImageBook({ bookImage, bookId }: BookImageDTO) {
+    const uploadImage = await prisma.book.update({
+      where: {
+        id: bookId,
+      },
+      data: {
+        bookImage,
+      },
+    });
+
+    return uploadImage;
   }
 
   async deleteBook({ id }: DeleteBookDTO) {

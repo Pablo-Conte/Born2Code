@@ -5,6 +5,8 @@ import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRep
 import { HistoryRentRepository } from "@modules/audit/infra/repositories/HistoryRentRepository";
 import { IHistoryRentRepository } from "@modules/audit/infra/repositories/implementations/IHistoryRentRepository";
 import { HistoryRentUseCase } from "@modules/audit/useCases/HistoryRentUseCase";
+import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
+import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
 import { ILibraryRepository } from "@modules/bookstore/infra/repositories/ILibraryRepository";
 import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
 import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
@@ -16,6 +18,11 @@ import { DayjsDateProvider } from "./providers/implementations/DayjsDateProvider
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
   UsersRepository
+);
+
+container.registerSingleton<IBooksRepository>(
+  "BooksRepository",
+  BooksRepository
 );
 
 container.registerSingleton<ILibraryRepository>(

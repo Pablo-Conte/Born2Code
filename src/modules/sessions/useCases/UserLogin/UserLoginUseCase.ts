@@ -13,9 +13,9 @@ import { ITokenRepository } from "@modules/sessions/infra/repositories/ITokenRep
 @injectable()
 class UserLoginUseCase {
   constructor(
-    @inject(UsersRepository)
+    @inject("UsersRepository")
     private usersRepository: IUsersRepository,
-    @inject(TokenRepository)
+    @inject("TokenRepository")
     private tokensRepository: ITokenRepository
   ) {}
 

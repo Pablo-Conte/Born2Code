@@ -7,6 +7,7 @@ class BookEntity implements Book {
   name: string;
   hourValue: number;
   library?: Library_BookEntity[];
+  bookImage: string;
 }
 
 export { BookEntity };

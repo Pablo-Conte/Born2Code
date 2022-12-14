@@ -68,8 +68,9 @@ model Library {
 model Book {
   id String @id @default(uuid())
 
-  name      String @unique
+  name      String  @unique
   hourValue Float
+  bookImage String?
 
   Library LibraryBook[]
 
