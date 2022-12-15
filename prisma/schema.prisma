@@ -105,10 +105,8 @@ model HistoryRent {
 }
 
 model EmphasisBook {
-  id String @id @default(uuid())
-
+  bookId String @unique @id
   Book Book? @relation(fields: [bookId], references: [id])
-  bookId String @unique
 
   totalRents Int
 }

@@ -4,7 +4,7 @@ import { UsersRepository } from "../../../accounts/infra/repositories/UsersRepos
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
 import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
 import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
-
+import { EmphasisBookRepository } from "../../../emphasisBook/infra/repositories/EmphasisBookRepository";
 
 type TBookId = {
   library_bookId: string;
@@ -17,6 +17,7 @@ class RentABookService {
     const library_bookRepository = new Library_BookRepository();
     const userRepository = new UsersRepository();
     const historyRentService = new HistoryRentService();
+    const emphasisBookRepository = new EmphasisBookRepository();
 
     const rentedBooks = await userRepository.readAllBooks({ userId });
 
@@ -52,8 +53,12 @@ class RentABookService {
       historyRentId: CreatedHistory.id,
     });
 
-    await library_bookRepository.updateToRented({ library_bookId });
+    // add total rents on emphasisBook
+    const { bookId } = libraryBook;
+    await emphasisBookRepository.updateTotalRents({ bookId });
+    //
 
+    await library_bookRepository.updateToRented({ library_bookId });
   }
 }
 
