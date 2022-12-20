@@ -9,7 +9,6 @@ import {
   FindByIdDTO,
   ReadAllLibrariesOnBookDTO,
   ReadBooksDTO,
-  ReadByUserIdDTO,
 } from "../../@types";
 import { BookEntity } from "../entities/BookEntity";
 
@@ -96,25 +95,7 @@ class BooksRepository {
       },
     });
 
-    const result = librariesFound.map((libraries) => {
-      const book = libraries.Library;
-
-      return book.map((books) => {
-        return books.Library;
-      });
-    });
-
-    return result[0];
-  }
-
-  async readBooksByUserId({ userId }: ReadByUserIdDTO): Promise<BookEntity[]> {
-    const booksFound = await prisma.book.findMany({
-      where: {
-        
-      },
-    });
-
-    return booksFound;
+    return librariesFound;
   }
 }
 

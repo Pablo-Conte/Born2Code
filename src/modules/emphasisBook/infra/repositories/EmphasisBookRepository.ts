@@ -42,7 +42,11 @@ class EmphasisBookRepository {
   }
 
   async readAllEmphasisBooks(): Promise<EmphasisBookEntity[]> {
-    const emphasisBooks = await prisma.emphasisBook.findMany();
+    const emphasisBooks = await prisma.emphasisBook.findMany({
+      orderBy: {
+        totalRents: "desc",
+      }
+    });
 
     return emphasisBooks;
   }
