@@ -37,7 +37,7 @@ class BooksRepository {
   async deleteBook({ id }: DeleteBookDTO) {
     await prisma.book.delete({
       where: {
-        id,
+        id
       },
     });
   }

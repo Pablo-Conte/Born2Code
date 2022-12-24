@@ -8,7 +8,7 @@ class HistoryRentEntity implements HistoryRent {
     clienteId: string;
     startDate: Date;
     endDate: Date;
-    totalValue: string;
+    totalValue: number;
 }
 
 export { HistoryRentEntity };

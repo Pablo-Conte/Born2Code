@@ -26,7 +26,7 @@ export async function authSecurity(
   }
 
   const [, token] = authHeader.split(" ");
-  
+
   try {
     const { sub: userId } = verify(token, auth.secret) as tokenAuth;
     const { token: tokenDB } = await tokensRepository.findByUserId({
