@@ -17,14 +17,15 @@ class ReturnBookService {
   async execute({ returnId, userId }: TData): Promise<object> {
     const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
     const libraryBookRepository = new Library_BookRepository();
-    const historyRentRepository = new HistoryRentRepository()
-    const historyRentReturnService = new HistoryRentReturnService()
+    const historyRentRepository = new HistoryRentRepository();
+    const historyRentReturnService = new HistoryRentReturnService();
     const rentedBook = await rentUserLibraryBookRepository.verifyIfRentExists({
       returnId,
     });
 
-    if (rentedBook.userId != userId)
+    if (rentedBook.userId != userId) { 
       throw new AppError("You aren't the user who rent this book", 401);
+    }
 
     if (!rentedBook) throw new AppError("This Rent not exists!", 404);
 
@@ -46,12 +47,12 @@ class ReturnBookService {
     const time = Math.abs(parsedNow - parsedRentedAt);
 
     const minutes = Math.ceil(time / (1000 * 60));
-    const coefficientHours = Number(Math.round((minutes / 60) * 100) / 100);
 
-    const total = Number(Math.round(coefficientHours * hourValue * 100) / 100);
+    const coefficientHours = Number(Math.round((minutes / 60)*100) / 100);
+    
+    const total = Number(Math.round((coefficientHours * hourValue) * 100) / 100);
 
-    const rentUserLibraryBook =
-      await rentUserLibraryBookRepository.verifyIfRentExists({ returnId });
+    const rentUserLibraryBook = await rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
 
     await historyRentReturnService.execute({
       id: rentUserLibraryBook.historyId,

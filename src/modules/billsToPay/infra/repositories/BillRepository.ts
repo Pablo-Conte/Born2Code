@@ -4,6 +4,7 @@ import { BillEntity } from "../entities/BillEntity";
 
 class BillRepository {
   async create({ userId, valor }: UserIdDTO): Promise<BillEntity> {
+    
     const newBill = prisma.bill.create({
       data: {
         userId,
