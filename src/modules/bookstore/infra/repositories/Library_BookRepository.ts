@@ -12,13 +12,12 @@ class Library_BookRepository {
   async findById({
     library_bookId,
   }: FindLibraryBookByIdDTO): Promise<Library_BookEntity> {
-    
     const library_bookFound = await prisma.libraryBook.findFirst({
       where: {
         id: library_bookId,
       },
     });
-    
+
     return library_bookFound;
   }
 

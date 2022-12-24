@@ -11,7 +11,7 @@ class CreateLibraryController {
    */
 
   async control(request: Request, response: Response): Promise<Response> {
-    const { isAdmin } = request.user;
+    const { isAdmin, userId } = request.user;
 
     if (!isAdmin) throw new AppError("You aren't and admin to do that", 401);
 
@@ -19,7 +19,7 @@ class CreateLibraryController {
 
     const createLibraryService = new CreateLibraryService();
    
-    const library = await createLibraryService.execute({ nameLibrary });
+    const library = await createLibraryService.execute({ nameLibrary, userId });
 
     return response.status(201).json(library);
   }

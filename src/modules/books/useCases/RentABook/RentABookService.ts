@@ -6,6 +6,9 @@ import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentSer
 import { VerifyOpenBillsService } from "../../../billsToPay/useCases/VerifyOpenBillsService";
 import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
 import { EmphasisBookRepository } from "../../../emphasisBook/infra/repositories/EmphasisBookRepository";
+import { LibraryRepository } from "../../../bookstore/infra/repositories/LibraryRepository";
+import { Mail } from "../../../emails/useCase/mailUseCase";
+import { BooksRepository } from "../../infra/repositories/BookRepository";
 
 
 type TBookId = {
@@ -19,7 +22,8 @@ class RentABookService {
     const library_bookRepository = new Library_BookRepository();
     const userRepository = new UsersRepository();
     const historyRentService = new HistoryRentService();
-
+    const libraryRepository = new LibraryRepository();
+    const bookRepository = new BooksRepository();
     const emphasisBookRepository = new EmphasisBookRepository();
 
     const rentedBooks = await userRepository.readAllBooks({ userId });
@@ -68,6 +72,23 @@ class RentABookService {
     await emphasisBookRepository.updateTotalRents({ bookId });
     //
     await library_bookRepository.updateToRented({ library_bookId });
+
+    const library_book = await library_bookRepository.findById({
+      library_bookId,
+    });
+    const { libraryId } = library_book;
+    const library = await libraryRepository.findById({ libraryId });
+    const { email } = library;
+    const namePersonWhoRent = await userRepository.findById( { id: userId } )
+    const { name } = namePersonWhoRent;
+    const book = await bookRepository.findById( {id: bookId} )
+
+    const mail = new Mail(
+      email,
+      "Um de seus Livros foi alugado!",
+      `<h1>Você acaba de alugar um livro!</h1><p>Livro alugado: ${book.name}</p><p>Nome de quem alugou: ${name}</p>`
+    );
+    mail.sendMail();
   }
 }
 
