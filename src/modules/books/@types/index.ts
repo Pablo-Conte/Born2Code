@@ -30,10 +30,6 @@ type ReadBooksDTO = {
   queryBook?: string;
 };
 
-type ReadByUserIdDTO = {
-  userId: string;
-};
-
 export {
   CreateBookDTO,
   DeleteBookDTO,
@@ -42,5 +38,4 @@ export {
   ReadAllLibrariesOnBookDTO,
   UpdateBookDTO,
   ReadBooksDTO,
-  ReadByUserIdDTO,
 };

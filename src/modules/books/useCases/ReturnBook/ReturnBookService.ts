@@ -18,6 +18,7 @@ class ReturnBookService {
     const libraryBookRepository = new Library_BookRepository();
     const historyRentRepository = new HistoryRentRepository()
     const historyRentReturnService = new HistoryRentReturnService()
+
     
     const rentedBook = await rentUserLibraryBookRepository.verifyIfRentExists({
       returnId,
