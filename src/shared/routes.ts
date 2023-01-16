@@ -9,8 +9,8 @@ const routesIndex = Router();
 
 routesIndex.use("/users", userRoutes);
 routesIndex.use("/sessions", sessionRoutes);
-routesIndex.use("/books", booksRoutes);
-routesIndex.use("/libraries", booksStoreRoutes);
+routesIndex.use("/book", booksRoutes);
+routesIndex.use("/bookstore", booksStoreRoutes);
 routesIndex.use("/emails", emailsRoutes);
 
 export { routesIndex };

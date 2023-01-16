@@ -3,8 +3,8 @@ import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRep
 import { inject, injectable } from "tsyringe";
 
 type AvatarDTO = {
+  userId?: string;
   avatar?: string;
-  userId: string;
   userData?: Partial<UserEntity>;
 };
 

@@ -2,8 +2,8 @@ import { UserEntity } from "../infra/entities/UserEntity";
 
 type UpdateUserDTO = {
   id: string;
-  userData?: Partial<UserEntity>;
   avatar?: string;
+  userData?: Partial<UserEntity>;
 };
 
 export { UpdateUserDTO };

@@ -12,7 +12,7 @@ import { BookImageDTO } from "@modules/books/useCases/UploadImageBook/UploadImag
 import { Prisma } from "@prisma/client";
 import { prisma } from "@prisma/PrismaClient";
 import { BookEntity } from "../../entities/BookEntity";
-import { IBooksRepository } from "../IBooksRepository";
+import { BookDTO, IBooksRepository } from "../IBooksRepository";
 
 class BooksRepository implements IBooksRepository {
   async createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity> {
@@ -36,10 +36,10 @@ class BooksRepository implements IBooksRepository {
     return updatedBook;
   }
 
-  async uploadImageBook({ bookImage, bookId }: BookImageDTO) {
+  async uploadImageBook({ bookImage, id }: BookDTO) {
     const uploadImage = await prisma.book.update({
       where: {
-        id: bookId,
+        id,
       },
       data: {
         bookImage,

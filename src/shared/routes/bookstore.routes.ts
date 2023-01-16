@@ -12,7 +12,6 @@ const createLibraryController = new CreateLibraryController();
 const updateLibraryController = new UpdateLibraryController();
 const deleteLibraryController = new DeleteLibraryController();
 
-// Bookstore ---------------------------------------------------------------------------
 booksStoreRoutes.post("/create", authSecurity, createLibraryController.control);
 
 booksStoreRoutes.get("/read", authSecurity, readLibraryController.control);
@@ -24,6 +23,5 @@ booksStoreRoutes.delete(
   authSecurity,
   deleteLibraryController.control
 );
-//-------------------------------------------------------------------------------------
 
 export { booksStoreRoutes };

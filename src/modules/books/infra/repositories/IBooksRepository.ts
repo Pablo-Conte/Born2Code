@@ -10,10 +10,16 @@ import {
 import { BookImageDTO } from "@modules/books/useCases/UploadImageBook/UploadImageBookUseCase";
 import { BookEntity } from "../entities/BookEntity";
 
+type BookDTO = {
+  id?: string;
+  bookImage?: string;
+  bookData?: Partial<BookEntity>;
+};
+
 interface IBooksRepository {
   createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity>;
   updateBook({ dataBook, bookId, userId }: UpdateBookDTO): Promise<BookEntity>;
-  uploadImageBook({ bookId, bookImage }: BookImageDTO): Promise<BookEntity>;
+  uploadImageBook({ bookImage }: BookDTO): Promise<BookEntity>;
   deleteBook({ id, userId }: DeleteBookDTO);
   findByName({ name }: FindByNameDTO): Promise<BookEntity>;
   findById({ id }: FindByIdDTO);
@@ -21,4 +27,4 @@ interface IBooksRepository {
   readAllLibrariesOnBook({ queryBook }: ReadAllLibrariesOnBookDTO);
 }
 
-export { IBooksRepository };
+export { IBooksRepository, BookDTO };

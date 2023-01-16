@@ -1,13 +1,12 @@
 import { BookEntity } from "@modules/books/infra/entities/BookEntity";
 import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
-import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
 import { inject, injectable } from "tsyringe";
 
 type BookImageDTO = {
-  bookImage?: string;
-  userId?: string;
-  bookData?: Partial<BookEntity>;
   bookId?: string;
+  userId: string;
+  bookImage?: string;
+  bookData?: Partial<BookEntity>;
 };
 
 @injectable()
@@ -17,9 +16,9 @@ class UploadImageBookUseCase {
     private booksRepository: IBooksRepository
   ) {}
 
-  async execute({ userId, bookImage }: BookImageDTO): Promise<BookEntity> {
+  async execute({ bookId, bookImage }: BookImageDTO): Promise<BookEntity> {
     const uploadImage = await this.booksRepository.uploadImageBook({
-      userId,
+      id: bookId,
       bookImage,
     });
 
