@@ -2,12 +2,13 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@shared/errors/appError";
 import { SetAdminDTO } from "@modules/accounts/@types/SetAdminDTO";
 import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
+import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
 
 @injectable()
 class ToggleAdminUseCase {
   constructor(
     @inject(UsersRepository)
-    private usersRepository: UsersRepository
+    private usersRepository: IUsersRepository
   ) {}
 
   async execute({ isAdmin, headerUserId }: SetAdminDTO): Promise<boolean> {
