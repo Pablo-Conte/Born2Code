@@ -3,6 +3,7 @@ import { BookEntity } from "../infra/entities/BookEntity";
 type CreateBookDTO = {
   dataToCreateBook?: BookEntity;
   userId?: string;
+  libraryId: string;
 };
 
 type FindByNameDTO = {

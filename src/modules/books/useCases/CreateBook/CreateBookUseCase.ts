@@ -5,10 +5,13 @@ import { IBooksRepository } from "@modules/books/infra/repositories/IBooksReposi
 import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
 import { UsersRepository } from "@modules/accounts/infra/repositories/implementations/UsersRepository";
 import { IUsersRepository } from "@modules/accounts/infra/repositories/IUsersRepository";
+import { ILibraryRepository } from "@modules/bookstore/infra/repositories/ILibraryRepository";
+import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
 
 type TUserData = {
   dataToCreateBook?: BookEntity;
   userId?: string;
+  libraryId: string;
 };
 
 @injectable()
@@ -17,10 +20,16 @@ class CreateBookUseCase {
     @inject(BooksRepository)
     private booksRepository: IBooksRepository,
     @inject(UsersRepository)
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject(LibraryRepository)
+    private libraryRepository: ILibraryRepository
   ) {}
 
-  async execute({ dataToCreateBook, userId }: TUserData): Promise<BookEntity> {
+  async execute({
+    dataToCreateBook,
+    userId,
+    libraryId,
+  }: TUserData): Promise<BookEntity> {
     const nameConflict = await this.booksRepository.findByName({
       name: dataToCreateBook.name,
     });
@@ -30,9 +39,13 @@ class CreateBookUseCase {
     if (userFound.admin === false)
       throw new AppError("You aren't an Admin!", 401);
 
+    const libraryFound = await this.libraryRepository.findById({ libraryId });
+    if (!libraryFound) throw new AppError("Library don't exists!", 400);
+
     const newBook = await this.booksRepository.createBook({
       dataToCreateBook,
       userId,
+      libraryId,
     });
 
     return newBook;

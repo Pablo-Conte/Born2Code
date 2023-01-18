@@ -17,7 +17,10 @@ type BookDTO = {
 };
 
 interface IBooksRepository {
-  createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity>;
+  createBook({
+    dataToCreateBook,
+    libraryId,
+  }: CreateBookDTO): Promise<BookEntity>;
   updateBook({ dataBook, bookId, userId }: UpdateBookDTO): Promise<BookEntity>;
   uploadImageBook({ bookImage }: BookDTO): Promise<BookEntity>;
   deleteBook({ id, userId }: DeleteBookDTO);

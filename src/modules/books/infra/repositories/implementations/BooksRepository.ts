@@ -8,17 +8,26 @@ import {
   ReadAllLibrariesOnBookDTO,
   ReadByUserIdDTO,
 } from "@modules/books/@types";
-import { BookImageDTO } from "@modules/books/useCases/UploadImageBook/UploadImageBookUseCase";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@prisma/PrismaClient";
 import { BookEntity } from "../../entities/BookEntity";
 import { BookDTO, IBooksRepository } from "../IBooksRepository";
 
 class BooksRepository implements IBooksRepository {
-  async createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity> {
+  async createBook({
+    dataToCreateBook,
+    libraryId,
+  }: CreateBookDTO): Promise<BookEntity> {
     const newBook = await prisma.book.create({
       data: {
         ...dataToCreateBook,
+        Library: {
+          create: {
+            Library: {
+              connect: { id: libraryId },
+            },
+          },
+        },
       },
     });
 
