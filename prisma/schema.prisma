@@ -72,7 +72,8 @@ model Book {
   hourValue Float
   bookImage String?
 
-  Library LibraryBook[]
+  Library  LibraryBook[]
+  Discount Discount[]
 
   @@map("book")
 }
@@ -102,4 +103,20 @@ model HistoryRent {
   totalValue Float?
 
   @@map("history_rent")
+}
+
+model Discount {
+  id String @id @default(uuid())
+
+  percentage String?
+
+  Book   Book   @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  bookId String
+
+  newValue String?
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  @@map("discount")
 }

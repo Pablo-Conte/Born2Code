@@ -7,6 +7,7 @@ import { IHistoryRentRepository } from "@modules/audit/infra/repositories/implem
 import { HistoryRentUseCase } from "@modules/audit/useCases/HistoryRentUseCase";
 import { IBooksRepository } from "@modules/books/infra/repositories/IBooksRepository";
 import { BooksRepository } from "@modules/books/infra/repositories/implementations/BooksRepository";
+import { DiscountRepository } from "@modules/books/infra/repositories/implementations/DiscountRepository";
 import { ILibraryRepository } from "@modules/bookstore/infra/repositories/ILibraryRepository";
 import { LibraryRepository } from "@modules/bookstore/infra/repositories/implementations/LibraryRepository";
 import { TokenRepository } from "@modules/sessions/infra/repositories/implementations/TokenRepository";
@@ -50,4 +51,9 @@ container.registerSingleton<HistoryRentUseCase>(
 container.registerSingleton<IDayjsDateProvider>(
   "DayjsDateProvider",
   DayjsDateProvider
+);
+
+container.registerSingleton<DiscountRepository>(
+  "DiscountRepository",
+  DiscountRepository
 );

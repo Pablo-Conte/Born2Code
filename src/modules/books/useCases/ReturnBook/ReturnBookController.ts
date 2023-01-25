@@ -10,7 +10,6 @@ class ReturnBookController {
     ] as string;
 
     const returnBookService = container.resolve(ReturnBookUseCase);
-
     const result = await returnBookService.execute({
       returnId: returnUserBookId,
       userId,

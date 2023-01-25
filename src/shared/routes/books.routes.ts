@@ -1,6 +1,7 @@
 import { AddBookToLibraryController } from "@modules/books/useCases/AddBookToLibrary/AddBookToLibraryController";
 import { CreateBookController } from "@modules/books/useCases/CreateBook/CreateBookController";
 import { DeleteBookController } from "@modules/books/useCases/DeleteBook/DeleteBookController";
+import { DiscountBookController } from "@modules/books/useCases/DiscountBook/DiscountBookController";
 import { ReadBooksController } from "@modules/books/useCases/ReadBooks/ReadAllBooksController";
 import { RentABookController } from "@modules/books/useCases/RentABook/RentABookController";
 import { ReturnBookController } from "@modules/books/useCases/ReturnBook/ReturnBookController";
@@ -22,6 +23,7 @@ const addBookToLibrary = new AddBookToLibraryController();
 const rentABookController = new RentABookController();
 const returnBookController = new ReturnBookController();
 const uploadImageBookController = new UploadImageBookController();
+const discountBookController = new DiscountBookController();
 
 booksRoutes.post("/create", authSecurity, createBookController.control);
 booksRoutes.get("/read", authSecurity, readBooksController.control);
@@ -36,5 +38,6 @@ booksRoutes.patch(
   uploadImage.single("bookImage"),
   uploadImageBookController.control
 );
+booksRoutes.post("/discount", authSecurity, discountBookController.control);
 
 export { booksRoutes };

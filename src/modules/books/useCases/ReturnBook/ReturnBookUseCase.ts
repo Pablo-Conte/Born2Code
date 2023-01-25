@@ -32,7 +32,7 @@ class ReturnBookUseCase {
     });
     if (rentedBook.userId != userId)
       throw new AppError("You aren't the user who rent this book", 401);
-
+    // essa parte não está funcionando
     if (!rentedBook) throw new AppError("This Rent not exists!", 404);
 
     const now = new Date(Date.now()) as Date;
