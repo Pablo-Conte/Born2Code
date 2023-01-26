@@ -1,11 +1,10 @@
 import { Discount } from "@prisma/client";
 
 class DiscountEntity implements Discount {
-  readonly id: string;
-
+  id: string;
   percentage: number;
   bookId: string;
-  newValue: string;
+  newValue: number;
   startDate: Date;
   endDate: Date;
 }

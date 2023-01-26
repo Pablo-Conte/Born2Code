@@ -86,6 +86,8 @@ model RentUserLibraryBook {
   User           User?        @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId         String
   LibraryBook    LibraryBook? @relation(fields: [library_bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  Discount       Discount?    @relation(fields: [percentage], references: [percentage], onUpdate: Cascade, onDelete: Cascade)
+  percentage     Int?
   library_bookId String
   historyId      String
 
@@ -108,15 +110,16 @@ model HistoryRent {
 model Discount {
   id String @id @default(uuid())
 
-  percentage String?
+  percentage Int? @unique
 
   Book   Book   @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   bookId String
 
-  newValue String?
+  newValue Int?
 
-  startDate DateTime?
-  endDate   DateTime?
+  startDate           DateTime?
+  endDate             DateTime?
+  RentUserLibraryBook RentUserLibraryBook[]
 
   @@map("discount")
 }

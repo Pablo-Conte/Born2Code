@@ -5,6 +5,7 @@ import { ReturnBookUseCase } from "./ReturnBookUseCase";
 class ReturnBookController {
   async control(request: Request, response: Response): Promise<Response> {
     const { userId } = request.user;
+    const { percentage } = request.body;
     const returnUserBookId = request.headers[
       "x-rentuserlibrarybook-id"
     ] as string;
@@ -13,6 +14,7 @@ class ReturnBookController {
     const result = await returnBookService.execute({
       returnId: returnUserBookId,
       userId,
+      percentage,
     });
 
     return response.status(200).json(result);

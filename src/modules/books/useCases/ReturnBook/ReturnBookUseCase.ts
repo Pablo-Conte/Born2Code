@@ -7,10 +7,13 @@ import { BooksRepository } from "@modules/books/infra/repositories/implementatio
 import { ILibrary_BookRepository } from "@modules/bookstore/infra/repositories/ILibrary_BookRepository";
 import { Library_BookRepository } from "@modules/bookstore/infra/repositories/implementations/Library_BookRepository";
 import { HistoryRentReturnUseCase } from "@modules/audit/useCases/HistoryRentReturnUseCase";
+import { DiscountRepository } from "@modules/books/infra/repositories/implementations/DiscountRepository";
 
 type TData = {
   returnId: string;
   userId: string;
+  discountId?: string;
+  percentage?: number;
 };
 
 @injectable()
@@ -23,10 +26,12 @@ class ReturnBookUseCase {
     @inject(Library_BookRepository)
     private library_bookRepository: ILibrary_BookRepository,
     @inject(HistoryRentReturnUseCase)
-    private historyRentReturnUseCase: HistoryRentReturnUseCase
+    private historyRentReturnUseCase: HistoryRentReturnUseCase,
+    @inject(DiscountRepository)
+    private discountRepository: DiscountRepository
   ) {}
 
-  async execute({ returnId, userId }: TData): Promise<object> {
+  async execute({ returnId, userId, discountId }: TData): Promise<object> {
     const rentedBook = await this.rentRepository.verifyIfRentExists({
       returnId,
     });
@@ -46,6 +51,12 @@ class ReturnBookUseCase {
 
     const { hourValue } = book;
 
+    const verifyDiscount = await this.discountRepository.findIdDiscount({
+      id: discountId,
+    });
+
+    const { percentage } = verifyDiscount;
+
     const parsedNow = now as unknown as number;
     const parsedRentedAt = rented_at as unknown as number;
 
@@ -54,7 +65,9 @@ class ReturnBookUseCase {
     const minutes = Math.ceil(time / (1000 * 60));
     const coefficientHours = minutes / 60;
 
-    const total = coefficientHours * hourValue;
+    const totalPrice = coefficientHours * hourValue;
+
+    const totalDiscount = totalPrice - percentage;
 
     const rentUserLibraryBook = await this.rentRepository.verifyIfRentExists({
       returnId,
@@ -63,7 +76,7 @@ class ReturnBookUseCase {
     await this.historyRentReturnUseCase.execute({
       id: rentUserLibraryBook.historyId,
       endDate: now,
-      totalValue: total,
+      totalValue: totalDiscount,
     });
 
     await this.library_bookRepository.updateToNotRented({
@@ -72,7 +85,7 @@ class ReturnBookUseCase {
 
     await this.rentRepository.delete({ returnId });
 
-    return { total, coefficientHours };
+    return { totalDiscount, coefficientHours };
   }
 }
 
