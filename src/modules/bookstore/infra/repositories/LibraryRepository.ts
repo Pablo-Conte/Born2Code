@@ -53,6 +53,7 @@ class LibraryRepository {
   }
 
   async findByName({ name }: FindByNameDTO): Promise<LibraryEntity> {
+  
     const libraryFound = await prisma.library.findFirst({
       where: {
         name,

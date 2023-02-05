@@ -24,8 +24,6 @@ model User {
   Tokens     Tokens?
   BookRented RentUserLibraryBook[]
 
-  bills Bill?
-
   @@map("user")
 }
 
@@ -34,8 +32,7 @@ model Bill {
   valor Float
   payied Boolean? @default(false)
 
-  user User @relation(fields: [userId], references: [id])
-  userId String @unique
+  userId String
 }
 
 model Tokens {
