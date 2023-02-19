@@ -20,8 +20,9 @@ class CreateLibraryController {
     const createLibraryService = new CreateLibraryService();
    
     const library = await createLibraryService.execute({ nameLibrary, userId });
-
+    
     return response.status(201).json(library);
+    
   }
 }
 
