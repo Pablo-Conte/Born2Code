@@ -1,5 +1,7 @@
+import { inject, injectable } from "tsyringe";
+
 import { AppError } from "../../../../shared/errors/appError";
-import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
+// import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/implementations/RentUserLibraryBookRepository";
 import { UsersRepository } from "../../../accounts/infra/repositories/UsersRepository";
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
 import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
@@ -9,6 +11,9 @@ import { EmphasisBookRepository } from "../../../emphasisBook/infra/repositories
 import { LibraryRepository } from "../../../bookstore/infra/repositories/LibraryRepository";
 import { Mail } from "../../../emails/useCase/mailUseCase";
 import { BooksRepository } from "../../infra/repositories/BookRepository";
+import { IRentUserLibraryBookRepository } from "../../../accounts/infra/repositories/IRentUserLibraryBookRepository";
+
+
 
 
 type TBookId = {
@@ -16,9 +21,18 @@ type TBookId = {
   userId: string;
 };
 
+@injectable()
 class RentABookService {
+
+  constructor (
+    @inject("RentUserLibraryBookRepository")
+    private rentUserLibraryBookRepository: IRentUserLibraryBookRepository
+  ) {}
+
   async execute({ library_bookId, userId }: TBookId): Promise<void> {
-    const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
+
+    
+    // const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
     const library_bookRepository = new Library_BookRepository();
     const userRepository = new UsersRepository();
     const historyRentService = new HistoryRentService();
@@ -62,11 +76,12 @@ class RentABookService {
       dataToCreateHistory
     );
 
-    await rentUserLibraryBookRepository.rent({
+    await this.rentUserLibraryBookRepository.rent({
       userId,
       library_bookId,
       historyRentId: CreatedHistory.id,
     });
+
     // add total rents on emphasisBook
     const { bookId } = libraryBook;
     await emphasisBookRepository.updateTotalRents({ bookId });

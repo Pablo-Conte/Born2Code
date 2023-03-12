@@ -1,9 +1,10 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
-import { DeleteDTO, RentDTO, VerifyIfRentExistsDTO } from "../../@types";
-import { RentUserLibraryBookEntity } from "../entities/RentUserLibraryBookEntity";
+import { prisma } from "../../../../../../prisma/PrismaClient";
+import { DeleteDTO, RentDTO, VerifyIfRentExistsDTO } from "../../../@types";
+import { RentUserLibraryBookEntity } from "../../entities/RentUserLibraryBookEntity";
+import { IRentUserLibraryBookRepository } from "../IRentUserLibraryBookRepository";
 
 
-class RentUserLibraryBookRepository {
+class RentUserLibraryBookRepository implements IRentUserLibraryBookRepository {
   async delete({ returnId }: DeleteDTO): Promise<void> {
     
     await prisma.rentUserLibraryBook.delete({

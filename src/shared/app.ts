@@ -1,3 +1,5 @@
+import "reflect-metadata";
+import "./container";
 import "dotenv/config";
 import "express-async-errors";
 import cors from "cors"; // Permite a comunicação entre o back e o front

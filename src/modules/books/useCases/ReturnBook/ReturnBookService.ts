@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 /* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
-import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/RentUserLibraryBookRepository";
+import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/implementations/RentUserLibraryBookRepository";
 import { HistoryRentRepository } from "../../../audit/infra/repositories/HistoryRentRepository";
 import { HistoryRentReturnService } from "../../../audit/infra/useCases/HistoryRentReturnService";
 import { CreateBillService } from "../../../billsToPay/useCases/CreateBillService";
