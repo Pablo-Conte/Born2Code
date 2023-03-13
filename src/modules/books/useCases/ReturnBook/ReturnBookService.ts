@@ -2,24 +2,36 @@
 /* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
 import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/implementations/RentUserLibraryBookRepository";
-import { HistoryRentRepository } from "../../../audit/infra/repositories/HistoryRentRepository";
+import { HistoryRentRepository } from "../../../audit/infra/repositories/implementations/HistoryRentRepository";
 import { HistoryRentReturnService } from "../../../audit/infra/useCases/HistoryRentReturnService";
 import { CreateBillService } from "../../../billsToPay/useCases/CreateBillService";
-import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
-import { BooksRepository } from "../../infra/repositories/BookRepository";
+import { Library_BookRepository } from "../../../bookstore/infra/repositories/implementations/Library_BookRepository";
+import { BooksRepository } from "../../infra/repositories/implementations/BookRepository";
+import { inject, injectable } from "tsyringe";
+import { BillRepository } from "../../../billsToPay/infra/repositories/implementations/BillRepository";
 
 type TData = {
   returnId: string;
   userId: string;
 };
 
+@injectable()
 class ReturnBookService {
+  constructor(
+    @inject("RentUserLibraryBookRepository")
+    private rentUserLibraryBookRepository: RentUserLibraryBookRepository,
+    @inject("HistoryRentRepository")
+    private historyRentRepository: HistoryRentRepository,
+    @inject("Library_BookRepository")
+    private library_bookRepository: Library_BookRepository,
+    @inject("BooksRepository")
+    private booksRepository: BooksRepository,
+    @inject("BillRepository")
+    private billRepository: BillRepository
+  ){}
   async execute({ returnId, userId }: TData): Promise<object> {
-    const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
-    const libraryBookRepository = new Library_BookRepository();
-    const historyRentRepository = new HistoryRentRepository();
-    const historyRentReturnService = new HistoryRentReturnService();
-    const rentedBook = await rentUserLibraryBookRepository.verifyIfRentExists({
+
+    const rentedBook = await this.rentUserLibraryBookRepository.verifyIfRentExists({
       returnId,
     });
 
@@ -32,7 +44,7 @@ class ReturnBookService {
     const now = new Date(Date.now()) as Date;
     const rented_at = new Date(rentedBook.rented_at) as Date;
 
-    const { bookId } = await libraryBookRepository.findById({
+    const { bookId } = await this.library_bookRepository.findById({
       library_bookId: rentedBook.library_bookId,
     });
 
@@ -52,23 +64,17 @@ class ReturnBookService {
     
     const total = Number(Math.round((coefficientHours * hourValue) * 100) / 100);
 
-    const rentUserLibraryBook = await rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
+    const rentUserLibraryBook = await this.rentUserLibraryBookRepository.verifyIfRentExists({ returnId })
 
-    await historyRentReturnService.execute({
-      id: rentUserLibraryBook.historyId,
-      endDate: now,
-      totalValue: total,
-    });
+    await this.historyRentRepository.Update({id: rentUserLibraryBook.historyId, endDate: now, totalValue: total})
 
-    await libraryBookRepository.updateToNotRented({
+    await this.library_bookRepository.updateToNotRented({
       library_bookId: rentedBook.library_bookId,
     });
 
-    await rentUserLibraryBookRepository.delete({ returnId });
+    await this.rentUserLibraryBookRepository.delete({ returnId });
 
-    const createBillService = new CreateBillService();
-
-    await createBillService.execute({ userId, valor: total });
+    const createBillService = await this.billRepository.create({ userId, valor: total });
 
     return { total, coefficientHours };
   }

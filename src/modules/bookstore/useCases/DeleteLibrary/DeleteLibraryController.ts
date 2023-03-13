@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
 import { DeleteLibraryService } from "./DeleteLibraryService";
 
@@ -15,7 +15,7 @@ class DeleteLibraryController {
       throw new AppError("User is not an Admin to do this!", 401);
 
     const libraryId = request.headers["x-library-id"] as string;
-    const deleteLibraryService = new DeleteLibraryService();
+    const deleteLibraryService = container.resolve(DeleteLibraryService);
 
     await deleteLibraryService.execute({ libraryId });
 

@@ -2,16 +2,18 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/appError";
 // import { RentUserLibraryBookRepository } from "../../../accounts/infra/repositories/implementations/RentUserLibraryBookRepository";
-import { UsersRepository } from "../../../accounts/infra/repositories/UsersRepository";
+import { UsersRepository } from "../../../accounts/infra/repositories/implementations/UsersRepository";
 import { HistoryRentEntity } from "../../../audit/infra/entities/HistoryRentEntity";
-import { HistoryRentService } from "../../../audit/infra/useCases/HistoryRentService";
+
 import { VerifyOpenBillsService } from "../../../billsToPay/useCases/VerifyOpenBillsService";
-import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
-import { EmphasisBookRepository } from "../../../emphasisBook/infra/repositories/EmphasisBookRepository";
-import { LibraryRepository } from "../../../bookstore/infra/repositories/LibraryRepository";
+import { Library_BookRepository } from "../../../bookstore/infra/repositories/implementations/Library_BookRepository";
+import { EmphasisBookRepository } from "../../../emphasisBook/infra/repositories/implementations/EmphasisBookRepository";
+import { LibraryRepository } from "../../../bookstore/infra/repositories/implementations/LibraryRepository";
 import { Mail } from "../../../emails/useCase/mailUseCase";
-import { BooksRepository } from "../../infra/repositories/BookRepository";
+import { BooksRepository } from "../../infra/repositories/implementations/BookRepository";
 import { IRentUserLibraryBookRepository } from "../../../accounts/infra/repositories/IRentUserLibraryBookRepository";
+import { HistoryRentRepository } from "../../../audit/infra/repositories/implementations/HistoryRentRepository";
+import { BillRepository } from "../../../billsToPay/infra/repositories/implementations/BillRepository";
 
 
 
@@ -26,21 +28,26 @@ class RentABookService {
 
   constructor (
     @inject("RentUserLibraryBookRepository")
-    private rentUserLibraryBookRepository: IRentUserLibraryBookRepository
+    private rentUserLibraryBookRepository: IRentUserLibraryBookRepository,
+    @inject("HistoryRentRepository")
+    private historyRentRepository: HistoryRentRepository,
+    @inject("UsersRepository")
+    private usersRepository: UsersRepository,
+    @inject("LibraryRepository")
+    private libraryRepository: LibraryRepository,
+    @inject("Library_BookRepository")
+    private library_bookRepository: Library_BookRepository,
+    @inject("BooksRepository")
+    private booksRepository: BooksRepository,
+    @inject("EmphasisBookRepository")
+    private emphasisBookRepository: EmphasisBookRepository,
+    @inject("BillRepository")
+    private billRepository: BillRepository,
   ) {}
 
   async execute({ library_bookId, userId }: TBookId): Promise<void> {
 
-    
-    // const rentUserLibraryBookRepository = new RentUserLibraryBookRepository();
-    const library_bookRepository = new Library_BookRepository();
-    const userRepository = new UsersRepository();
-    const historyRentService = new HistoryRentService();
-    const libraryRepository = new LibraryRepository();
-    const bookRepository = new BooksRepository();
-    const emphasisBookRepository = new EmphasisBookRepository();
-
-    const rentedBooks = await userRepository.readAllBooks({ userId });
+    const rentedBooks = await this.usersRepository.readAllBooks({ userId });
 
     if (rentedBooks >= 3)
       throw new AppError(
@@ -48,15 +55,13 @@ class RentABookService {
         400
       );
 
-    const verifyOpenBill = new VerifyOpenBillsService();
-    
-    const openBill = await verifyOpenBill.execute({ userId });
+    const openBill = await this.billRepository.verifyOpenBill({ userId });
     
     if (openBill) {
       throw new AppError("An open Bill is open for you, pay it first!", 400);
     }
 
-    const libraryBook = await library_bookRepository.findById({
+    const libraryBook = await this.library_bookRepository.findById({
       library_bookId,
     });
 
@@ -72,8 +77,8 @@ class RentABookService {
       totalValue: undefined,
     };
 
-    const CreatedHistory = await historyRentService.execute(
-      dataToCreateHistory
+    const CreatedHistory = await this.historyRentRepository.CreateHistoryRent(
+      { dataToCreateHistory }
     );
 
     await this.rentUserLibraryBookRepository.rent({
@@ -84,19 +89,19 @@ class RentABookService {
 
     // add total rents on emphasisBook
     const { bookId } = libraryBook;
-    await emphasisBookRepository.updateTotalRents({ bookId });
+    await this.emphasisBookRepository.updateTotalRents({ bookId });
     //
-    await library_bookRepository.updateToRented({ library_bookId });
+    await this.library_bookRepository.updateToRented({ library_bookId });
 
-    const library_book = await library_bookRepository.findById({
+    const library_book = await this.library_bookRepository.findById({
       library_bookId,
     });
     const { libraryId } = library_book;
-    const library = await libraryRepository.findById({ libraryId });
+    const library = await this.libraryRepository.findById({ libraryId });
     const { email } = library;
-    const namePersonWhoRent = await userRepository.findById( { id: userId } )
+    const namePersonWhoRent = await this.usersRepository.findById( { id: userId } )
     const { name } = namePersonWhoRent;
-    const book = await bookRepository.findById( {id: bookId} )
+    const book = await this.booksRepository.findById( {id: bookId} )
 
     const mail = new Mail(
       email,

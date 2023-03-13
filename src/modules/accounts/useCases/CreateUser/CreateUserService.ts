@@ -1,23 +1,29 @@
 /* eslint-disable no-param-reassign */
 import { hash } from "bcrypt";
+import { injectable, inject } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/appError";
 import { UserEntity } from "../../infra/entities/UserEntity";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TCreateUser = {
   userData: UserEntity;
 };
 
+@injectable()
 class CreateUserService {
+
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: UsersRepository
+  ){}
   async execute({ userData }: TCreateUser): Promise<UserEntity> {
     const { email, password, cellNumber } = userData;
-    const usersRepository = new UsersRepository();
 
-    const cellNumberConflict = await usersRepository.findByCellNumber({
+    const cellNumberConflict = await this.usersRepository.findByCellNumber({
       cellNumber,
     });
-    const userConflict = await usersRepository.findByEmail({ email });
+    const userConflict = await this.usersRepository.findByEmail({ email });
 
     if (userConflict || cellNumberConflict) {
       throw new AppError("User Already exists!", 409);
@@ -33,7 +39,7 @@ class CreateUserService {
       ).toISOString() as unknown as Date;
     }
 
-    const newUser = await usersRepository.create({ uData: userData });
+    const newUser = await this.usersRepository.create({ uData: userData });
     if (!newUser) {
       throw new AppError(
         "User creation failed, contact support for more details",

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { ReturnBookService } from "./ReturnBookService";
 
 class ReturnBookController {
@@ -7,7 +7,7 @@ class ReturnBookController {
     const { userId } = request.user;
     const returnUserBookId = request.headers["x-rentuserlibrarybook-id"] as string;
     
-    const returnBookService = new ReturnBookService();
+    const returnBookService = container.resolve(ReturnBookService);
     
     const result = await returnBookService.execute({
       returnId: returnUserBookId,

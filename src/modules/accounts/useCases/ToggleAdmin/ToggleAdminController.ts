@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { ToggleAdminService } from "./ToggleAdminService";
 
@@ -10,7 +11,7 @@ class ToggleAdminController {
     };
     const headerUserId = request.headers["x-user-id"] as string;
 
-    const toggleAdminService = new ToggleAdminService();
+    const toggleAdminService = container.resolve(ToggleAdminService);
 
     const result = await toggleAdminService.execute({ isAdmin, headerUserId });
 

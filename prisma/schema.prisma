@@ -116,7 +116,7 @@ model HistoryRent {
 
 model EmphasisBook {
   bookId String @unique @id
-  Book Book? @relation(fields: [bookId], references: [id])
+  Book Book? @relation(fields: [bookId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   totalRents Int
 }

@@ -2,8 +2,8 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
-import { TokenRepository } from "../../modules/accounts/infra/repositories/TokenRepository";
-import { UsersRepository } from "../../modules/accounts/infra/repositories/UsersRepository";
+import { TokenRepository } from "../../modules/accounts/infra/repositories/implementations/TokenRepository";
+import { UsersRepository } from "../../modules/accounts/infra/repositories/implementations/UsersRepository";
 import auth from "../../settings/auth";
 import { AppError } from "../errors/appError";
 

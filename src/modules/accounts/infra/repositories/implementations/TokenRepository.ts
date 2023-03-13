@@ -1,12 +1,13 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   CreateUserTokenDTO,
   DeleteTokenDTO,
   FindUserIdDTO,
-} from "../../@types";
-import { TokenEntity } from "../entities/TokenEntity";
+} from "../../../@types";
+import { TokenEntity } from "../../entities/TokenEntity";
+import { ITokenRepository } from "../ITokenRepository";
 
-class TokenRepository {
+class TokenRepository implements ITokenRepository {
   async create({
     tokenData: { userId, token },
   }: CreateUserTokenDTO): Promise<void> {

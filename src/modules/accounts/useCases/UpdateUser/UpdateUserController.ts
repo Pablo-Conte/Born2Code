@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { UserEntity } from "../../infra/entities/UserEntity";
 import { UpdateUserService } from "./UpdateUserService";
@@ -15,7 +16,7 @@ class UpdateUserController {
         .json({ message: "Password isn't alterable in this route" });
     }
 
-    const updateUserService = new UpdateUserService();
+    const updateUserService = container.resolve(UpdateUserService);
 
     const updatedUser = await updateUserService.execute({
       id: userId,

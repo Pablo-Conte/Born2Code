@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
 import { BookEntity } from "../../infra/entities/BookEntity";
 import { UpdateBookService } from "./UpdateBookService";
@@ -10,7 +10,7 @@ class UpdateBookController {
 
     const bookId = request.headers["x-book-id"] as string;
     const dataBook = request.body as Partial<BookEntity>;
-    const updateBookService = new UpdateBookService();
+    const updateBookService = container.resolve(UpdateBookService);
 
     const updatedBook = await updateBookService.execute({ dataBook, bookId });
 

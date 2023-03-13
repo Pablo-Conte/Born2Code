@@ -1,14 +1,15 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   AlreadyRelationConflictDTO,
   CreateRelationDTO,
   FindLibraryBookByIdDTO,
   UpdateToNotRentedDTO,
   UpdateToRentedDTO,
-} from "../../@types";
-import { Library_BookEntity } from "../entities/Library_BookEntity";
+} from "../../../@types";
+import { Library_BookEntity } from "../../entities/Library_BookEntity";
+import { ILibrary_BookRepository } from "../ILibrary_BookRepository";
 
-class Library_BookRepository {
+class Library_BookRepository implements ILibrary_BookRepository{
   async findById({
     library_bookId,
   }: FindLibraryBookByIdDTO): Promise<Library_BookEntity> {

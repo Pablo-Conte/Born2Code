@@ -1,11 +1,12 @@
+import { container } from "tsyringe";
 import { HistoryRentEntity } from "../entities/HistoryRentEntity";
-import { HistoryRentRepository } from "../repositories/HistoryRentRepository";
+import { HistoryRentRepository } from "../repositories/implementations/HistoryRentRepository";
 
 class HistoryRentReturnService {
 
     async execute(data: Partial<HistoryRentEntity>): Promise<void>{
 
-        const historyRentRepository = new HistoryRentRepository();
+        const historyRentRepository = container.resolve(HistoryRentRepository);
 
         const { id, endDate, totalValue } = data
 

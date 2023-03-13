@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
 import { CreateBookService } from "./CreateBookService";
 
@@ -9,7 +9,7 @@ class CreateBookController {
 
     if (!request.user.isAdmin) throw new AppError("You aren't an Admin!", 401);
 
-    const createBookService = new CreateBookService();
+    const createBookService = container.resolve(CreateBookService);
 
     const newBook = await createBookService.execute({ dataToCreateBook });
 

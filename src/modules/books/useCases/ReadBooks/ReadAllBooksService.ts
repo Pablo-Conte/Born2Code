@@ -1,7 +1,8 @@
 /* eslint-disable eqeqeq */
 import { AppError } from "../../../../shared/errors/appError";
 import { BookEntity } from "../../infra/entities/BookEntity";
-import { BooksRepository } from "../../infra/repositories/BookRepository";
+import { BooksRepository } from "../../infra/repositories/implementations/BookRepository";
+import { inject, injectable } from "tsyringe";
 
 type TUserData = {
   queryLibrary: string;
@@ -9,22 +10,26 @@ type TUserData = {
   all: string;
 };
 
+@injectable()
 class ReadBooksService {
+  constructor(
+    @inject("BooksRepository")
+    private booksRepository: BooksRepository
+  ){}
   async execute({ queryLibrary, queryBook, all }: TUserData) {
-    const bookRepository = new BooksRepository();
 
     const getAll = all == "true";
 
     let booksFound: BookEntity[];
     switch (getAll) {
       case true:
-        booksFound = await bookRepository.readBooks({
+        booksFound = await this.booksRepository.readBooks({
           queryLibrary,
         });
         break;
       case false:
         if (!queryBook) throw new AppError("Book id missing", 400);
-        booksFound = await bookRepository.readBooks({
+        booksFound = await this.booksRepository.readBooks({
           queryBook,
         });
         break;

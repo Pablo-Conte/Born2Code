@@ -4,16 +4,21 @@
 // 4 - se não, retorna erro de autorização
 
 import { AppError } from "../../../../shared/errors/appError";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
+import { injectable, inject } from "tsyringe";
 
 type TAddUser = {
   isAdmin: boolean;
   headerUserId: string;
 };
 
+@injectable()
 class ToggleAdminService {
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: UsersRepository
+  ){}
   async execute({ isAdmin, headerUserId }: TAddUser): Promise<boolean> {
-    const usersRepository = new UsersRepository();
 
     if (!isAdmin)
       throw new AppError(
@@ -21,13 +26,13 @@ class ToggleAdminService {
         401
       );
 
-    const userToChangeExists = await usersRepository.findById({
+    const userToChangeExists = await this.usersRepository.findById({
       id: headerUserId,
     });
     if (!userToChangeExists)
       throw new AppError("This isn't a valid user ID, try again!", 404);
 
-    await usersRepository.toggleAdmin({
+    await this.usersRepository.toggleAdmin({
       userId: headerUserId,
       admin: userToChangeExists.admin,
     });

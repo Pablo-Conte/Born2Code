@@ -1,11 +1,17 @@
 import { BillIdDTO } from "../../infra/@types";
-import { BillRepository } from "../../infra/repositories/BillRepository";
+import { BillRepository } from "../../infra/repositories/implementations/BillRepository";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 class PayBillService {
-  async execute({ billId }: BillIdDTO): Promise<void> {
-    const billRepository = new BillRepository();
+  constructor(
+    @inject("BillRepository")
+    private billRepository: BillRepository
+  ){}
 
-    await billRepository.setPaiyedTrue({ billId });
+  async execute({ billId }: BillIdDTO): Promise<void> {
+
+    await this.billRepository.setPaiyedTrue({ billId });
   }
 }
 

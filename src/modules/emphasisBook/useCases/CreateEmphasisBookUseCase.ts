@@ -1,10 +1,15 @@
-import { EmphasisBookRepository } from "../infra/repositories/EmphasisBookRepository";
+import { EmphasisBookRepository } from "../infra/repositories/implementations/EmphasisBookRepository";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 class CreateEmphasisBookUseCase {
+  constructor(
+    @inject("EmphasisBookRepository")
+    private emphasisBookRepository: EmphasisBookRepository
+  ){}
   async execute({ bookId }): Promise<void> {
-    const emphasisBookRepository = new EmphasisBookRepository();
 
-    await emphasisBookRepository.create({ bookId });
+    await this.emphasisBookRepository.create({ bookId });
   }
 }
 

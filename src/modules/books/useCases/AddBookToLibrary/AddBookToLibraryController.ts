@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/appError";
 import { AddBookToLibraryService } from "./AddBookToLibraryService";
@@ -13,7 +14,7 @@ class AddBookToLibraryController {
     if (!bookId || !libraryId)
       throw new AppError("You forgot the data man!", 404);
 
-    const addBookToLibrary = new AddBookToLibraryService();
+    const addBookToLibrary = container.resolve(AddBookToLibraryService);
 
     await addBookToLibrary.execute({ bookId, libraryId });
 

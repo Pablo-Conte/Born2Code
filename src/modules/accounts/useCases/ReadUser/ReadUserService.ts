@@ -1,15 +1,20 @@
 /* eslint-disable eqeqeq */
 import { UserEntity } from "../../infra/entities/UserEntity";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { inject, injectable } from "tsyringe";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TReadUser = {
   myId: string;
   id: string;
 };
 
+@injectable()
 class ReadUserService {
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: UsersRepository
+  ){}
   async execute({ myId, id }: TReadUser): Promise<UserEntity> {
-    const usersRepository = new UsersRepository();
 
     let userToRead = myId;
 
@@ -17,7 +22,7 @@ class ReadUserService {
       userToRead = id;
     }
 
-    const userAlreadyExists = await usersRepository.findById({
+    const userAlreadyExists = await this.usersRepository.findById({
       id: userToRead,
     });
 

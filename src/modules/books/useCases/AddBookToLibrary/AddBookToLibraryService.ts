@@ -1,17 +1,22 @@
 import { AppError } from "../../../../shared/errors/appError";
-import { Library_BookRepository } from "../../../bookstore/infra/repositories/Library_BookRepository";
+import { Library_BookRepository } from "../../../bookstore/infra/repositories/implementations/Library_BookRepository";
+import { inject, injectable } from "tsyringe";
 
 type TUserData = {
   bookId: string;
   libraryId: string;
 };
 
+@injectable()
 class AddBookToLibraryService {
+  constructor(
+    @inject("Library_BookRepository")
+    private library_bookRepository: Library_BookRepository
+  ){}
   async execute({ bookId, libraryId }: TUserData): Promise<void> {
-    const library_bookRepository = new Library_BookRepository();
 
     const alreadyRelationConflict =
-      await library_bookRepository.alreadyRelationConflict({
+      await this.library_bookRepository.alreadyRelationConflict({
         bookId,
         libraryId,
       });
@@ -19,7 +24,7 @@ class AddBookToLibraryService {
     if (alreadyRelationConflict)
       throw new AppError("This relation already exists!", 400);
 
-    await library_bookRepository.createRelation({ bookId, libraryId });
+    await this.library_bookRepository.createRelation({ bookId, libraryId });
   }
 }
 

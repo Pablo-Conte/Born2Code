@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { DeleteUserService } from "./DeleteUserService";
 
@@ -8,7 +9,7 @@ class DeleteUserController {
 
     const userIdDelete = request.headers["x-user-id"] as string;
 
-    const deleteUserService = new DeleteUserService();
+    const deleteUserService = container.resolve(DeleteUserService);
 
     await deleteUserService.execute({
       myId: userId,

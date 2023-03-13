@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
 import { DeleteBookService } from "./DeleteBookService";
 
@@ -10,7 +10,7 @@ class DeleteBookController {
 
     const idToDelete = request.headers["x-book-id"] as string;
 
-    const deleteBookService = new DeleteBookService();
+    const deleteBookService = container.resolve(DeleteBookService);
 
     await deleteBookService.execute({ id: idToDelete });
 

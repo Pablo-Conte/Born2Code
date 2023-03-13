@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   CreateBookDTO,
   UpdateBookDTO,
@@ -9,8 +9,8 @@ import {
   FindByIdDTO,
   ReadAllLibrariesOnBookDTO,
   ReadBooksDTO,
-} from "../../@types";
-import { BookEntity } from "../entities/BookEntity";
+} from "../../../@types";
+import { BookEntity } from "../../entities/BookEntity";
 
 class BooksRepository {
   async createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity> {

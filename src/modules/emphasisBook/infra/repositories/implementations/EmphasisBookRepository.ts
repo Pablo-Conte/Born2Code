@@ -1,10 +1,10 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   AddTotalRentsOnEmphasisBookUseCaseDTO,
   CreateDTO,
   FindByIdDTO,
-} from "../../@types";
-import { EmphasisBookEntity } from "../entities/EmphasisBookEntity";
+} from "../../../@types";
+import { EmphasisBookEntity } from "../../entities/EmphasisBookEntity";
 
 class EmphasisBookRepository {
   async FindById({ bookId }: FindByIdDTO): Promise<EmphasisBookEntity> {

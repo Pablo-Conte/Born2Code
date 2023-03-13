@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { ReadUserService } from "./ReadUserService";
 
@@ -8,7 +9,7 @@ class ReadUserController {
 
     const userIdRead = request.headers["x-user-id"] as string;
 
-    const readUserService = new ReadUserService();
+    const readUserService = container.resolve(ReadUserService);
 
     const User = await readUserService.execute({
       myId: userId,

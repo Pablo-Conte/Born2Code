@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { AppError } from "../../../../shared/errors/appError";
 import { CreateLibraryService } from "./CreateLibraryService";
 
@@ -17,7 +17,7 @@ class CreateLibraryController {
 
     const { nameLibrary } = request.body;
 
-    const createLibraryService = new CreateLibraryService();
+    const createLibraryService = container.resolve(CreateLibraryService);
    
     const library = await createLibraryService.execute({ nameLibrary, userId });
     

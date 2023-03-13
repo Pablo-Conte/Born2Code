@@ -1,10 +1,10 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-
+import { inject, injectable } from "tsyringe";
 import auth from "../../../../settings/auth";
 import { AppError } from "../../../../shared/errors/appError";
-import { TokenRepository } from "../../infra/repositories/TokenRepository";
-import { UsersRepository } from "../../infra/repositories/UsersRepository";
+import { TokenRepository } from "../../infra/repositories/implementations/TokenRepository";
+import { UsersRepository } from "../../infra/repositories/implementations/UsersRepository";
 
 type TUserLogin = {
   email: string;
@@ -15,13 +15,18 @@ type TLoginReturn = {
   newToken: string;
 };
 
+@injectable()
 class UserLoginService {
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: UsersRepository,
+    @inject("TokenRepository")
+    private tokenRepository: TokenRepository
+  ){}
   async execute({ email, password }: TUserLogin): Promise<TLoginReturn> {
     const { secret, countdown } = auth;
 
-    const usersRepository = new UsersRepository();
-
-    const userAlreadyExists = await usersRepository.findByEmail({ email });
+    const userAlreadyExists = await this.usersRepository.findByEmail({ email });
     if (!userAlreadyExists) {
       throw new AppError("Incorrect email or password", 400); // bad request
     }
@@ -40,17 +45,15 @@ class UserLoginService {
       throw new AppError("Login failed, contact support for more details", 401); // Não autorizado
     }
 
-    const tokensRepository = new TokenRepository();
-
-    const tokenConflict = await tokensRepository.findByUserId({
+    const tokenConflict = await this.tokenRepository.findByUserId({
       userId: userAlreadyExists.id,
     });
 
     if (tokenConflict) {
-      await tokensRepository.delete({ userId: userAlreadyExists.id });
+      await this.tokenRepository.delete({ userId: userAlreadyExists.id });
     }
 
-    tokensRepository.create({
+    this.tokenRepository.create({
       tokenData: {
         userId: userAlreadyExists.id,
         token: newToken,

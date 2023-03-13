@@ -1,6 +1,6 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
-import { BillIdDTO, UserIdDTO, UserIdVerifyDTO } from "../@types";
-import { BillEntity } from "../entities/BillEntity";
+import { prisma } from "../../../../../../prisma/PrismaClient";
+import { BillIdDTO, UserIdDTO, UserIdVerifyDTO } from "../../@types";
+import { BillEntity } from "../../entities/BillEntity";
 
 class BillRepository {
   async create({ userId, valor }: UserIdDTO): Promise<BillEntity> {

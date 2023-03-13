@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../../prisma/PrismaClient";
 import {
   ReadAllBooksDTO,
   IsAdminDTO,
@@ -9,10 +9,11 @@ import {
   UpdateUserDTO,
   DeleteUserDTO,
   SetAdminDTO,
-} from "../../@types";
-import { UserEntity } from "../entities/UserEntity";
+} from "../../../@types";
+import { UserEntity } from "../../entities/UserEntity";
+import { IUsersRepository } from "../IUsersRepository";
 
-class UsersRepository {
+class UsersRepository implements IUsersRepository {
 
   async readAllBooks({ userId }: ReadAllBooksDTO): Promise<number> {
 

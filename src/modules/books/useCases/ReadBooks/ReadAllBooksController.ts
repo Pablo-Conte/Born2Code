@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { container } from "tsyringe";
 import { ReadBooksService } from "./ReadAllBooksService";
 
 class ReadBooksController {
@@ -14,7 +14,7 @@ class ReadBooksController {
       all: string;
     };
 
-    const readAllBooksService = new ReadBooksService();
+    const readAllBooksService = container.resolve(ReadBooksService);
 
     const booksFound = await readAllBooksService.execute({
       queryLibrary,

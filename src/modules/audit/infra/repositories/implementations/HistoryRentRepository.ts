@@ -1,8 +1,9 @@
-import { prisma } from "../../../../../prisma/PrismaClient";
-import { CreateHistoryRentDTO, UpdateDTO } from "../../@types";
-import { HistoryRentEntity } from "../entities/HistoryRentEntity";
+import { prisma } from "../../../../../../prisma/PrismaClient";
+import { CreateHistoryRentDTO, UpdateDTO } from "../../../@types";
+import { HistoryRentEntity } from "../../entities/HistoryRentEntity";
+import { IHistoryRentRepository } from "../IHistoryRentRepository";
 
-class HistoryRentRepository {
+class HistoryRentRepository implements IHistoryRentRepository {
 
     async CreateHistoryRent({ dataToCreateHistory }: CreateHistoryRentDTO): Promise<HistoryRentEntity> {
         
