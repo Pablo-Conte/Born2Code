@@ -1,6 +1,6 @@
 {
   "name": "born2code_v2",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "./src/shared/server.ts",
   "repository": "https://github.com/Pablo-Conte/LetsDev-BackEnd",
   "author": "Pablo Conte Correa <pablo.correa.nr@gmail.com>",
