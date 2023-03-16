@@ -1,8 +1,9 @@
 import { prisma } from "../../../../../../prisma/PrismaClient";
 import { BillIdDTO, UserIdDTO, UserIdVerifyDTO } from "../../@types";
 import { BillEntity } from "../../entities/BillEntity";
+import { IBillRepository } from "../IBillRepository";
 
-class BillRepository {
+class BillRepository implements IBillRepository {
   async create({ userId, valor }: UserIdDTO): Promise<BillEntity> {
     
     const newBill = prisma.bill.create({

@@ -5,8 +5,9 @@ import {
   FindByIdDTO,
 } from "../../../@types";
 import { EmphasisBookEntity } from "../../entities/EmphasisBookEntity";
+import { IEmphasisBookRepository } from "../IEmphasisBookRepository";
 
-class EmphasisBookRepository {
+class EmphasisBookRepository implements IEmphasisBookRepository {
   async FindById({ bookId }: FindByIdDTO): Promise<EmphasisBookEntity> {
     const FoundedEmphasisBook = await prisma.emphasisBook.findFirst({
       where: {

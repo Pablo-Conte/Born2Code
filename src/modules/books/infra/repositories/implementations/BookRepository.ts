@@ -11,8 +11,9 @@ import {
   ReadBooksDTO,
 } from "../../../@types";
 import { BookEntity } from "../../entities/BookEntity";
+import { IBookRepository } from "../IBookRepository";
 
-class BooksRepository {
+class BooksRepository implements IBookRepository {
   async createBook({ dataToCreateBook }: CreateBookDTO): Promise<BookEntity> {
     const newBook = await prisma.book.create({
       data: {
